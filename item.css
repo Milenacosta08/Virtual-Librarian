@@ -1,97 +1,95 @@
-corpo {
-    margem : 0 ;
-    cor de fundo : darkslategrey;
-    preenchimento : 0 ;
-    família de fontes : "Lucida Console" ,  "Courier New" , monospace;
+body{
+    margin: 0;
+    background-color: darkslategrey;
+    padding: 0;
+    font-family: "Lucida Console", "Courier New", monospace;
 }
-div . header {
-    cor de fundo : # fbdd47 ;
-    preenchimento : 15 px  20 px ;
+div.header {
+    background-color: #fbdd47;
+    padding: 15px 20px;
 }
-# TITULO {
-    largura : 100 % ;
-    alinhamento de texto : centro;
-    posição : topo;
-    tamanho da fonte : 40 px ;   
-    cor : branco;
-    sombra do texto : 2 px  2 px  2 px  rgba ( 0 , 0 , 0 , 0,5 );
+#TITULO {
+    width: 100%;
+    text-align: center;
+    position: top;
+    font-size: 40px;   
+    color: white;
+    text-shadow: 2px 2px 2px rgba(0,0,0,0.5);
 }
-# LOGO {
-    posição : absoluta;
-    largura máxima : 60 px ;
-    altura : automático;
-    topo : 2 % ;
-    esquerda : 0,2 % ;
+#LOGO {
+    position: absolute;
+    max-width: 60px;
+    height: auto;
+    top: 2%;
+    left: 0.2%;
 }
-div . subcabeçalho {
-    posição : relativa;
-    altura : 40 px ;
-    topo : -17px;
-    cor de fundo : limegreen;
-    cor : branco;
-    sombra do texto : 2 px  2 px  2 px  rgba ( 0 , 0 , 0 , 0,5 );
-    tamanho da fonte : 12 px ;
+div.sub-header{
+    position: relative;
+    height: 40px;
+    top: -17px;
+    background-color: limegreen;
+    color: white;
+    text-shadow: 2px 2px 2px rgba(0,0,0,0.5);
+    font-size: 12px;
 }
-# ulsub1 {
-    posição : absoluta;
-    topo : 3 px ;
-    alinhamento de texto : esquerda;
+#ulsub1 {
+    position: absolute;
+    top: 3px;
+    text-align: left;
 }
-# ulsub2 {
-    posição : absoluta;
-    topo : 3 px ;
-    esquerda : 17 % ;
+#ulsub2 {
+    position: absolute;
+    top: 3px;
+    left: 17%;
 }
-# ulsub3 {
-    posição : absoluta;
-    topo : 3 px ;
-    esquerda : 34 % ;
+#ulsub3 {
+    position: absolute;
+    top: 3px;
+    left: 34%;
 }
-# ulsub4 {
-    posição : absoluta;
-    topo : 3 px ;
-    esquerda : 57 % ;
+#ulsub4 {
+    position: absolute;
+    top: 3px;
+    left: 57%;
 }
-a : link {
-    display : bloco ;
-    decoração de texto : nenhum ;
-    cor : branco ;
+a:link {
+    display : block;
+    text-decoration: none;
+    color: white;
 }
-ul  a : hover {
-    borda : 5 em ;
-    raio da borda : 1 em ;
-    margem : 0,1 em ;
-    preenchimento : 2 px  ,  3 px ;
-    sombra da caixa : 1,5 px  1,5 px  1,5 px preta;
-    cor de fundo : rgb ( 75 ,  239 ,  245 );
-    cor : branco;
+ul a:hover {
+    border: 5em;
+    border-radius: 1em;
+    margin: 0.1em;
+    padding: 2px , 3px;
+    box-shadow: 1.5px 1.5px 1.5px black;
+    background-color: rgb(75, 239, 245);
+    color:white;
 }
-a : visitou {
-    cor : branco;
+a:visited {
+    color: white;
 }
-a : ativo {
-    cor : preto;
-    sombra da caixa : 0  0  0  0 preto;
+a:active {
+    color: black;
+    box-shadow: 0 0 0 0 black;
 }
-. caixapesquisa {
-    posição : relativa;
-    raio da borda : 48 px ;
-    altura : 3 % ;
-    largura : 8 % ;
-    topo : -47px;
-    esquerda : 82 % ;
+.caixapesquisa {
+    position: relative;
+    border-radius: 48px;
+    height: 3%;
+    width: 8%;
+    top: -47px;
+    left: 82%;
 }
-. botaopesquisa {
-    posição : absoluta;
-    cor de fundo : limegreen;
-    fronteira : nenhum;
-    preenchimento : 0 ;
-    topo : 114 px ;
-    esquerda : 94 % ;
+.botaopesquisa {
+    position: absolute;
+    background-color: limegreen;
+    border: none;
+    padding: 0;
+    top: 114px;
+    left: 94%;
 }
-   width: 80px;
-   height: 80px;
-}
+
 img.parte2{
    width: 80px;
    height: 80px;
