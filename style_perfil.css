@@ -35,22 +35,22 @@ body{
   }
   #ulsub1 {
     position: absolute;
-    top: 3px;
+    top: 12px;
     text-align: left;
   }
   #ulsub2 {
     position: absolute;
-    top: 3px;
+    top: 12px;
     left: 17%;
   }
   #ulsub3 {
     position: absolute;
-    top: 3px;
+    top: 12px;
     left: 34%;
   }
   #ulsub4 {
     position: absolute;
-    top: 3px;
+    top: 12px;
     left: 57%;
   }
   a:link {
