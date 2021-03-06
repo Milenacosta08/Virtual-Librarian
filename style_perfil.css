@@ -111,8 +111,13 @@ body{
     display: inline-block;
   }
   nav.navbar {
-    min-height:35px;
-    height:35px;
+    border: 1px solid;
+    border-radius: 5px;
+    background-color: #fbdd47;
+    min-height: 35px;
+    height: 35px;
+    font-family: "Lucida Console", "Courier New", monospace;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
   }
   div.container2{
     margin:2% 5% 10% 5%;
