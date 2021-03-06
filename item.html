@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    
     <link rel="stylesheet" href="item.css">
 
     <title>Item</title>
@@ -29,52 +31,48 @@
         <form class="form-inline" action="/action_page.php">
             <input class="caixapesquisa" type="text" placeholder="Pesquisa">
         </form>
+
+        <!--TABELA DE ITENS-->
         <table id="tbVendas_de_livros" rules="rows">
             <thead>
-               <tr>
-               
-              <table class= "estetica" width="980" border="50px"> 
+                <tr>
+                    <table class= "estetica" width="980" border="50px"> 
+                        <th> Imagem </th>
+                        <th>Nome</th>
+                        <th>Data</th>
+                        <th> Item </th>
+                        <th>Descrição</th>
+                        <th>Valor</th>
+                        <th>Gênero</th>    
+                        <th>Aspecto do livro</th>  
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="linhaprodutosvenda">
+        <!--Item 1-->
+                    <td><img class="parte1" src='http://painel.portalamazonia.com/uploads/RTEmagicC_domquixote.jpg.jpg'/></td>
+                    <div id = "div2">
+                        <td> Dom quixote</td>
+                        <td>02/03/2021</td>
+                        <td> 1 </td>
+                        <td> Descreve sobre romances de cavalaria que gozaram de imensa popularidade</td>
+                        <td>50,00</td>
+                        <td>Aventura </td>
+                        <td>Poucas marcas de uso, sem marcas de canetas nas páginas</td>
+                    </div>
+                </tr>
+        <!--Item 2-->
+                <td><img class="parte2" src='https://images-na.ssl-images-amazon.com/images/I/81oeku8iPtL.jpg'/></td>
+                <td> O pequeno príncipe</td>
+                <td>08/03/2021</td>
+                <td>2</td>
+                <td> Descreve sobre a queda de um avião e o encontro do piloto com uma criança loia e frágil</td>
+                <td>80,00</td>
+                <td> Fábula </td>
+                <td>Algumas marcas de uso nas páginas, mas o aspecto ecterno do livro encontra-se em perfeito estado</td>
    
-                   <th> Imagem </th>
-                   <th>Nome</th>
-                   <th>Data</th>
-                   <th> Item </th>
-                   <th>Descrição</th>
-                   <th>Valor</th>
-                   <th>Gênero</th>    
-                   <th>Aspecto do livro</th>  
-                  </tr>
-         </thead>
-       <tbody>
-       
-     <tr class="linhaprodutosvenda">
-         <td><img class="parte1" src='http://painel.portalamazonia.com/uploads/RTEmagicC_domquixote.jpg.jpg'/></td>
-       
-       <div id = "div2">
-             
-              <td> Dom quixote</td>
-              <td>02/03/2021</td>
-              <td> 1 </td>
-              <td> Descreve sobre romances de cavalaria que gozaram de imensa popularidade</td>
-              <td>50,00</td>
-              <td>Aventura </td>
-              <td>Poucas marcas de uso, sem marcas de canetas nas páginas</td>
-   
-            </div>
-       </tr>
-      
-             <td><img class="parte2" src='https://images-na.ssl-images-amazon.com/images/I/81oeku8iPtL.jpg'/></td>
-       
-          <td> O pequeno príncipe</td>
-              <td>08/03/2021</td>
-              <td>2</td>
-              <td> Descreve sobre a queda de um avião e o encontro do piloto com uma criança loia e frágil</td>
-              <td>80,00</td>
-              <td> Fábula </td>
-              <td>Algumas marcas de uso nas páginas, mas o aspecto ecterno do livro encontra-se em perfeito estado</td>
-   
-              </tbody>
-          </table>
+            </tbody>
+        </table>
     </div>
 </body>
 </html>
