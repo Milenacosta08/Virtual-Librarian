@@ -1,0 +1,127 @@
+body{
+    margin: 0;
+    background-color: lightgrey;
+    
+  }
+  div.header {
+    background-color: #fbdd47;
+    padding: 15px 20px;
+  }
+  #TITULO {
+    width: 100%;
+    text-align: center;
+    position: top;
+    font-size: 40px;
+    font-family: "Lucida Console", "Courier New", monospace;    
+    color: white;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+  }
+  #LOGO {
+    position: absolute;
+    max-width: 65px;
+    max-height: 65px;
+    top: 1%;
+    nav-left: 1%;
+  }
+  div.sub-header{
+    position: relative;
+    height: 40px;
+    top: auto;
+    background-color: limegreen;
+    font-family: "Lucida Console", "Courier New", monospace;
+    color: white;
+    text-shadow: 2px 2px 2px rgba(0,0,0,0.5);
+    font-size: 12px;
+  }
+  #ulsub1 {
+    position: absolute;
+    top: 3px;
+    text-align: left;
+  }
+  #ulsub2 {
+    position: absolute;
+    top: 3px;
+    left: 17%;
+  }
+  #ulsub3 {
+    position: absolute;
+    top: 3px;
+    left: 34%;
+  }
+  #ulsub4 {
+    position: absolute;
+    top: 3px;
+    left: 57%;
+  }
+  a:link {
+    display: block;
+    text-decoration: none;
+    color: white;
+  }
+  ul a:hover {
+    border: 5em;
+    border-radius: 1em;
+    margin: 0.1em;
+    padding: 2px , 3px;
+    box-shadow: 1.5px 1.5px 1.5px black;
+    background-color: rgb(75, 239, 245);
+    color: white;
+  }
+  a:visited {
+    color: white;
+  }
+  a:active {
+    color: black;
+    box-shadow: 0 0 0 0 black;
+  }
+  .caixapesquisa {
+    position: relative;
+    border-radius: 48px;
+    height: 3%;
+    width: 8%;
+    top: -35px;
+    left: 82%;
+  }
+  .botaopesquisa {
+    position: absolute;
+    background-color: limegreen;
+    border: none;
+    padding: 0;
+    top: 114px;
+    left: 94%;
+  }
+  
+  .fakeimg {
+    height: 200px;
+    width: 60%;
+    background: #aaa;
+  }
+  div.texto{
+    line-height: 0.5;
+  }
+  div.foto{
+    width:200px;
+  }
+  p.reput{
+    color:red;
+    position: butto;
+  }
+  div.conf{
+    width: 20%;
+    display: inline-block;
+  }
+  nav.navbar {
+    min-height:35px;
+    height:35px;
+  }
+  div.container2{
+    margin:2% 5% 10% 5%;
+  }
+  div.list{
+    right: 20px;
+    border: 1px solid;
+    border-radius: 10px;
+    height: 250px;
+  }
+  
+ 
