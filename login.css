@@ -38,9 +38,13 @@ body{
   border: 10px;
   color: white;
   flex: 1 1 100%;
- 
+  text-decoration: none;
   outline:0;
 }
 .title{
   color: #dc3545;
+}
+#botaohome {
+  text-decoration: none;
+  color: white;
 }

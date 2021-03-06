@@ -5,6 +5,8 @@ body{
     font-family: "Lucida Console", "Courier New", monospace;
 }
 div.header {
+
+    position: relative;
     background-color: #fbdd47;
     padding: 15px 20px;
 }
@@ -20,8 +22,8 @@ div.header {
     position: absolute;
     max-width: 60px;
     height: auto;
-    top: 2%;
-    left: 0.2%;
+    top: 0%;
+    left: 2%;
 }
 div.sub-header{
     position: relative;
@@ -34,22 +36,22 @@ div.sub-header{
 }
 #ulsub1 {
     position: absolute;
-    top: 3px;
+    top: 12px;
     text-align: left;
 }
 #ulsub2 {
     position: absolute;
-    top: 3px;
+    top: 12px;
     left: 17%;
 }
 #ulsub3 {
     position: absolute;
-    top: 3px;
+    top: 12px;
     left: 34%;
 }
 #ulsub4 {
     position: absolute;
-    top: 3px;
+    top: 12px;
     left: 57%;
 }
 a:link {
@@ -109,6 +111,8 @@ table {
   border-collapse: collapse;
   border-radius: 1em;
   overflow: hidden;
+  width: 100%;
+  height: auto;
 }
 th, td {
   padding: 1em;
@@ -119,8 +123,6 @@ th, td {
   margin-top: 2em;
   clear: both;
 }
-body {
-  margin: 1.5em;
-}
+
 
    
