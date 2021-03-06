@@ -1,0 +1,45 @@
+body{
+  background-color: #f0f0f0
+}
+.form{
+  width:400px;
+  margin: auto;
+  padding-top:40px;
+}
+.card{
+  box-shadow: 1px 1px 5px #ccc;
+  background-color: white;
+  padding: 30px;
+  border-radius: 5px;
+}
+.card-top{
+  text-align: center;
+}
+.card-group{
+  margin-bottom:10px;
+}
+.card-group > label{
+  width:100%;
+  color: rgb(75, 75, 75);
+  display: block;
+}
+.card-group >input{
+ border-radius: spx;
+ outline:0;
+ width:100%;
+ height: 25px;
+ padding:5px;
+}
+.card-group > button{
+  background-color:#dc3545;
+  width: 100%;
+  border-radius:30px;
+  padding:15px;
+  border: 10px;
+  color: white;
+ 
+  outline:0;
+}
+.title{
+  color: #dc3545;
+}
