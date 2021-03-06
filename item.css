@@ -104,9 +104,10 @@ th{
   color: blue;
   }
   
-  table.estetica{ 
- border: 1px lightgray;
- }
+table.estetica{ 
+    width: "980";
+    border: 1px lightgray;
+}
 table {
   border-collapse: collapse;
   border-radius: 1em;
@@ -123,6 +124,3 @@ th, td {
   margin-top: 2em;
   clear: both;
 }
-
-
-   
