@@ -1,0 +1,144 @@
+body{
+    margin: 0;
+    background-color: darkslategrey;
+    padding: 0;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+div.header {
+    background-color: #fbdd47;
+    padding: 15px 20px;
+}
+#TITULO {
+    width: 100%;
+    text-align: center;
+    position: top;
+    font-size: 40px;   
+    color: white;
+    text-shadow: 2px 2px 2px rgba(0,0,0,0.5);
+}
+#LOGO {
+    position: absolute;
+    max-width: 60px;
+    height: auto;
+    top: 2%;
+    left: 0.2%;
+}
+div.sub-header{
+    position: relative;
+    height: 40px;
+    top: -17px;
+    background-color: limegreen;
+    color: white;
+    text-shadow: 2px 2px 2px rgba(0,0,0,0.5);
+    font-size: 12px;
+}
+#ulsub1 {
+    position: absolute;
+    top: 3px;
+    text-align: left;
+}
+#ulsub2 {
+    position: absolute;
+    top: 3px;
+    left: 17%;
+}
+#ulsub3 {
+    position: absolute;
+    top: 3px;
+    left: 34%;
+}
+#ulsub4 {
+    position: absolute;
+    top: 3px;
+    left: 57%;
+}
+a:link {
+    display : block;
+    text-decoration: none;
+    color: white;
+}
+ul a:hover {
+    border: 5em;
+    border-radius: 1em;
+    margin: 0.1em;
+    padding: 2px , 3px;
+    box-shadow: 1.5px 1.5px 1.5px black;
+    background-color: rgb(75, 239, 245);
+    color:white;
+}
+a:visited {
+    color: white;
+}
+a:active {
+    color: black;
+    box-shadow: 0 0 0 0 black;
+}
+.caixapesquisa {
+    position: relative;
+    border-radius: 48px;
+    height: 3%;
+    width: 8%;
+    top: -47px;
+    left: 82%;
+}
+.botaopesquisa {
+    position: absolute;
+    background-color: limegreen;
+    border: none;
+    padding: 0;
+    top: 114px;
+    left: 94%;
+}
+.pagini {
+    font-size: 12px;
+    position: relative;
+    height: auto;
+    width: 100%;
+    top: -40px;
+    color: white;
+    
+}
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+    width: 100%;
+    top: 12px;
+}
+.frase {
+    background: darkslategrey;
+    text-align: center;
+    color: white;
+    top: -200px;
+}
+.caixa {
+    box-sizing: border-box;
+    border: 2px solid black;
+}
+table {
+    position: relative;
+    bottom: -350px;
+    border-collapse: collapse;
+    width: 100%;
+    color: white;
+    background-color: darkslategrey;
+    border-bottom: 1px solid grey;
+}
+  
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+#titulofuncional {
+    max-width: 100%;
+    width: 100%;
+    text-align: center;
+    left: 450px;
+    bottom: -500px;
+    color: white;
+}
+caption {
+    background-color: limegreen;
+    color: white;
+    font-size: 20px;
+    padding: 20px;
+}
