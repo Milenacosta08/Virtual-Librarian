@@ -37,6 +37,7 @@ body{
   padding:15px;
   border: 10px;
   color: white;
+  flex: 1 1 100%;
  
   outline:0;
 }
