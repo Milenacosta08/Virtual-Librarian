@@ -1,0 +1,124 @@
+corpo {
+    margem : 0 ;
+    cor de fundo : darkslategrey;
+    preenchimento : 0 ;
+    família de fontes : "Lucida Console" ,  "Courier New" , monospace;
+}
+div . header {
+    cor de fundo : # fbdd47 ;
+    preenchimento : 15 px  20 px ;
+}
+# TITULO {
+    largura : 100 % ;
+    alinhamento de texto : centro;
+    posição : topo;
+    tamanho da fonte : 40 px ;   
+    cor : branco;
+    sombra do texto : 2 px  2 px  2 px  rgba ( 0 , 0 , 0 , 0,5 );
+}
+# LOGO {
+    posição : absoluta;
+    largura máxima : 60 px ;
+    altura : automático;
+    topo : 2 % ;
+    esquerda : 0,2 % ;
+}
+div . subcabeçalho {
+    posição : relativa;
+    altura : 40 px ;
+    topo : -17px;
+    cor de fundo : limegreen;
+    cor : branco;
+    sombra do texto : 2 px  2 px  2 px  rgba ( 0 , 0 , 0 , 0,5 );
+    tamanho da fonte : 12 px ;
+}
+# ulsub1 {
+    posição : absoluta;
+    topo : 3 px ;
+    alinhamento de texto : esquerda;
+}
+# ulsub2 {
+    posição : absoluta;
+    topo : 3 px ;
+    esquerda : 17 % ;
+}
+# ulsub3 {
+    posição : absoluta;
+    topo : 3 px ;
+    esquerda : 34 % ;
+}
+# ulsub4 {
+    posição : absoluta;
+    topo : 3 px ;
+    esquerda : 57 % ;
+}
+a : link {
+    display : bloco ;
+    decoração de texto : nenhum ;
+    cor : branco ;
+}
+ul  a : hover {
+    borda : 5 em ;
+    raio da borda : 1 em ;
+    margem : 0,1 em ;
+    preenchimento : 2 px  ,  3 px ;
+    sombra da caixa : 1,5 px  1,5 px  1,5 px preta;
+    cor de fundo : rgb ( 75 ,  239 ,  245 );
+    cor : branco;
+}
+a : visitou {
+    cor : branco;
+}
+a : ativo {
+    cor : preto;
+    sombra da caixa : 0  0  0  0 preto;
+}
+. caixapesquisa {
+    posição : relativa;
+    raio da borda : 48 px ;
+    altura : 3 % ;
+    largura : 8 % ;
+    topo : -47px;
+    esquerda : 82 % ;
+}
+. botaopesquisa {
+    posição : absoluta;
+    cor de fundo : limegreen;
+    fronteira : nenhum;
+    preenchimento : 0 ;
+    topo : 114 px ;
+    esquerda : 94 % ;
+}
+   width: 80px;
+   height: 80px;
+}
+img.parte2{
+   width: 80px;
+   height: 80px;
+}
+th{
+  color: blue;
+  }
+  
+  table.estetica{ 
+ border: 1px lightgray;
+ }
+table {
+  border-collapse: collapse;
+  border-radius: 1em;
+  overflow: hidden;
+}
+th, td {
+  padding: 1em;
+  background: #ddd;
+  border-bottom: 2px solid white; 
+}
+.css-mine {
+  margin-top: 2em;
+  clear: both;
+}
+body {
+  margin: 1.5em;
+}
+
+   
