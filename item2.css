@@ -86,11 +86,6 @@ a:active {
 div.main{
     margin: 1% 5% 10% 2%;
 }
-#imagem1{
-    max-width: 30%;
-    height: auto;
-    border-radius: 8px;
-}
 #resumo{
     margin-top: 3%;
 }
@@ -105,4 +100,9 @@ div.botões{
     text-align: center;
     border-bottom: 4px solid;
     background-color: #f0d44a;
+}
+#imagem2{
+    max-width: 20%;
+    height: auto;
+    border-radius: 8px;
 }
