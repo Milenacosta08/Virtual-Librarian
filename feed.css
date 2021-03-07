@@ -197,6 +197,7 @@ p.botaoenviar a {
     height: 100px;
     width: 100px;
     background: #aaa;
+    float: left;
 }
 .nomedousu {
     margin-left: 10%;
@@ -204,6 +205,7 @@ p.botaoenviar a {
     top: 10px;
     left: 20%;
     line-height: 0.5;
+    float: left;
 }
 .fakeimg, .nomedousu {
     display: inline-block;
