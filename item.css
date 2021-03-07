@@ -97,6 +97,9 @@ div.foto{
     height: 150px;
     width: 30%;
 }
+.botao{
+    margin: 5% 1% 10% 0%;
+}
 p{
     margin-top: 5px;
 }
