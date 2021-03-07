@@ -92,14 +92,14 @@ a:active {
 .feedbox {
     position: relative;
     width: 99.5%;
-    height: 674px;
+    height: 641px;
     border: 2px solid black;
     left: 2px;
 }
 .barradefuncao {
     position: relative;
     width: 20%;
-    height: 674px;
+    height: 641px;
     background-color: #2196F3;
     align-items: center;
 }
@@ -114,7 +114,7 @@ a:active {
     position: absolute;
     background-color: darkgray;
     width: 79.9%;
-    height: 674px;
+    height: 641px;
     left: 20%;
 }
 .btn {
