@@ -1,8 +1,7 @@
 body{
     margin: 0;
-    background-color: darkslategrey;
+    background-color: lightgray;
     padding: 0;
-    font-family: "Lucida Console", "Courier New", monospace;
 }
 div.header {
     background-color: #fbdd47;
@@ -14,15 +13,16 @@ div.header {
     position: top;
     font-size: 40px;   
     color: white;
+    font-family: "Lucida Console", "Courier New", monospace;
     text-shadow: 2px 2px 2px rgba(0,0,0,0.5);
 }
 #LOGO {
     position: absolute;
-    max-width: 60px;
-    height: auto;
-    top: 2%;
-    left: 0.2%;
-}
+    max-width: 65px;
+    max-height: 65px;
+    top: 1%;
+    nav-left: 1%;
+  }
 div.sub-header{
     position: relative;
     height: 40px;
@@ -89,4 +89,31 @@ a:active {
     top: 114px;
     left: 94%;
 }
+.feedbox {
+    position: relative;
+    width: 99.5%;
+    height: 700px;
+    border: 2px solid black;
+    left: 2px;
+}
+.barradefuncao {
+    position: relative;
+    width: 20%;
+    height: 700px;
+    background-color: lightgray;
 
+}
+.titulofuncao {
+    padding: 20px;
+    font-size: 10px;
+    text-align: center;
+    background-color: black;
+    color: white;
+}
+.caixapostagens {
+    position: absolute;
+    background-color: darkgray;
+    width: 79.9%;
+    height: 700px;
+    left: 20%;
+}
