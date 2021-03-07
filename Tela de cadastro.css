@@ -108,3 +108,17 @@ input[type="submit"] {
   .template {
     display: none;
   }
+  p.botao a { 
+    position: relative; 	
+    top: -15px;
+    padding:10px 20px;
+    text-decoration: none;
+    text-align:center;	
+    color:white;
+    background: #E60084;	
+    border-radius: 20px;
+    width:450px;  
+    height:35px;	
+    display:block;	
+    font-size: .9rem;
+}
