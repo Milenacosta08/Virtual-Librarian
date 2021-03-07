@@ -92,16 +92,16 @@ a:active {
 .feedbox {
     position: relative;
     width: 99.5%;
-    height: 700px;
+    height: 674px;
     border: 2px solid black;
     left: 2px;
 }
 .barradefuncao {
     position: relative;
     width: 20%;
-    height: 700px;
+    height: 674px;
     background-color: lightgray;
-
+    align-items: center;
 }
 .titulofuncao {
     padding: 15px;
@@ -114,6 +114,42 @@ a:active {
     position: absolute;
     background-color: darkgray;
     width: 79.9%;
-    height: 700px;
+    height: 674px;
     left: 20%;
 }
+.btn {
+    width: 100%;
+    background-color: #2196F3;
+    color: white;
+    padding: 16px;
+    font-size: 10px;
+    border: none;
+    outline: none;
+  }
+.nomelivros {
+    width: 100%;
+    position: relative;
+    display: inline-block;
+}
+.conteudo {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    z-index: 1;
+}
+.conteudo a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+.conteudo a:hover {
+    background-color: #ddd;
+}
+.nomelivros:hover .conteudo {
+    display: block;
+}
+.btn:hover, .nomelivros:hover .btn {
+    background-color: #0b7dda;
+  }
