@@ -1,10 +1,10 @@
 body{
     margin: 0;
-    background-color: lightgrey;
+    background-color: lightgray;
     
   }
   div.header {
-    background-color: #fbdd47;
+    background-color: #f0d44a;
     padding: 15px 20px;
   }
   #TITULO {
@@ -111,10 +111,9 @@ body{
     display: inline-block;
   }
   nav.navbar {
-    border: 1px solid;
+    border-bottom: 1px solid;
     border-radius: 5px;
-    background-color: #fbdd47;
-    min-height: 35px;
+    background-color: #f0d44a;
     height: 35px;
     font-family: "Lucida Console", "Courier New", monospace;
     text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
