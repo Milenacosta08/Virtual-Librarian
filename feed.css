@@ -100,7 +100,7 @@ a:active {
     position: relative;
     width: 20%;
     height: 674px;
-    background-color: lightgray;
+    background-color: #2196F3;
     align-items: center;
 }
 .titulofuncao {
@@ -153,3 +153,14 @@ a:active {
 .btn:hover, .nomelivros:hover .btn {
     background-color: #0b7dda;
   }
+.botaoperfil {
+    background-color: #2196F3;
+    text-align: center;
+    font-size: 10px;
+    padding: 15px;
+    border: none;
+    outline: none;
+}
+.botaoperfil:hover {
+    background-color: #0b7dda;
+}
