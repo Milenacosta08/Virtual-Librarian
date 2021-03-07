@@ -81,14 +81,6 @@ a:active {
     top: -47px;
     left: 82%;
 }
-.botaopesquisa {
-    position: absolute;
-    background-color: limegreen;
-    border: none;
-    padding: 0;
-    top: 114px;
-    left: 94%;
-}
 .feedbox {
     position: relative;
     width: 99.5%;
@@ -109,13 +101,6 @@ a:active {
     text-align: center;
     background-color: black;
     color: white;
-}
-.caixapostagens {
-    position: absolute;
-    background-color: darkgray;
-    width: 79.9%;
-    height: 641px;
-    left: 20%;
 }
 .btn {
     width: 100%;
@@ -157,10 +142,30 @@ a:active {
     background-color: #2196F3;
     text-align: center;
     font-size: 10px;
-    padding: 15px;
+    padding: 15px 20px;
     border: none;
     outline: none;
 }
 .botaoperfil:hover {
     background-color: #0b7dda;
+}
+.caixapostagens {
+    position: absolute;
+    background-color: white;
+    width: 79.9%;
+    height: 641px;
+    left: 20%;
+}
+.formatopostagem {
+    height: 200px;
+    width: 79.9%;
+    background: white;
+    border: 1px solid black;
+    border-radius: 20px;
+}
+.textopost {
+    height: 200px;
+    width: 79.9%;
+    background: white;
+    border-radius: 20px;
 }

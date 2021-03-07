@@ -83,15 +83,6 @@ a:active {
     top: -47px;
     left: 82%;
 }
-.botaopesquisa {
-    position: absolute;
-    background-color: limegreen;
-    border: none;
-    padding: 0;
-    top: 114px;
-    left: 94%;
-}
-
 div.main{
     margin: 1% 5% 10% 2%;
 }

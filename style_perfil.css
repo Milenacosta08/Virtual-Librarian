@@ -82,15 +82,6 @@ body{
     top: -35px;
     left: 82%;
   }
-  .botaopesquisa {
-    position: absolute;
-    background-color: limegreen;
-    border: none;
-    padding: 0;
-    top: 114px;
-    left: 94%;
-  }
-  
   .fakeimg {
     height: 200px;
     width: 60%;
