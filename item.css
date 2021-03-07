@@ -113,5 +113,10 @@ div.botões{
 #detalhes{
     text-align: center;
     border-bottom: 4px solid;
-    background-color: lightgrey;
+    background-color: #f0d44a;
+}
+#imagem2{
+    max-width: 20%;
+    height: auto;
+    border-radius: 8px;
 }
