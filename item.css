@@ -1,13 +1,13 @@
 body{
     margin: 0;
-    background-color: darkslategrey;
+    background-color:lightgrey;
     padding: 0;
     font-family: "Lucida Console", "Courier New", monospace;
 }
 div.header {
 
     position: relative;
-    background-color: #fbdd47;
+    background-color: #f0d44a;
     padding: 15px 20px;
 }
 #TITULO {
@@ -92,35 +92,26 @@ a:active {
     left: 94%;
 }
 
-img.parte1{
-    width: 80px;
-    height: 80px;
+div.main{
+    margin: 1% 5% 10% 2%;
 }
-img.parte2{
-   width: 80px;
-   height: 80px;
+#imagem1{
+    max-width: 30%;
+    height: auto;
+    border-radius: 8px;
 }
-th{
-  color: blue;
-  }
-  
-table.estetica{ 
-    width: "980";
-    border: 1px lightgray;
+#resumo{
+    margin-top: 3%;
 }
-table {
-  border-collapse: collapse;
-  border-radius: 1em;
-  overflow: hidden;
-  width: 100%;
-  height: auto;
+p{
+    line-height: 1;
 }
-th, td {
-  padding: 1em;
-  background: #ddd;
-  border-bottom: 2px solid white; 
+
+div.botões{
+    margin: 5% 1% 10% 0%;
 }
-.css-mine {
-  margin-top: 2em;
-  clear: both;
+#detalhes{
+    text-align: center;
+    border-bottom: 4px solid;
+    background-color: lightgrey;
 }

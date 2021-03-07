@@ -14,67 +14,46 @@
     <title>Item</title>
 </head>
 <body>
-    <!--CABEÇALHO DO SITE -->
-    <div class="container-fluid">
+    <div class="container-fluid" >
+        <!--Cabeçalho geral-->
         <header>
-            <div class = "header">
-                <h1 id = "TITULO">Virtual Librarian</h1>
-                <img id = "LOGO" src="LOGOTIPO VIRTUAL LIBRARIAN.png" alt="VIRTUAL LIBRARIAN">
-            </div>
+          <div class = "header">
+            <h1 id = "TITULO">Virtual Librarian</h1>
+            <img id = "LOGO" src="https://i.imgur.com/nVHQMfK.png" alt="VIRTUAL LIBRARIAN">
+          </div>
         </header>
         <div class = "sub-header">
-            <ul id = "ulsub1"><a href="index.html">Home</a></ul>
-            <ul id = "ulsub2"><a href="feed.html">Feed</a></ul>
-            <ul id = "ulsub3"><a href="Tela de cadastro.html">Cadastro</a></ul>
-            <ul id = "ulsub4"><a href="login.html">Login</a></ul>
+          <ul id = "ulsub1"><a href="index.html">Home</a></ul>
+          <ul id = "ulsub2"><a href="feed.html">Feed</a></ul>
+          <ul id = "ulsub3"><a href="cadastro.html">Cadastro</a></ul>
+          <ul id = "ulsub4"><a href="login.html">Login</a></ul>
         </div>
-        
-        <!--BARRA DE PESQUISA-->
+    
+        <!--PESQUISA-->
         <form class="form-inline" action="/action_page.php">
-            <input class="caixapesquisa" type="text" placeholder="Pesquisa">
+          <input class="caixapesquisa" type="text" placeholder="Pesquisa">
         </form>
-
-        <!--TABELA DE ITENS-->
-        <table id="tbVendas_de_livros" rules="rows">
-            <thead>
-                <tr>
-                    <table class= "estetica"> 
-                        <th> Imagem </th>
-                        <th>Nome</th>
-                        <th>Data</th>
-                        <th> Item </th>
-                        <th>Descrição</th>
-                        <th>Valor</th>
-                        <th>Gênero</th>    
-                        <th>Aspecto do livro</th>  
-                </tr>
-            </thead>
-            <tbody>
-                <tr class="linhaprodutosvenda">
-        <!--Item 1-->
-                    <td><img class="parte1" src='http://painel.portalamazonia.com/uploads/RTEmagicC_domquixote.jpg.jpg'/></td>
-                    <div id = "div2">
-                        <td> Dom quixote</td>
-                        <td>02/03/2021</td>
-                        <td> 1 </td>
-                        <td> Descreve sobre romances de cavalaria que gozaram de imensa popularidade</td>
-                        <td>50,00</td>
-                        <td>Aventura </td>
-                        <td>Poucas marcas de uso, sem marcas de canetas nas páginas</td>
+    
+        <!--CAIXA DO ITEM-->
+            <div class="media border p-3">
+                <img id="imagem1" src='http://painel.portalamazonia.com/uploads/RTEmagicC_domquixote.jpg.jpg' class="align-self-start mr-2" alt="Dom Quixote"/>
+                <div class="media-body">
+                    <h4>Dom Quixote <small><i>(Miguel de Cervantes)</i></small></h4>
+                    <small><i>Adicionado em 06 de Março de 2021 <br></i></small>
+                    <button class="btn btn-secondary btn-sm" type="button" data-toggle="collapse" data-target="#resumo">Resumo</button>
+                    <div id="resumo" class="collapse">
+                        Descreve sobre romances de cavalaria que gozaram de imensa popularidade. A obra narra as aventuras e desventuras de Dom Quixote, um homem de meia idade que resolveu se tornar cavaleiro andante depois de ler muitos romances de cavalaria.
                     </div>
-                </tr>
-        <!--Item 2-->
-                <td><img class="parte2" src='https://images-na.ssl-images-amazon.com/images/I/81oeku8iPtL.jpg'/></td>
-                <td> O pequeno príncipe</td>
-                <td>08/03/2021</td>
-                <td>2</td>
-                <td> Descreve sobre a queda de um avião e o encontro do piloto com uma criança loia e frágil</td>
-                <td>80,00</td>
-                <td> Fábula </td>
-                <td>Algumas marcas de uso nas páginas, mas o aspecto ecterno do livro encontra-se em perfeito estado</td>
-   
-            </tbody>
-        </table>
+                    <div class="botões">
+                        <button type="button" class="btn btn-outline-success btn-sm">Desejo</button>
+                        <button type="button" class="btn btn-outline-info btn-sm">Sinalizar interesse</button>
+                    </div>
+                </div>
+            </div>
+            <div class="main container">
+                <h2 id="detalhes"><b>Detalhes</b></h2>
+
+        
     </div>
 </body>
 </html>
