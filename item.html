@@ -9,6 +9,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
     
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="item.css">
 
     <title>Item</title>
@@ -44,7 +45,7 @@
         <div id="resumo" class="collapse">
           Descreve sobre romances de cavalaria que gozaram de imensa popularidade. A obra narra as aventuras e desventuras de Dom Quixote, um homem de meia idade que resolveu se tornar cavaleiro andante depois de ler muitos romances de cavalaria.
         </div>
-        <div class="botões">
+        <div class="botao">
           <button type="button" class="btn btn-outline-success btn-sm">Desejo</button>
           <button type="button" class="btn btn-outline-info btn-sm">Tenho</button>
         </div>
@@ -52,8 +53,27 @@
     </div>
     <!--DETALHES ITEM 1-->
     <div class="main container">
-      <h2 id="detalhes"><b>Detalhes</b></h2>
-      Apresenta poucas marcas de uso, com todas as páginas sem danos ou rasgos. Além disso, o livro possui um estado de conservação bem elevado, já que obteve somente um dono.
+      <div class="row">
+    <!--COLUNA DE CONTATO-->
+        <div class="contato col-md-4">
+          <h3 id="contato">Contato</h3>
+          <div class="media">
+            <div class="foto fakeimg align-self-start" alt="Nome do usuário">Foto do usuário</div>
+            <div class="media-body">
+              <h5><a href="perfil.html">Nome do usuário</a></h5>
+              <p><small id="reput">Confiável/duvidosa</small></p>
+              <button type="button" class="mensagem btn btn-warning btn-sm"><a href="#"class="material-icons">message</a></button>
+            </div>
+          </div>
+        </div>
+    <!--COLUNA PRINCIPAL-->
+        <div class="col-md-8">
+          <h2 id="detalhes">Detalhes</h2>
+          <b>Status do livro:</b> Disponível para troca.
+          <p><b>Condições do livro:</b> Apresenta poucas marcas de uso, com todas as páginas sem danos ou rasgos. Além disso, o livro possui um estado de conservação bem elevado, já que obteve somente um dono.</p>
+          <div class="fakeimg"><i>Foto dos danos</i></div>
+        </div>
+      </div>
     </div>
   </div>
 </body>
