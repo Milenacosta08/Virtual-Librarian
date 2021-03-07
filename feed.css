@@ -83,7 +83,7 @@ a:active {
 }
 .feedbox {
     position: relative;
-    width: 99.5%;
+    width: 99%;
     height: 641px;
     border: 2px solid black;
     left: 2px;
@@ -145,6 +145,10 @@ a:active {
     padding: 15px 20px;
     border: none;
     outline: none;
+    display : block;
+    text-decoration: none;
+    color: white;
+
 }
 .botaoperfil:hover {
     background-color: #0b7dda;
@@ -152,20 +156,55 @@ a:active {
 .caixapostagens {
     position: absolute;
     background-color: white;
-    width: 79.9%;
+    width: 79%;
     height: 641px;
     left: 20%;
 }
 .formatopostagem {
-    height: 200px;
-    width: 79.9%;
+    position: absolute;
+    height: 60px;
+    width: 30%;
     background: white;
     border: 1px solid black;
     border-radius: 20px;
+    bottom: 50%;
+    right: 60%;
 }
-.textopost {
-    height: 200px;
-    width: 79.9%;
-    background: white;
+.formatopostagem p {
+    font-size: 10px;
+    margin: 20px;
+    opacity: 0.5;
+}
+p.botaoenviar a { 
+    position: relative;
+    margin: 20px;
+    padding: 20px;
+    text-align: center;
+    width: 17%;
+    height: 23px;
+	color: white;
+    background: #2196F3;
     border-radius: 20px;
+    bottom: -237px;
+    left: 40%;
+    word-wrap: break-word;
+}
+.fakeimg {
+    margin: 20px;
+    position: absolute;
+    left: 10%;
+    top: 105px;
+    height: 100px;
+    width: 100px;
+    background: #aaa;
+}
+.nomedousu {
+    margin-left: 10%;
+    position: relative;
+    top: 10px;
+    left: 20%;
+    line-height: 0.5;
+}
+.fakeimg, .nomedousu {
+    display: inline-block;
 }
