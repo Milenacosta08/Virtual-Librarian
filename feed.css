@@ -73,6 +73,7 @@ a:active {
     color: black;
     box-shadow: 0 0 0 0 black;
 }
+
 .caixapesquisa {
     position: relative;
     border-radius: 48px;
@@ -81,17 +82,20 @@ a:active {
     top: -47px;
     left: 82%;
 }
+.fakeimg {
+    height: 100px;
+    width: 100px;
+    background: #aaa;
+}
+
 .feedbox {
-    position: relative;
-    width: 99%;
-    height: 641px;
     border: 2px solid black;
-    left: 2px;
 }
 .barradefuncao {
     position: relative;
-    width: 20%;
-    height: 641px;
+    margin: center;
+    width: 99%;
+    min-height: 99%;
     background-color: #2196F3;
     align-items: center;
 }
@@ -107,7 +111,7 @@ a:active {
     background-color: #2196F3;
     color: white;
     padding: 16px;
-    font-size: 10px;
+    font-size: 14px;
     border: none;
     outline: none;
   }
@@ -141,7 +145,7 @@ a:active {
 .botaoperfil {
     background-color: #2196F3;
     text-align: center;
-    font-size: 10px;
+    font-size: 14px;
     padding: 15px 20px;
     border: none;
     outline: none;
@@ -153,60 +157,27 @@ a:active {
 .botaoperfil:hover {
     background-color: #0b7dda;
 }
-.caixapostagens {
-    position: absolute;
-    background-color: white;
-    width: 79%;
-    height: 641px;
-    left: 20%;
-}
+
 .formatopostagem {
-    position: absolute;
     height: 60px;
     width: 30%;
     background: white;
     border: 1px solid black;
     border-radius: 20px;
-    bottom: 50%;
-    right: 60%;
+    margin-right: 2%;
+    margin-top: 1%;
 }
 .formatopostagem p {
     font-size: 10px;
     margin: 20px;
     opacity: 0.5;
 }
-p.botaoenviar a { 
-    position: relative;
-    margin: 20px;
-    padding: 20px;
-    text-align: center;
-    width: 17%;
-    height: 23px;
-	color: white;
-    background: #2196F3;
-    border-radius: 20px;
-    bottom: -237px;
-    left: 40%;
-    word-wrap: break-word;
+
+button.botaoenviar {
+    height: 40px;
+    width: 80px;
+    margin-top: -13%;
+    margin-left: 32%;
 }
-.fakeimg {
-    margin: 20px;
-    position: absolute;
-    left: 10%;
-    top: 105px;
-    height: 100px;
-    width: 100px;
-    background: #aaa;
-    float: left;
-}
-.nomedousu {
-    margin-left: 10%;
-    position: relative;
-    top: 10px;
-    left: 20%;
-    line-height: 0.5;
-    float: left;
-}
-.fakeimg, .nomedousu {
-    display: inline-block;
-}
+
+

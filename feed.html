@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="feed.css" media="screen">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/&#xf4ad.js" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" type="text/css" href="feed.css" media="screen">
+
     <title>Feed - Virtual Librarian</title>
 </head>
 <body>
@@ -26,54 +33,58 @@
             <form class="form-inline" action="/action_page.php">
                 <input class="caixapesquisa" type="text" placeholder="Pesquisa">
             </form>
-        </div>
-        <!--INICIO FEED-->
-        <div class = "feedbox">
-            <div class = "align-self-start">
-                <div class = "caixapostagens">
-                    <div class = "formatopostagem">
-                        <p>Digite o seu comentário...</p>              
-                    </div>
-                    <p class = "botaoenviar">
-                        <a href="#">Publicar</a>
-                    </p>
-                    <div class = "nomedousu">
-                        <p>Nome do Usuário</p>
-                    </div>
-                    <div class = "fakeimg">
-                        Imagem do usuário
-                    </div>
+        <!--INICIO FEED-->  
+    
+        <div class="feedbox">
+            <div class="row">
+              <div class="col-sm-3">
+                <div class = "barradefuncao">
+                    <a href="#demo" data-toggle="collapse"><div class = "titulofuncao">
+                        <h2>Funções</h2>
+                        <hr>
+                    </div></a>
+                    <div id="demo" class="collapse show">
+                        <p class = "botaoperfil">
+                        <a href="perfil.html">Meu Perfil</a>
+                        </p>
+                        <div class = "nomelivros">
+                            <button class = "btn">Livros</button>
+                            <div class = "conteudo">
+                                <a href="item.html">Dom Quixote</a>
+                                <a href="item2.html">Pequeno Príncipe</a>
+                                <a href="#">Livro Teste2</a>
+                            </div>
+                        </div>
 
-            </div>
-                </div>
-            <div class = "barradefuncao">
-                <div class = "titulofuncao">
-                    <h2>Funções</h2>
-                    <hr>
-                </div>
-                <p class = "botaoperfil">
-                    <a href="perfil.html">Meu Perfil</a>
-                </p>
-                <div class = "nomelivros">
-                    <button class = "btn">Livros</button>
-                    <div class = "conteudo">
-                        <a href="item.html">Dom Quixote</a>
-                        <a href="item2.html">Pequeno Príncipe</a>
-                        <a href="#">Livro Teste2</a>
+                        <div class = "botoesfake">
+                            <button class = "btn">Amigos</button>
+                            <button class = "btn">Chat</button>
+                            <button class = "btn">Grupos</button>
+                            <button class = "btn">Minha Estante</button>
+                            <button class = "btn">Estantes</button>
+                            <button class = "btn">Teste</button>
+                            <button class = "btn">Teste</button>
+                            <button class = "btn">Teste</button>
+                            <button class = "btn">Teste</button>
+                            <button class = "btn">Teste</button>
+                            <button class = "btn">Teste</button>
+                        </div>
                     </div>
                 </div>
-                <div class = "botoesfake">
-                    <button class = "btn">Amigos</button>
-                    <button class = "btn">Chat</button>
-                    <button class = "btn">Grupos</button>
-                    <button class = "btn">Minha Estante</button>
-                    <button class = "btn">Estantes</button>
-                    <button class = "btn">Teste</button>
-                    <button class = "btn">Teste</button>
-                    <button class = "btn">Teste</button>
-                    <button class = "btn">Teste</button>
-                    <button class = "btn">Teste</button>
-                    <button class = "btn">Teste</button>
+                <hr class="d-sm-none">
+              </div>
+            <div class="col-sm-8">
+                <div class="media border p-3">
+                    <div class="foto fakeimg mr-2">Foto do usuário</div>
+                        <div class="media-body">
+                            <h4>Nome do usuário</h4>
+                            <div class = "formatopostagem">
+                                <p>Digite o seu comentário...</p>              
+                            </div>
+                            <button type="button" class="botaoenviar btn btn-sm" hef="#">Publicar</button> 
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
         </div>
