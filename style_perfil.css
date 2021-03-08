@@ -118,5 +118,9 @@ body{
     border-radius: 10px;
     height: 250px;
   }
+  .principal{
+    background-color: rgba(231, 231, 231, 0.76);
+    border-radius: 5px;
+  }
   
  
