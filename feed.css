@@ -157,27 +157,29 @@ a:active {
 .botaoperfil:hover {
     background-color: #0b7dda;
 }
-
-.formatopostagem {
-    height: 60px;
-    width: 30%;
-    background: white;
-    border: 1px solid black;
-    border-radius: 20px;
-    margin-right: 2%;
-    margin-top: 1%;
-}
 .formatopostagem p {
     font-size: 10px;
     margin: 20px;
     opacity: 0.5;
 }
-
-button.botaoenviar {
-    height: 40px;
-    width: 80px;
-    margin-top: -13%;
-    margin-left: 32%;
+.comentario{
+	width: 60%;
+	height: 50px;
+	padding: 10px;
+	border: none;
+	border-radius: 20px;
+    
 }
+button.botaoenviar {
+    margin-bottom: 5px;
+    height: 50px;
+    width: 80px;
+    text-align: center;
+}
+.caixadosbotoes {
+    align-content: center;
+    height: 50px;
+    width: 220px;
 
+}
 
