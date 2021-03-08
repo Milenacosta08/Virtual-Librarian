@@ -128,14 +128,6 @@ th, td {
     padding: 8px;
     text-align: left;
 }
-#titulofuncional {
-    max-width: 100%;
-    width: 100%;
-    text-align: center;
-    left: 450px;
-    bottom: -500px;
-    color: white;
-}
 caption {
     background-color: limegreen;
     color: white;
