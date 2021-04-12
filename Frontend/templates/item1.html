@@ -1,49 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
+{% extends 'base.html' %}
+
+{% block csss %}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-    
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="item2.css">
+    <link rel="stylesheet" href={{url_for('static', filename= 'item1.css' )}}>
+{% endblock %}
 
-    <title>Item</title>
-</head>
-<body>
-  <div class="container-fluid" >
-    <!--Cabeçalho geral-->
-    <header>
-      <div class = "header">
-        <h1 id = "TITULO">Virtual Librarian</h1>
-        <img id = "LOGO" src="https://i.imgur.com/nVHQMfK.png" alt="VIRTUAL LIBRARIAN">
-      </div>
-    </header>
-    <div class = "sub-header">
-      <ul id = "ulsub1"><a href="index.html">Home</a></ul>
-      <ul id = "ulsub2"><a href="feed.html">Feed</a></ul>
-      <ul id = "ulsub3"><a href="Tela de cadastro.html">Cadastro</a></ul>
-      <ul id = "ulsub4"><a href="login.html">Login</a></ul>
-    </div>
-    
-    <!--PESQUISA-->
-    <form class="form-inline" action="/action_page.php">
-      <input class="caixapesquisa" type="text" placeholder="Pesquisa">
-    </form>
+{% block titulo %}Dom Quixote - Virtual Librarian{% endblock %}
+
+{% block conteudo %}
+    {{ super() }}
+<div class="container-fluid" >
     
     <!--CAIXA DO ITEM 1-->
     <div class="media border p-3">
-      <img id="imagem2" src='https://images-na.ssl-images-amazon.com/images/I/81oeku8iPtL.jpg' class="align-self-start mr-2" alt="O pequeno príncipe"/>
+      <img id="imagem1" src='http://painel.portalamazonia.com/uploads/RTEmagicC_domquixote.jpg.jpg' class="align-self-start mr-2" alt="Dom Quixote"/>
       <div class="media-body">
-        <h4>O pequeno príncipe <small><i>(Antoine de Saint-Exupéry)</i></small></h4>
-        <small><i>Adicionado em 07 de Março de 2021 <br></i></small>
+        <h4>Dom Quixote <small><i>(Miguel de Cervantes)</i></small></h4>
+        <small><i>Adicionado em 06 de Março de 2021 <br></i></small>
         <button class="btn btn-secondary btn-sm" type="button" data-toggle="collapse" data-target="#resumo">Resumo</button>
         <div id="resumo" class="collapse">
-          Um piloto cai com seu avião no deserto e ali encontra uma criança loura e frágil. Ela diz ter vindo de um pequeno planeta distante. E ali, na convivência com o piloto perdido, os dois repensam os seus valores e encontram o sentido da vida.
+          Descreve sobre romances de cavalaria que gozaram de imensa popularidade. A obra narra as aventuras e desventuras de Dom Quixote, um homem de meia idade que resolveu se tornar cavaleiro andante depois de ler muitos romances de cavalaria.
         </div>
         <div class="botao">
           <button type="button" class="btn btn-outline-success btn-sm">Desejo</button>
@@ -60,7 +39,7 @@
           <div class="media">
             <div class="foto fakeimg align-self-start" alt="Nome do usuário">Foto do usuário</div>
             <div class="media-body">
-              <h5><a href="perfil.html">Nome do usuário</a></h5>
+              <h5><a href="/perfil">Nome do usuário</a></h5>
               <p><small id="reput">Confiável/duvidosa</small></p>
               <button type="button" class="mensagem btn btn-warning btn-sm"><a href="#"class="material-icons">message</a></button>
             </div>
@@ -69,13 +48,12 @@
     <!--COLUNA PRINCIPAL-->
         <div class="col-md-8">
           <h2 id="detalhes">Detalhes</h2>
-          <b>Status do livro:</b> Disponível para troca e venda.
-          <p><b>Preço: </b> R$ 15,00</p>
-          <p><b>Condições do livro:</b> Apresenta algumas marcas de uso; como a utilização de caneta nas páginas 18 e 33. Além disso, a página 50 apresenta-se rasgada. Porém, todo o resto livro está em boas condições de uso.</p>
+          <b>Status do livro:</b> Disponível para troca.
+          <p><b>Condições do livro:</b> Apresenta poucas marcas de uso, com todas as páginas sem danos ou rasgos. Além disso, o livro possui um estado de conservação bem elevado, já que obteve somente um dono.</p>
           <div class="fakeimg"><i>Foto dos danos</i></div>
         </div>
       </div>
     </div>
   </div>
-</body>
-</html>
+
+{% endblock %}

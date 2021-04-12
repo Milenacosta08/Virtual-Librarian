@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block csss %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href={{url_for('static', filename= 'feed.css' )}}>
+{% endblock %}
+
+{% block titulo %}Feed - Virtual Librarian{% endblock %}
+
+{% block conteudo %}
+    {{ super() }}
+    <!--INICIO FEED-->  
+    
+    <div class="feedbox">
+        <div class="row">
+          <div class="col-sm-3">
+            <div class = "barradefuncao">
+                <a href="#demo" data-toggle="collapse"><div class = "titulofuncao">
+                    <h2>Funções</h2>
+                    <hr>
+                </div></a>
+                <div id="demo" class="collapse show">
+                    <p class = "botaoperfil">
+                    <a href="/perfil">Meu Perfil</a>
+                    </p>
+                    <div class = "nomelivros">
+                        <button class = "btn">Livros</button>
+                        <div class = "conteudo">
+                            <a href="/dom-quixote">Dom Quixote</a>
+                            <a href="/pequeno-principe">Pequeno Príncipe</a>
+                            <a href="#">Livro Teste2</a>
+                        </div>
+                    </div>
+                    <!--BOTOES DA TABELA DE FUNÇÃO FAKE-->
+                    <div class = "botoesfake">
+                        <button class = "btn">Amigos</button>
+                        <button class = "btn">Chat</button>
+                        <button class = "btn">Grupos</button>
+                        <button class = "btn">Minha Estante</button>
+                        <button class = "btn">Estantes</button>
+                        <button class = "btn">Teste</button>
+                        <button class = "btn">Teste</button>
+                        <button class = "btn">Teste</button>
+                        <button class = "btn">Teste</button>
+                        <button class = "btn">Teste</button>
+                        <button class = "btn">Teste</button>
+                    </div>
+                </div>
+            </div>
+            <hr class="d-sm-none">
+          </div>
+          <!--USUARIO ESCREVENDO-->
+        <div class="col-sm-8">
+            <div class="media border p-4">
+                <div class="fakeimg mr-2">Foto do usuário</div>
+                <div class="media-body">
+                    <h5>Nome do usuário</h5>
+                    <div class = "formatopostagem">
+                        <div class = "caixadosbotoes">
+                            <input type="text" class = "comentario" placeholder="Comentário..."> 
+                            <button type="button" class="botaoenviar btn btn-sm" hef="#">Publicar</button> 
+                        </div>                
+                    </div>
+                </div>
+            </div>
+            <!--USUARIO TESTE-->
+            <div class="teste media">
+                <div class="fakeimg mr-2">Foto do José</div>
+                <div class="media-body">
+                    <h5>José Maria <small><i>Postou em 08 de março de 2021</i></small></h5>
+                    <a id="livro" href="/pequeno-principe"><h5>O pequeno príncipe</h5></a>
+                    <img id="imagem2" src='https://images-na.ssl-images-amazon.com/images/I/81oeku8iPtL.jpg' alt="O pequeno príncipe"/>
+                    <p><b>Resenha: </b>O livro é bem interessante, ele mostra as aventuras do Pequeno Príncipe, passando pela rosa e a raposa.</p>
+                    <button type="button" class="botao btn-outline-primary">Curtir</button>
+                </div>
+            </div>
+        
+        </div>
+    </div>
+</div>
+
+{% endblock %}
