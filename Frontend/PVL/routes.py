@@ -5,7 +5,7 @@ def home():
     return render_template("index.html")
 
 
-@app.route('/feed', methods=['POST'])
+@app.route('/feed')
 def feed():
     return render_template("feed.html")
 
