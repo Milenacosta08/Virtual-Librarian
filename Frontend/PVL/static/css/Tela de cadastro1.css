@@ -1,0 +1,124 @@
+/* geral */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: helvetica, sans-serif;
+    color: #323232;
+    border: none;
+      
+    }
+    
+    input,label {
+      display:block;
+      width: 100%;
+      }
+      
+    input:focus, label:focus {
+      outline: none;
+    }
+    
+    a {
+      color: #964b00;
+    }
+    
+    body {
+      padding-top: 5vh; /* view hwight -> 5% da tela */
+      background-image: url('https://cdn.pixabay.com/photo/2017/08/07/19/07/books-2606859_960_720.jpg');
+      background-size: cover;
+      background-position-y: -150px;
+    }
+    
+    /* form */
+    #main-container {
+      width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      background-color: #e9e3ce;
+      border-radius: 10px;
+      padding: 25px;
+      }
+      #main-container h1 {
+        text-align: center;
+        margin-bottom: 25px;
+        font-size: 1.6rem; /* adaptada ao elemento root */
+      }
+      
+    form {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+    
+    .full-box {
+      flex: 1 1 100%;
+      position: relative;
+    }
+    
+    .half-box {
+      flex: 1 1 45%;
+      position: relative;
+    }
+    
+    .spacing {
+      margin-right: 2.5%;
+    }
+    
+    label {
+      font-weight: bold;
+      font-size: .8rem;
+    }
+    
+    input {
+      border-bottom: 2px solid #323232;
+      padding: 10px;
+      font-size: .9rem;
+      margin-bottom: 40px;
+    }
+    
+    input:focus {
+      border-color: #4b3621;
+    }
+    
+    input[type="submit"] {
+      background-color: #4b3621;
+      color: #FFF;
+      border: none;
+      border-radius: 20px;
+    
+      cursos: pointer;
+      }
+      #agreement {
+        margin-right: 5px;
+      }
+      
+      #agreement, #agreement-label {
+        display: inline-block;
+        width: auto;
+      }
+      
+      /* validações */
+      .error-validation {
+        color: #FF1A1A;
+        position: absolute;
+        top: 57px;
+        font-size: .8rem;
+      }
+      
+      .template {
+        display: none;
+      }
+      p.botao a { 
+        position: relative; 	
+        top: -15px;
+        padding:10px 20px;
+        text-decoration: none;
+        text-align:center;	
+        color:white;
+        background: #4b3621;	
+        border-radius: 20px;
+        width:450px;  
+        height:35px;	
+        display:block;	
+        font-size: .9rem;
+    }

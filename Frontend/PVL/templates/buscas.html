@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block csss %}
+    {{super()}}
+    <link rel="stylesheet" href={{url_for('static', filename = '/css/buscas.css')}}>
+{% endblock %}
+
+{% block titulo %}Buscas - Virtual Librarian{% endblock %}
+
+{% block conteudo %}
+    {{ super() }}
+<div class = "container">
+    <div class = "resultadopesquisa">
+        <p>Exibindo resultados para "{{busca}}"</p>
+    </div>
+</div>
+    <div = "caixasite">
+        {% if existe == 1 %}
+            {% for q in range(0,8) %}
+                {% if busca == sites[q] %}
+
+                    <a class = "linksite" href={{links[q]}}> - {{sites[q].capitalize()}} </a>
+
+                {% endif %}
+            {% endfor %}
+
+        {% else %}
+
+        <p class="paragrafo">Página não encontrada</p>
+
+        {% endif %}
+    </div>
+
+
+{% endblock %}

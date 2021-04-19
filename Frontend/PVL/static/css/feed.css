@@ -1,0 +1,212 @@
+body{
+    margin: 0;
+    background-color: lightgray;
+    padding: 0;
+}
+div.header {
+    background-color: #4b3621;
+    padding: 15px 20px;
+}
+#TITULO {
+    width: 100%;
+    text-align: center;
+    position: top;
+    font-size: 40px;
+    color: white;
+    font-family: "Lucida Console", "Courier New", monospace;
+    text-shadow: 2px 2px 2px rgba(0,0,0,0.5);
+}
+#LOGO {
+    position: absolute;
+    max-width: 65px;
+    max-height: 65px;
+    top: 1%;
+    nav-left: 1%;
+  }
+div.sub-header{
+    position: relative;
+    height: 40px;
+    top: -17px;
+    background-color: #f5f5dc;
+    color: black;
+
+    font-size: 12px;
+}
+#ulsub1 {
+    position: absolute;
+    top: 10px;
+    text-align: left;
+}
+#ulsub2 {
+    position: absolute;
+    top: 10px;
+    left: 17%;
+}
+#ulsub3 {
+    position: absolute;
+    top: 10px;
+    left: 34%;
+}
+#ulsub4 {
+    position: absolute;
+    top: 10px;
+    left: 57%;
+}
+a:link {
+    display : block;
+    text-decoration: none;
+    color: black;
+}
+ul a:hover {
+    border: 5em;
+    border-radius: 1em;
+    margin: 0.1em;
+    padding: 2px , 3px;
+    box-shadow: 1.5px 1.5px 1.5px black;
+    background-color: rgb(75, 239, 245);
+    color:black;
+}
+a:visited {
+    color: black;
+}
+a:active {
+    color: black;
+    box-shadow: 0 0 0 0 black;
+}
+
+.caixapesquisa {
+    position: relative;
+    border-radius: 48px;
+    height: 3%;
+    width: 8%;
+    top: -47px;
+    left: 82%;
+}
+.fakeimg {
+    height: 100px;
+    width: 100px;
+    background: #aaa;
+}
+
+.feedbox {
+    border: 2px solid black;
+}
+.barradefuncao {
+    position: relative;
+    margin: center;
+    width: 99%;
+    min-height: 99%;
+    background-color: #2196F3;
+    align-items: center;
+}
+.titulofuncao {
+    padding: 15px;
+    font-size: 7px;
+    text-align: center;
+    background-color: black;
+    color: white;
+}
+.btn {
+    width: 100%;
+    background-color: #2196F3;
+    color: black;
+    padding: 16px;
+    font-size: 14px;
+    border: none;
+    outline: none;
+  }
+.nomelivros {
+    width: 100%;
+    position: relative;
+    display: inline-block;
+}
+.conteudo {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    z-index: 1;
+}
+.conteudo a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+.conteudo a:hover {
+    background-color: #ddd;
+}
+.nomelivros:hover .conteudo {
+    display: block;
+}
+.btn:hover, .nomelivros:hover .btn {
+    background-color: #0b7dda;
+  }
+.botaoperfil {
+    background-color: #2196F3;
+    text-align: center;
+    font-size: 14px;
+    padding: 15px 20px;
+    border: none;
+    outline: none;
+    display : block;
+    text-decoration: none;
+    color: white;
+
+}
+.botaoperfil:hover {
+    background-color: #0b7dda;
+}
+.formatopostagem p {
+    font-size: 10px;
+    margin: 20px;
+    opacity: 0.5;
+}
+.comentario{
+	width: 60%;
+	height: 50px;
+	padding: 10px;
+	border: none;
+	border-radius: 20px;
+
+}
+button.botaoenviar {
+    margin-bottom: 5px;
+    height: 50px;
+    width: 80px;
+    text-align: center;
+}
+.caixadosbotoes {
+    align-content: center;
+    height: 50px;
+    width: 220px;
+
+}
+b{
+    color:blue;
+}
+.teste{
+margin: 1% 3% 5% 3%;
+border: 0.3px solid whitesmoke;
+padding: 2%;
+}
+div.foto{
+    width: auto;
+    max-width: 350px ;
+    height: 200px;
+    margin-bottom: 1%;
+}
+#livro{
+    color: blue;
+
+}
+.botao{
+    width: 100px;
+    max-width: 100px ;
+    height: 50px;
+}
+#imagem2{
+    max-width: 30%;
+    max-height: auto;
+    border-radius: 8px;
+}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block csss %}
+    {{ super() }}
+    <link rel="stylesheet" href={{url_for('static', filename= 'css/index.css' )}}>
+{% endblock %}
+
+{% block titulo %} Página inicial - Virtual Librarian {% endblock %}
+
+{% block conteudo %}
+    {{  super() }}
+        <!--IMAGEM INICIAL-->
+        <div class = "pagini">
+            <img class = "img-fluid" src="/static/img/PAGINAINICIAL1-1024w.png">
+        </div>
+        <div class = "frase">
+            <div class = "caixa">
+                <br>
+                <p id = "para1">"Um livro é um sonho que seguramos com as mãos" <br> Neil Gaiman</p>
+                <p id = "para2">Então, junte-se ao Virtual Librarian e compartilhe seus sonhos!!!</p>
+            </div>
+        </div>
+        <br>
+{% endblock %}

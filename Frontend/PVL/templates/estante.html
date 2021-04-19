@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block csss %}
+    {{super()}}
+    <link rel="stylesheet" href={{url_for('static', filename = '/css/estante.css')}}>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+{% endblock %}
+
+{% block titulo %}Virtual Librarian - Estante{% endblock %}
+
+{% block conteudo %}
+    {{ super() }}
+<div class = "container">
+
+    <div class = "Tituloestante">
+        <h1>Estante</h1>
+    </div>
+
+    <div class = "d-flex justify-content-center">
+        <div class ="box">
+            <img src="/static/img/Estante.png" class="estante">
+            <div class = "d-flex justify-content-center">
+                <div = class "caixalink">
+                    <a href="/dom-quixote">
+                        <img align="middle" src="https://i.imgur.com/Ns0J8Gp.jpg" class="img-fluid">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CADASTRO DE LIVROS -->
+    <div class="cad_livro">
+        <button type="button" class="btn btn-light" data-toggle="modal" data-target="#myModal">
+            <i class="material-icons">add</i>
+        </button>
+
+      <!-- The Modal -->
+        <div class="modal fade" id="myModal">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content">
+
+                <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Cadastrar Livro</h4>
+                    </div>
+
+                    <!-- Modal body -->
+                    <form action="/livro-cadastrado" method="POST">
+                        <div class="modal-body">
+
+                            <!-- INÍCIO DAS COLUNAS -->
+                            <div class="row">
+
+                                <!-- COLUNA 1 -->
+                                <div class='col md-5'>
+                                    <div class="fakeimg">
+                                        <div class="form-group">
+                                            <label for="capa">Capa do Livro</label><br>
+                                            <input type="file" class="form-control-file" id="capa">
+                                      </div>
+                                    </div>
+                                    <label for="descricao">Resumo</label>
+                                    <textarea class="form-control" id="descricao" aria-label="Com textarea"></textarea>
+                                </div>
+
+                                <!-- COLUNA 2 -->
+                                <div class="col md-5 ml-auto">
+                                    <label for="titulo">Titulo</label>
+                                    <input type="text" class="form-control"id="titulo_livro">
+                                    <label for="autor">Autor</label>
+                                    <input type="text" class="form-control" id="autor">
+                                    <div class="form-group">
+                                        <label for="genero">Gênero</label>
+                                        <select class="form-control" id="genero">
+                                            <option>Romance</option>
+                                            <option>Poesia</option>
+                                            <option>Conto</option>
+                                            <option>Crônica</option>
+                                            <option>Ensaio</option>
+                                            <option>Drama</option>
+                                            <option>Novela</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancelar</button>
+                            <input type="submit" value="Cadastrar">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

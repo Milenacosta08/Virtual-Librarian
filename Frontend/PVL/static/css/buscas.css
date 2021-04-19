@@ -1,0 +1,125 @@
+body{
+    margin: 0;
+    background-color: lightgray;
+    padding: 0;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+div.header {
+    background-color: #4b3621;
+    padding: 15px 20px;
+}
+#TITULO {
+    width: 100%;
+    text-align: center;
+    position: top;
+    font-size: 40px;
+    color: white;
+    text-shadow: 2px 2px 2px rgba(0,0,0,0.5);
+}
+#LOGO {
+    position: absolute;
+    max-width: 60px;
+    height: auto;
+    top: 0% ;
+    left: 0.2%;
+}
+div.sub-header{
+    position: relative;
+    height: 40px;
+    top: -17px;
+    background-color: #f5f5dc;
+    color: black;
+
+    font-size: 12px;
+}
+#ulsub1 {
+    position: absolute;
+    top: 12px;
+    text-align: left;
+}
+#ulsub2 {
+    position: absolute;
+    top: 12px;
+    left: 17%;
+}
+#ulsub3 {
+    position: absolute;
+    top: 12px;
+    left: 34%;
+}
+#ulsub4 {
+    position: absolute;
+    top: 12px;
+    left: 57%;
+}
+a:link {
+    display : block;
+    text-decoration: none;
+    color: black;
+}
+ul a:hover {
+    border: 5em;
+    border-radius: 1em;
+    margin: 0.1em;
+    padding: 2px , 3px;
+    box-shadow: 1.5px 1.5px 1.5px black;
+    background-color: rgb(75, 239, 245);
+    color:black;
+}
+a:visited {
+    color: black;
+}
+a:active {
+    color: black;
+    box-shadow: 0 0 0 0 black;
+}
+.caixapesquisa {
+    position: relative;
+    border-radius: 48px;
+    height: 3%;
+    width: 8%;
+    top: -47px;
+    left: 82%;
+}
+.botaopesquisa {
+    position: absolute;
+    background-color: limegreen;
+    border: none;
+    padding: 0;
+    top: 114px;
+    left: 94%;
+}
+.container {
+    display: flex;
+}
+.resultadopesquisa {
+    width: 100%;
+    font-size: 20px;
+    text-align: center;
+}
+.linksite {
+    font-size: 20px;
+    text-align: left;
+    text-decoration: none;
+
+}
+.linksite:hover {
+    background-color: none;
+    box-shadow: none;
+
+}
+.ullink {
+    border: none;
+    border-radius: none;
+    margin: none;
+    padding: none;
+    box-shadow: none;
+
+}
+.paragrafo {
+    font-size: 20px;
+    text-align: center;
+}
+.caixasite {
+    width: 50%;
+}
