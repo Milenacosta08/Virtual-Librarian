@@ -1,7 +1,8 @@
 body{
     margin: 0;
-    background-color: lightgray;
+    background-color: #ddd9ce;
     padding: 0;
+    font-family: "Lucida Console", "Courier New", monospace;
 }
 div.header {
     background-color: #4b3621;
@@ -13,16 +14,15 @@ div.header {
     position: top;
     font-size: 40px;
     color: white;
-    font-family: "Lucida Console", "Courier New", monospace;
     text-shadow: 2px 2px 2px rgba(0,0,0,0.5);
 }
 #LOGO {
     position: absolute;
-    max-width: 65px;
-    max-height: 65px;
-    top: 1%;
-    nav-left: 1%;
-  }
+    max-width: 60px;
+    height: auto;
+    top: 0% ;
+    left: 0.2%;
+}
 div.sub-header{
     position: relative;
     height: 40px;
@@ -34,22 +34,22 @@ div.sub-header{
 }
 #ulsub1 {
     position: absolute;
-    top: 10px;
+    top: 12px;
     text-align: left;
 }
 #ulsub2 {
     position: absolute;
-    top: 10px;
+    top: 12px;
     left: 17%;
 }
 #ulsub3 {
     position: absolute;
-    top: 10px;
+    top: 12px;
     left: 34%;
 }
 #ulsub4 {
     position: absolute;
-    top: 10px;
+    top: 12px;
     left: 57%;
 }
 a:link {
@@ -59,7 +59,7 @@ a:link {
 }
 ul a:hover {
     border: 5em;
-    border-radius: 1em;
+    border-radius: 5px;
     margin: 0.1em;
     padding: 2px , 3px;
     box-shadow: 1.5px 1.5px 1.5px black;
@@ -73,7 +73,6 @@ a:active {
     color: black;
     box-shadow: 0 0 0 0 black;
 }
-
 .caixapesquisa {
     position: relative;
     border-radius: 48px;
@@ -82,33 +81,31 @@ a:active {
     top: -47px;
     left: 82%;
 }
+
 .fakeimg {
     height: 100px;
     width: 100px;
     background: #aaa;
 }
 
-.feedbox {
-    border: 2px solid black;
-}
 .barradefuncao {
     position: relative;
     margin: center;
     width: 99%;
     min-height: 100%;
-    background-color: #2196F3;
+    background-color: #d2b48c;
     align-items: center;
 }
 .titulofuncao {
     padding: 15px;
     font-size: 7px;
     text-align: center;
-    background-color: black;
+    background-color: #363636;
     color: white;
 }
 .btn {
     width: 100%;
-    background-color: #2196F3;
+    background-color: #d2b48c;
     color: black;
     padding: 16px;
     font-size: 14px;
@@ -140,10 +137,10 @@ a:active {
     display: block;
 }
 .btn:hover, .nomelivros:hover .btn {
-    background-color: #0b7dda;
+    background-color: #be935a;
   }
 .botaoperfil {
-    background-color: #2196F3;
+    background-color: #d2b48c;
     text-align: center;
     font-size: 14px;
     padding: 15px 20px;
@@ -155,32 +152,35 @@ a:active {
 
 }
 .botaoperfil:hover {
-    background-color: #0b7dda;
+    background-color: #be935a;
 }
 .formatopostagem p {
     font-size: 10px;
     margin: 20px;
     opacity: 0.5;
 }
-.comentario{
-	width: 60%;
-	height: 50px;
-	padding: 10px;
-	border: none;
-	border-radius: 20px;
 
+textarea {
+    padding: 10px;
+    line-height: 1.5;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 1px 1px 1px #999;
+    width: 60%;
+    min-width: 100px;
+    max-width: 70%;
+  	max-height: 100px;
 }
+
 button.botaoenviar {
-    margin-bottom: 5px;
-    height: 50px;
-    width: 80px;
+    margin-bottom: 4%;
+    height: 43px;
+    width: 90px;
     text-align: center;
+    border-radius: 5px;
 }
 .caixadosbotoes {
     align-content: center;
-    height: 50px;
-    width: 220px;
-
 }
 b{
     color:blue;
@@ -201,13 +201,21 @@ div.foto{
 
 }
 .botao{
-    width: 100px;
+    width: 70px;
     max-width: 100px ;
-    height: 50px;
+    height: 40px;
 }
+
 #imagem2{
     max-width: 30%;
     max-height: auto;
     border-radius: 8px;
 }
+.main{
+    margin-top: -3%;
+    margin-left: -1%;
+}
 
+.custom-file{
+    width: 50%;
+}

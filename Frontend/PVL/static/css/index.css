@@ -59,7 +59,7 @@ a:link {
 }
 ul a:hover {
     border: 5em;
-    border-radius: 1em;
+    border-radius: 5px;
     margin: 0.1em;
     padding: 2px , 3px;
     box-shadow: 1.5px 1.5px 1.5px black;
@@ -81,14 +81,7 @@ a:active {
     top: -47px;
     left: 82%;
 }
-.botaopesquisa {
-    position: absolute;
-    background-color: limegreen;
-    border: none;
-    padding: 0;
-    top: 114px;
-    left: 94%;
-}
+
 .pagini {
     font-size: 12px;
     position: relative;

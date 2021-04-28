@@ -1,50 +1,60 @@
 body{
-  background-color: #f5f5dc
+  background-color: #f5f5dc;
+  padding-top: 5vh; /* view hwight -> 5% da tela */
+  background-image: url('https://i.imgur.com/9ThA8UZ.png');
+  background-size: cover;
+  background-position-y: -150px;
+  font-family: "Lucida Console", "Courier New", monospace;
 }
 .form{
-  width:400px;
-  margin: auto;
-  padding-top:40px;
-}
-.card{
-  box-shadow: 1px 1px 5px #ccc;
   background-color: white;
+  width: 400px;
+  margin: 2%;
+  margin-left: 35%;
   padding: 30px;
-  border-radius: 5px;
+  padding-top: 40px;
+  float: center;/* Coloquei o formulario p esquerda */
+  border-radius: 10px;
+  box-shadow: 1px 1px 5px #ccc;
 }
+
 .card-top{
   text-align: center;
 }
 .card-group{
-  margin-bottom:10px;
+  margin-bottom: 3%;
 }
 .card-group > label{
-  width:100%;
-  color: rgb(75, 75, 75);
-  display: block;
+  font-weight: bold;
+  font-size: .8rem;
 }
-.card-group >input{
- border-radius: spx;
- outline:0;
- width:100%;
- height: 25px;
- padding:5px;
+.card-group > input{
+  border: 0.5px solid #ccc;
+  border-bottom: 2px solid #323232;
+  border-radius: spx;
+  outline: 0;
+  width: 100%;
+  height: 40px;
+  padding: 5px;
 }
 .card-group > button{
-  background-color:#4b3621;
+  background-color: #4b3621;
   width: 100%;
-  border-radius:30px;
-  padding:15px;
+  border-radius: 30px;
+  padding: 15px;
   border: 10px;
   color: white;
   flex: 1 1 100%;
   text-decoration: none;
-  outline:0;
+  outline: 0;
   margin-bottom: 15px;
 }
 .title{
   color: #4b3621;
+
 }
+
+
 p.botao a {
   position: relative;
   top: -15px;
@@ -52,11 +62,26 @@ p.botao a {
   margin-bottom: 50px;
   padding: 15px;
   text-decoration: none;
-  text-align:center;
-  color:white;
+  text-align: center;
+  color: white;
   background: #4b3621;
   border-radius: 30px;
-  width:100%;
-  height:50px;
-  display:block;
+  display: block;
+}
+.boximagem {
+  display: flex;
+}
+.imagem {
+  width: 80px;
+  height: 88px;
+}
+.boxtexto {
+  margin: 8px 0px 0px 20px;
+}
+.card-header {
+  background-color: white;
+  border: none;
+}
+.card {
+  border: none;
 }

@@ -61,7 +61,7 @@ a:link {
 }
 ul a:hover {
     border: 5em;
-    border-radius: 1em;
+    border-radius: 5px;
     margin: 0.1em;
     padding: 2px , 3px;
     box-shadow: 1.5px 1.5px 1.5px black;

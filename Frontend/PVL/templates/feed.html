@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block csss %}
     {{ super() }}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
     <link rel="stylesheet" href={{url_for('static', filename= 'css/feed.css' )}}>
 {% endblock %}
 
@@ -10,14 +10,12 @@
 {% block conteudo %}
     {{ super() }}
     <!--INICIO FEED-->
-
-    <div class="feedbox">
+    <div class="main container-fluid">
         <div class="row">
           <div class="col-sm-3">
             <div class = "barradefuncao">
                 <a href="#demo" data-toggle="collapse"><div class = "titulofuncao">
                     <h2>Funções</h2>
-                    <hr>
                 </div></a>
                 <div id="demo" class="collapse show">
                     <p class = "botaoperfil">
@@ -33,7 +31,9 @@
                     </div>
                     <!--BOTOES DA TABELA DE FUNÇÃO FAKE-->
                     <div class = "botoesfake">
-                        <button class = "btn">Amigos</button>
+                        <a href='/amigos'>
+                            <button class = "btn">Amigos</button>
+                        </a>
                         <button class = "btn">Chat</button>
                         <a href='/estante'>
                             <button class = "btn">Minha Estante</button>
@@ -46,14 +46,14 @@
           </div>
           <!--USUARIO ESCREVENDO-->
         <div class="col-sm-8">
-            <div class="media border p-4">
-                <div class="fakeimg mr-2">Foto do usuário</div>
-                <div class="media-body">
-                    <h5>Nome do usuário</h5>
-                    <div class = "formatopostagem">
-                        <div class = "caixadosbotoes">
-                            <input type="text" class = "comentario" placeholder="Comentário...">
-                            <button type="button" class="botaoenviar btn btn-sm" hef="#">Publicar</button>
+            <div class = "caixadosbotoes container-fluid">
+                <div class="media border p-4">
+                    <div class="fakeimg mr-2">Foto do usuário</div>
+                    <div class="media-body">
+                        <h5>Nome do usuário</h5>
+                        <div class = "formatopostagem">
+                            <textarea  name="comentario" cols="" rows="2" placeholder="Resenha..."></textarea>
+                            <button type="button" class="botaoenviar btn" hef="#">Publicar</button>
                         </div>
                     </div>
                 </div>
@@ -66,7 +66,7 @@
                     <a id="livro" href="/pequeno-principe"><h5>O pequeno príncipe</h5></a>
                     <img id="imagem2" src='https://images-na.ssl-images-amazon.com/images/I/81oeku8iPtL.jpg' alt="O pequeno príncipe"/>
                     <p><b>Resenha: </b>O livro é bem interessante, ele mostra as aventuras do Pequeno Príncipe, passando pela rosa e a raposa.</p>
-                    <button type="button" class="botao btn-outline-primary">Curtir</button>
+                    <button type="button" class="botao btn-outline-info">Curtir</button>
                 </div>
             </div>
 

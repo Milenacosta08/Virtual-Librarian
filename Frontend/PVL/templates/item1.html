@@ -3,54 +3,55 @@
 {% block csss %}
     {{ super() }}
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href={{url_for('static', filename= 'css/item2.css' )}}>
+    <link rel="stylesheet" href={{url_for('static', filename= 'css/item1.css' )}}>
 {% endblock %}
 
-{% block titulo %}Pequeno Príncipe - Virtual Librarian{% endblock %}
+{% block titulo %}Dom Quixote - Virtual Librarian{% endblock %}
 
 {% block conteudo %}
     {{ super() }}
 <div class="container-fluid" >
-    <!--CAIXA DO ITEM 2-->
+
+    <!--CAIXA DO ITEM 1-->
     <div class="media border p-3">
-        <img id="imagem2" src='https://images-na.ssl-images-amazon.com/images/I/81oeku8iPtL.jpg' class="align-self-start mr-2" alt="O pequeno príncipe"/>
-        <div class="media-body">
-          <h4>O pequeno príncipe <small><i>(Antoine de Saint-Exupéry)</i></small></h4>
-          <small><i>Adicionado em 07 de Março de 2021 <br></i></small>
-          <button class="btn btn-secondary btn-sm" type="button" data-toggle="collapse" data-target="#resumo">Resumo</button>
-          <div id="resumo" class="collapse">
-            Um piloto cai com seu avião no deserto e ali encontra uma criança loura e frágil. Ela diz ter vindo de um pequeno planeta distante. E ali, na convivência com o piloto perdido, os dois repensam os seus valores e encontram o sentido da vida.
-          </div>
-          <div class="botao">
-            <button type="button" class="btn btn-outline-success btn-sm">Desejo</button>
-            <button type="button" class="btn btn-outline-info btn-sm">Tenho</button>
-          </div>
+      <img id="imagem1" src='https://m.media-amazon.com/images/I/51XULadddlL.jpg' class="align-self-start mr-2" alt="Dom Quixote"/>
+      <div class="media-body">
+        <h4>Dom Quixote <small><i>(Miguel de Cervantes)</i></small></h4>
+        <small><i>Adicionado em 06 de Março de 2021 <br></i></small>
+        <button class="btn btn-secondary btn-sm" type="button" data-toggle="collapse" data-target="#resumo">Resumo</button>
+        <div id="resumo" class="collapse">
+          Descreve sobre romances de cavalaria que gozaram de imensa popularidade. A obra narra as aventuras e desventuras de Dom Quixote, um homem de meia idade que resolveu se tornar cavaleiro andante depois de ler muitos romances de cavalaria.
         </div>
-      </div>
-      <!--DETALHES ITEM 1-->
-      <div class="main container">
-        <div class="row">
-      <!--COLUNA DE CONTATO-->
-          <div class="contato col-md-4">
-            <h3 id="contato">Contato</h3>
-            <div class="media">
-              <div class="foto fakeimg align-self-start" alt="Nome do usuário">Foto do usuário</div>
-              <div class="media-body">
-                <h5><a href="/perfil">Nome do usuário</a></h5>
-                <p><small id="reput">Confiável/duvidosa</small></p>
-                <button type="button" id = "botaochat" class="mensagem btn btn-warning btn-sm"><a href="#"class="material-icons">message</a></button>
-              </div>
-            </div>
-          </div>
-      <!--COLUNA PRINCIPAL-->
-          <div class="col-md-8">
-            <h2 id="detalhes">Detalhes</h2>
-            <b>Status do livro:</b> Disponível para troca e venda.
-            <p><b>Preço: </b> R$ 15,00</p>
-            <p><b>Condições do livro:</b> Apresenta algumas marcas de uso; como a utilização de caneta nas páginas 18 e 33. Além disso, a página 50 apresenta-se rasgada. Porém, todo o resto livro está em boas condições de uso.</p>
-            <div class="fakeimg"><i>Foto dos danos</i></div>
-          </div>
+        <div class="botao">
+          <button type="button" class="btn btn-outline-success btn-sm">Desejo</button>
+          <button type="button" class="btn btn-outline-info btn-sm">Tenho</button>
         </div>
       </div>
     </div>
+    <!--DETALHES ITEM 1-->
+    <div class="main container">
+      <div class="row">
+    <!--COLUNA DE CONTATO-->
+        <div class="contato col-md-4">
+          <h3 id="contato"> Contato</h3>
+          <div class="media">
+            <div class="foto fakeimg align-self-start" alt="Nome do usuário">Foto do usuário</div>
+            <div class="media-body">
+              <h5><a href="/perfil">Nome do usuário</a></h5>
+              <p><small id="reput">Confiável/duvidosa</small></p>
+              <button type="button" id = "botaochat" class="mensagem btn btn-warning btn-sm"><a href="#"class="material-icons">message</a></button>
+            </div>
+          </div>
+        </div>
+    <!--COLUNA PRINCIPAL-->
+        <div class="col-md-8">
+          <h2 id="detalhes">Detalhes</h2>
+          <b>Status do livro:</b> Disponível para troca.
+          <p><b>Condições do livro:</b> Apresenta poucas marcas de uso, com todas as páginas sem danos ou rasgos. Além disso, o livro possui um estado de conservação bem elevado, já que obteve somente um dono.</p>
+          <div class="fakeimg"><i>Foto dos danos</i></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 {% endblock %}

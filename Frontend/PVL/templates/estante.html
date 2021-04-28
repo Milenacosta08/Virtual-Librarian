@@ -2,14 +2,16 @@
 
 {% block csss %}
     {{super()}}
-    <link rel="stylesheet" href={{url_for('static', filename = '/css/estante.css')}}>
+    <link rel="stylesheet" href="{{url_for('static', filename = 'css/estante.css')}}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
 {% endblock %}
 
 {% block titulo %}Virtual Librarian - Estante{% endblock %}
 
 {% block conteudo %}
     {{ super() }}
+
 <div class = "container">
 
     <div class = "Tituloestante">
@@ -22,7 +24,7 @@
             <div class = "d-flex justify-content-center">
                 <div = class "caixalink">
                     <a href="/dom-quixote">
-                        <img align="middle" src="https://i.imgur.com/Ns0J8Gp.jpg" class="img-fluid">
+                        <img align="middle" src="https://i.imgur.com/Ns0J8Gp.jpg" class="imagem">
                     </a>
                 </div>
             </div>
@@ -46,7 +48,7 @@
                     </div>
 
                     <!-- Modal body -->
-                    <form action="/livro-cadastrado" method="POST">
+                    <form action="/livro-cadastrado" method="POST" encType="multipart/form-data">
                         <div class="modal-body">
 
                             <!-- INÍCIO DAS COLUNAS -->
@@ -54,14 +56,16 @@
 
                                 <!-- COLUNA 1 -->
                                 <div class='col md-5'>
-                                    <div class="fakeimg">
-                                        <div class="form-group">
-                                            <label for="capa">Capa do Livro</label><br>
-                                            <input type="file" class="form-control-file" id="capa">
-                                      </div>
+                                        <label for="file-button">Capa do Livro</label><br>
+                                        <button class="file-button btn btn-light" type="button"><i class="material-icons">open_in_browser</i></button><br>
+                                        <input class="file-chooser" type="file" accept="image/*" hidden>
+                                        <img class="previa">
+                                        <!-- JAVASCRIPT -->
+                                        <script src="/static/js/estante.js"></script>
+                                    <div class="resumo">
+                                        <label for="resumo">Resumo</label>
+                                        <textarea class="form-control" id="resumo" aria-label="Com textarea"></textarea>
                                     </div>
-                                    <label for="descricao">Resumo</label>
-                                    <textarea class="form-control" id="descricao" aria-label="Com textarea"></textarea>
                                 </div>
 
                                 <!-- COLUNA 2 -->
@@ -73,6 +77,7 @@
                                     <div class="form-group">
                                         <label for="genero">Gênero</label>
                                         <select class="form-control" id="genero">
+                                            <option>Escolher gênero</option>
                                             <option>Romance</option>
                                             <option>Poesia</option>
                                             <option>Conto</option>
@@ -82,21 +87,20 @@
                                             <option>Novela</option>
                                         </select>
                                     </div>
-                                </div>
+                                    </div>
                             </div>
                         </div>
 
-                        <!-- Modal footer -->
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancelar</button>
-                            <input type="submit" value="Cadastrar">
+                            <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancelar</button>
+                                <button type="submit" id="botaocad" class="btn btn-light">Cadastrar</button>
                         </div>
                     </form>
                 </div>
             </div>
-        </div>
-    </div>
+      </div>
+  </div>
 </div>
 
 {% endblock %}
-

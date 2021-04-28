@@ -8,34 +8,43 @@
 {% block titulo %}Login - Virtual Librarian{% endblock %}
 
 {% block conteudo %}
-<form class="form" action= "/feed">
-    <div class="card-top">
 
-         <h2 class="title" >Login </h2>
-         <p > Faça seu login</p>
-    </div>
+<div class="login container-fluid">
+    <form class="form" action= "/feed">
+        <div class = "card">
+            <div class="card-header">
+                <div class ="boximagem">
+                    <img class = "imagem" src = "https://i.imgur.com/nVHQMfK.png">
+                    <div class = "boxtexto">
+                        <h2 class="title" >Login </h2>
+                        <p > Faça seu login</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-   <div class="card-group">
-        <label >Email</label>
-        <input type="text" name="email"placeholder="digite seu email">
-   </div>
+        <div class="card-group">
+            <label >Email</label>
+            <input type="text" name="email"placeholder="digite seu email">
+        </div>
 
-   <div class="card-group">
-        <label >senha</label>
-        <input type="password" name="senha"placeholder="digite sua senha">
-    </div>
+        <div class="card-group">
+            <label>Senha</label>
+            <input type="password" name="senha"placeholder="digite sua senha">
+        </div>
 
+        <div class="card-group">
+            <label ><input type="checkbox"> Lembre-me</label>
+        </div>
 
-   <div class="card-group">
-        <label ><input type="checkbox"> Lembre-me</label>
-    </div>
-   <div class="card-group">
-        <button type="submit">ACESSAR</button>
-    </div>
+        <div class="card-group">
+            <button type="submit">ACESSAR</button>
+        </div>
 
-    <p class = "botao">
-        <a href="/">HOME</a>
-    </p>
-
-</form>
+        <p class = "botao">
+            <a href="/">HOME</a>
+        </p>
+        </div>
+    </form>
+</div>
 {% endblock %}

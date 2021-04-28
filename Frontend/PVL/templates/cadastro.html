@@ -15,9 +15,9 @@
     <form action = "/perfil-usuario" id="register-form" method="POST">
 
       <div class="full-box">
-        <label for="email">E-mail</label>
+<label for="email">E-mail</label>
 
-        <input type="email" name="email" id="email" placeholder="fulanodetal@exemplo.com" data-min-length="3">
+        <input type="email" name="email" id="email" placeholder="exemplo@hmel.com" data-min-length="3">
 
       </div>
 
@@ -39,7 +39,7 @@
 
         <div class="half-box spacing">
 
-        <label for="password">senha</label>
+        <label for="password">Senha</label>
 
         <input type="password" name="password" id="password" placeholder="Digite sua senha">
 
@@ -63,22 +63,23 @@
 
        <div class="full-box">
 
-        <input type="submit" name="agreement-label" id="btn-submit" value="Registrar">
+       <input type="submit" name="agreement-label" id="btn-submit" value="registrar">
 
-        <p class = "botao">
-            <a href="/">Home</a>
-        </p>
       </div>
 
+      <p class = "botao">
+        <a href="/">Home</a>
+      </p>
     </form>
+
     {% if erro %}
         <div class="alert alert-danger">
             {{erro}}
         </div>
     {% endif %}
-
   </div>
 
   <p class="erro-validation template"></p>
+
 
 {% endblock %}

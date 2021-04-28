@@ -1,6 +1,6 @@
 body{
     margin: 0;
-    background-color: lightgray;
+    background-color: white;
     padding: 0;
     font-family: "Lucida Console", "Courier New", monospace;
 }
@@ -83,35 +83,22 @@ a:active {
 }
 .container {
     display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
 }
-.resultadopesquisa {
-    width: 100%;
-    font-size: 20px;
+.card {
+    width: 18rem;
+}
+.card-body {
     text-align: center;
 }
-.linksite {
-    font-size: 20px;
-    text-align: left;
-    text-decoration: none;
-
+.card-link {
+    flex-direction: row;
 }
-.linksite:hover {
-    background-color: none;
-    box-shadow: none;
-
-}
-.ullink {
-    border: none;
-    border-radius: none;
-    margin: none;
-    padding: none;
-    box-shadow: none;
-
-}
-.paragrafo {
-    font-size: 20px;
+.card-text {
+    padding-top: 10px;
     text-align: center;
 }
-.caixasite {
-    width: 50%;
+.card-img-top {
+    height: auto;
 }
