@@ -9,27 +9,45 @@
 
 {% block conteudo %}
     {{ super() }}
-<div class = "container">
+<div class = "container-fluid">
     <div class = "resultadopesquisa">
         <p>Exibindo resultados para "{{busca}}"</p>
     </div>
-</div>
+
     <div = "caixasite">
         {% if existe == 1 %}
             {% for q in range(0,8) %}
                 {% if busca == sites[q] %}
 
-                    <a class = "linksite" href={{links[q]}}> - {{sites[q].capitalize()}} </a>
-
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-sm">
+                            <thead class="pesquisas">
+                                <tr>
+                                    <th>Busca</th>
+                                    <th>Link</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{busca}}</td>
+                                    <td><a class = "linksite" href={{links[q]}}>{{sites[q].capitalize()}}</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 {% endif %}
             {% endfor %}
 
         {% else %}
 
-        <p class="paragrafo">Página não encontrada</p>
+            <p class="paragrafo">Página não encontrada</p>
 
         {% endif %}
     </div>
+</div>
+
+</body>
+</html>
 
 
 {% endblock %}

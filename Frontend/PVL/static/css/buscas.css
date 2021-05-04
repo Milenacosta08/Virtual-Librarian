@@ -11,17 +11,15 @@ div.header {
 #TITULO {
     width: 100%;
     text-align: center;
-    position: top;
+    margin: 10px 30px 0px 0px;
     font-size: 40px;
     color: white;
     text-shadow: 2px 2px 2px rgba(0,0,0,0.5);
 }
 #LOGO {
-    position: absolute;
     max-width: 60px;
     height: auto;
-    top: 0% ;
-    left: 0.2%;
+    margin: 0px 0px 10px 0px;
 }
 div.sub-header{
     position: relative;
@@ -89,14 +87,15 @@ a:active {
     font-size: 20px;
     text-align: center;
 }
-.linksite {
-    font-size: 20px;
-    text-align: left;
-    text-decoration: none;
 
+.linksite:visited {
+  color: blue;
+  background-color: transparent;
+  text-decoration: none;
 }
 .linksite:hover {
-    background-color: none;
+    color: green;
+    background-color: transparent;
     box-shadow: none;
 
 }
@@ -114,4 +113,7 @@ a:active {
 }
 .caixasite {
     width: 50%;
+}
+.pesquisas {
+    background-color: #935c29 ;
 }
