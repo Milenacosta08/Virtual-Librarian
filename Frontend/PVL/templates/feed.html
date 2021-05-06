@@ -24,9 +24,9 @@
                     <div class = "nomelivros">
                         <button class = "btn">Livros</button>
                         <div class = "conteudo">
-                            <a href="/dom-quixote">Dom Quixote</a>
-                            <a href="/pequeno-principe">Pequeno Príncipe</a>
-                            <a href="#">Livro Teste2</a>
+                            <a id = "livrof" href="/dom-quixote">Dom Quixote</a>
+                            <a id = "livrof" href="/pequeno-principe">Pequeno Príncipe</a>
+                            <a id = "livrof" href="/estante">Ver mais</a>
                         </div>
                     </div>
                     <!--BOTOES DA TABELA DE FUNÇÃO FAKE-->
@@ -43,14 +43,14 @@
                 </div>
             </div>
             <hr class="d-sm-none">
-          </div>
+        </div>
           <!--USUARIO ESCREVENDO-->
         <div class="col-sm-8">
             <div class = "caixadosbotoes container-fluid">
                 <div class="media border p-4">
                     <div class="fakeimg mr-2">Foto do usuário</div>
                     <div class="media-body">
-                        <h5>Nome do usuário</h5>
+                        <h5>{{nome}} {{sobrenome}}</h5>
                         <div class = "formatopostagem">
                             <textarea  name="comentario" cols="" rows="2" placeholder="Resenha..."></textarea>
                             <button type="button" class="botaoenviar btn" hef="#">Publicar</button>
@@ -69,7 +69,6 @@
                     <button type="button" class="botao btn-outline-info">Curtir</button>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

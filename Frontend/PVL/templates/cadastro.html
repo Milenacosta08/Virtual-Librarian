@@ -8,75 +8,67 @@
 {% block titulo %}Cadastro - Virtual Librarian{% endblock %}
 
 {% block conteudo %}
-<div id="main-container">
-
+  <div id="main-container">
     <h1>Cadastre-se para acessar o sistema</h1>
 
-    <form action = "/perfil-usuario" id="register-form" method="POST">
-
+    <form action = "/perfil-usuario" id="register-form" method="POST" class="was-validated">
       <div class="full-box">
-<label for="email">E-mail</label>
-
-        <input type="email" name="email" id="email" placeholder="exemplo@hmel.com" data-min-length="3">
-
+        <label for="email">E-mail</label>
+        <input type="email" name="email" id="email" placeholder="exemplo@hmel.com" data-min-length="3" required>
+        <div class="valid-feedback">Válido</div>
+        <div class="invalid-feedback">*Campo obrigatório</div>
       </div>
-
-       <div class="half-box spacing">
-
+    
+      <div class="half-box spacing">
         <label for="name">Nome</label>
-
-        <input type="text" name="name" id="name" placeholder="Digite seu nome">
-
+        <input type="text" name="name" id="name" placeholder="Digite seu nome" required>
+        <div class="valid-feedback">Válido</div>
+        <div class="invalid-feedback">*Campo obrigatório</div>
       </div>
-
-        <div class="half-box">
-
+    
+      <div class="half-box spacing">
         <label for="lastname">Sobrenome</label>
-
-        <input type="text" name="lastname" id="lastname" placeholder="Digite seu sobrenome">
-
+        <input type="text" name="lastname" id="lastname" placeholder="Digite seu sobrenome" required>
+        <div class="valid-feedback">Válido</div>
+        <div class="invalid-feedback">*Campo obrigatório</div>
       </div>
-
-        <div class="half-box spacing">
-
+    
+      <div class="half-box spacing">
         <label for="password">Senha</label>
-
-        <input type="password" name="password" id="password" placeholder="Digite sua senha">
-
+        <input type="password" name="password" id="password" placeholder="Digite sua senha" required>
+        <div class="valid-feedback">Válido</div>
+        <div class="invalid-feedback">*Campo obrigatório</div>
       </div>
 
-        <div class="half-box">
-
+      <div class="half-box spacing">
         <label for="passconfirmation">Confirme sua senha</label>
-
-        <input type="password" name="passconfirmation" id="passconfimation" placeholder="Confirme sua senha">
-
+        <input type="password" name="passconfirmation" id="passconfirmation" placeholder="Confirme sua senha" required>
+        <div class="valid-feedback">Válido</div>
+        <div class="invalid-feedback">*Campo obrigatório</div>
       </div>
 
-       <div class="full-box">
-
-       <input type="checkbox" name="agreement" id="agreement">
-
-       <label for="agreement" id="agreement-label">Eu li e aceito os <a href="#">termos de uso</a></label>
-
+      <div class="form-group form-check">
+        <label class="form-check-label">
+          <div class="full-box">
+            <input class="form-check-input" type="checkbox" name="agreement" id="agreement" required>
+            Eu li e aceito os <a href="#">termos de uso</a>
+            <div class="invalid-feedback">Aceite os termos para continuar.</div>
+          </div>
+        </label>
       </div>
 
-       <div class="full-box">
-
-       <input type="submit" name="agreement-label" id="btn-submit" value="registrar">
-
-      </div>
-
+      <input type="submit" name="agreement-label" id="btn-submit" value="registrar">
       <p class = "botao">
         <a href="/">Home</a>
       </p>
     </form>
 
-    {% if erro %}
-        <div class="alert alert-danger">
-            {{erro}}
-        </div>
-    {% endif %}
+  {% if erro %}
+    <div class="alert alert-danger">
+        {{erro}}
+    </div>
+  {% endif %}
+  
   </div>
 
   <p class="erro-validation template"></p>

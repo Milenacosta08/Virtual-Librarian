@@ -17,20 +17,28 @@
     <div class = "Tituloestante">
         <h1>Estante</h1>
     </div>
-
-    <div class = "d-flex justify-content-center">
-        <div class ="box">
-            <img src="/static/img/Estante.png" class="estante">
-            <div class = "d-flex justify-content-center">
-                <div = class "caixalink">
-                    <a href="/dom-quixote">
-                        <img align="middle" src="/static/img/domquixoteredimensionada.jpg" class="imagem">
-                    </a>
+    <div class = "card-columns" align='center'>
+        <div class="col-xs">
+            <div class = 'card'>
+                <img src='https://m.media-amazon.com/images/I/51XULadddlL.jpg' class="card-img-top" id="imagemcard" alt="Card image cap">
+                <div class = 'card-body'>
+                    <p class = 'card-text'>Dom Quixote</p>
                 </div>
             </div>
         </div>
-    </div>
+        {% for livro in livros %}
+        <div class="col-xs">
+            <div class = 'card'>
+                <img src='https://m.media-amazon.com/images/I/51XULadddlL.jpg' class="card-img-top" id="imagemcard" alt="Card image cap">
+                <div class = 'card-body'>
+                    <p class = 'card-text'>{{livro.titulo}}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
 
+
+    </div>
     <!-- CADASTRO DE LIVROS -->
     <div class="cad_livro">
         <button type="button" class="btn btn-light" data-toggle="modal" data-target="#myModal">
@@ -58,7 +66,7 @@
                                 <div class='col md-5'>
                                         <label for="file-button">Capa do Livro</label><br>
                                         <button class="file-button btn btn-light" type="button"><i class="material-icons">open_in_browser</i></button><br>
-                                        <input class="file-chooser" type="file" accept="image/*" hidden>
+                                        <input class="file-chooser" name = "imagemsel" type="file" accept="image/*" hidden>
                                         <img class="previa">
                                         <!-- JAVASCRIPT -->
                                         <script src="/static/js/estante.js"></script>
@@ -71,7 +79,7 @@
                                 <!-- COLUNA 2 -->
                                 <div class="col md-5 ml-auto">
                                     <label for="titulo">Titulo</label>
-                                    <input type="text" class="form-control"id="titulo_livro">
+                                    <input type="text" name = "titulo" class="form-control"id="titulo_livro">
                                     <label for="autor">Autor</label>
                                     <input type="text" class="form-control" id="autor">
                                     <div class="form-group">

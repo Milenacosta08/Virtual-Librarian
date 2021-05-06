@@ -8,10 +8,18 @@
 
 {% block conteudo %}
     {{  super() }}
+        <!--ALERTA DE ACESSO-->
+        {% if erro %}
+            <div class="alerta alert alert-danger alert-dismissible fade show">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                {{erro}}
+            </div>
+        {% endif %}
         <!--IMAGEM INICIAL-->
         <div class = "pagini">
             <img class = "img-fluid" src="/static/img/PAGINAINICIAL1-1024w.png">
         </div>
+
         <div class = "frase">
             <div class = "caixa">
                 <br>

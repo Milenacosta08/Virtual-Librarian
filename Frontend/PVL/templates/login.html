@@ -10,7 +10,7 @@
 {% block conteudo %}
 
 <div class="login container-fluid">
-    <form class="form" action= "/feed">
+    <form class="form" action="/feed-usuario" method="POST" class="was-validated">
         <div class = "card">
             <div class="card-header">
                 <div class ="boximagem">
@@ -21,29 +21,36 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="card-group">
-            <label >Email</label>
-            <input type="text" name="email"placeholder="digite seu email">
-        </div>
 
-        <div class="card-group">
-            <label>Senha</label>
-            <input type="password" name="senha"placeholder="digite sua senha">
-        </div>
+            <div class="card-group">
+                <label >Email</label>
+                <input type="email" name="email"placeholder="Digite seu email" required>
+            </div>
 
-        <div class="card-group">
-            <label ><input type="checkbox"> Lembre-me</label>
-        </div>
+            <div class="card-group">
+                <label>Senha</label>
+                <input type="password" name="senha"placeholder="Digite sua senha" required>
+            </div>
 
-        <div class="card-group">
-            <button type="submit">ACESSAR</button>
-        </div>
+            <div class="card-group">
+                <label ><input type="checkbox"> Lembre-me</label>
+            </div>
 
-        <p class = "botao">
-            <a href="/">HOME</a>
-        </p>
+            <div class="card-group">
+                <button type="submit">ACESSAR</button>
+            </div>
+
+            <p class = "botao">
+                <a href="/">HOME</a>
+            </p>
+
+            {% if erro: %}
+                <div class="alert alert-danger">
+                    {{erro}}
+                </div>
+            {% endif %}
+
         </div>
     </form>
 </div>

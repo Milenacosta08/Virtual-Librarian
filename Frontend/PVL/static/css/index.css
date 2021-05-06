@@ -11,47 +11,54 @@ div.header {
 #TITULO {
     width: 100%;
     text-align: center;
-    position: top;
+    margin: 10px 30px 0px 0px;
     font-size: 40px;
     color: white;
     text-shadow: 2px 2px 2px rgba(0,0,0,0.5);
 }
 #LOGO {
-    position: absolute;
     max-width: 60px;
     height: auto;
-    top: 0% ;
-    left: 0.2%;
+    margin: 0px 0px 10px 0px;
 }
-div.sub-header{
-    position: relative;
-    height: 40px;
-    top: -17px;
+.sub-header{
+    max-height: 20%;
     background-color: #f5f5dc;
     color: black;
-
     font-size: 12px;
 }
-#ulsub1 {
-    position: absolute;
-    top: 12px;
-    text-align: left;
+.navbar-toggler{
+    font-size: 15px;
+    background-color: #f5f5dc;
 }
-#ulsub2 {
-    position: absolute;
-    top: 12px;
-    left: 17%;
+
+@media only screen and (min-width: 390px) {
+    #ulsub1 {
+        position: absolute;
+        top: 12px;
+        left: 13%;
+    }
+    #ulsub2 {
+        position: absolute;
+        top: 12px;
+        left: 28%;
+    }
+
+    #ulsub3 {
+        position: absolute;
+        top: 12px;
+        left: 43%;
+
+    }
+    #ulsub4 {
+        position: absolute;
+        top: 12px;
+        left: 58%;
+
+    }
 }
-#ulsub3 {
-    position: absolute;
-    top: 12px;
-    left: 34%;
-}
-#ulsub4 {
-    position: absolute;
-    top: 12px;
-    left: 57%;
-}
+
+
 a:link {
     display : block;
     text-decoration: none;
@@ -74,12 +81,9 @@ a:active {
     box-shadow: 0 0 0 0 black;
 }
 .caixapesquisa {
-    position: relative;
     border-radius: 48px;
-    height: 3%;
-    width: 8%;
-    top: -47px;
-    left: 82%;
+    width: 60%;
+    text-align: center;
 }
 
 .pagini {
@@ -87,7 +91,6 @@ a:active {
     position: relative;
     height: auto;
     width: 100%;
-    top: -40px;
     color: white;
 
 }
@@ -106,4 +109,12 @@ a:active {
 .caixa {
     box-sizing: border-box;
     border: 2px solid black;
+}
+
+.alerta{
+    margin-top: 1%;
+    margin-left: 20%;
+    width: 58%;
+    border-left: 6px solid #c73a33;
+    border-radius: 2px;
 }
