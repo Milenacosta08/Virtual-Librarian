@@ -1,164 +1,196 @@
 body{
-  margin: 0;
-  background-color: lightgray;
+    margin: 0;
+    background-color: lightgray;
 
-}
-div.header {
-  background-color: #4b3621;
-  padding: 15px 20px;
-}
-#TITULO {
-  width: 100%;
-  text-align: center;
-  margin: 10px 30px 0px 0px;
-  font-size: 40px;
-  font-family: "Lucida Console", "Courier New", monospace;
-  color: white;
-  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
-}
-#LOGO {
-  max-width: 65px;
-  max-height: 65px;
-  top: 1%;
-  nav-left: 1%;
-}
+  }
+  div.header {
+    background-color: #4b3621;
+    padding: 15px 20px;
+  }
+  #TITULO {
+    width: 100%;
+    text-align: center;
+    margin: 10px 30px 0px 0px;
+    font-size: 40px;
+    font-family: "Lucida Console", "Courier New", monospace;
+    color: white;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+  }
+  #LOGO {
+    max-width: 65px;
+    max-height: 65px;
+    top: 1%;
+    nav-left: 1%;
+  }
 .sub-header{
-  max-height: 20%;
-  background-color: #f5f5dc;
-  color: black;
-  font-size: 12px;
+    max-height: 20%;
+    background-color: #f5f5dc;
+    color: black;
+    font-size: 12px;
 }
 .navbar-toggler{
-  font-size: 12px;
-  color: Gray;
-  background-color: #f5f5dc;
+    font-size: 12px;
+    color: gray;
+    background-color: #f5f5dc;
 }
 @media only screen and (min-width: 390px) {
-  #ulsub1 {
-      position: absolute;
-      top: 12px;
-      left: 13%;
-  }
-  #ulsub2 {
-      position: absolute;
-      top: 12px;
-      left: 28%;
-  }
+    #ulsub1 {
+        position: absolute;
+        top: 12px;
+        left: 13%;
+    }
+    #ulsub2 {
+        position: absolute;
+        top: 12px;
+        left: 28%;
+    }
 
-  #ulsub3 {
-      position: absolute;
-      top: 12px;
-      left: 43%;
+    #ulsub3 {
+        position: absolute;
+        top: 12px;
+        left: 43%;
 
-  }
-  #ulsub4 {
-      position: absolute;
-      top: 12px;
-      left: 58%;
+    }
+    #ulsub4 {
+        position: absolute;
+        top: 12px;
+        left: 58%;
 
-  }
+    }
 }
 a:link {
-  display : block;
-  text-decoration: none;
-  color: black;
+    display : block;
+    text-decoration: none;
+    color: black;
 }
 ul a:hover {
-  border: 5em;
-  border-radius: 5px;
-  margin: 0.1em;
-  padding: 2px , 3px;
-  box-shadow: 1.5px 1.5px 1.5px black;
-  background-color: rgb(75, 239, 245);
-  color:black;
+    border: 5em;
+    border-radius: 5px;
+    margin: 0.1em;
+    padding: 2px , 3px;
+    box-shadow: 1.5px 1.5px 1.5px black;
+    background-color: rgb(75, 239, 245);
+    color:black;
 }
 a:visited {
-  color: black;
+    color: black;
 }
 a:active {
-  color: black;
-  box-shadow: 0 0 0 0 black;
+    color: black;
+    box-shadow: 0 0 0 0 black;
 }
 .caixapesquisa {
-  border-radius: 48px;
-  width: 60%;
-  text-align: center;
+    border-radius: 48px;
+    width: 60%;
+    text-align: center;
 
 }
-.fakeimg {
-  height: 200px;
-  width: 60%;
-  background: #aaa;
-}
-div.texto{
-  line-height: 0.5;
-}
-div.foto{
-  width:200px;
-}
-p.reput{
-  color:red;
-}
-div.conf{
-  width: 20%;
-  display: inline-block;
-}
-.barra-perfil{
+  .fakeimg {
+    height: 200px;
+    width: 60%;
+    background: #aaa;
+  }
+  div.texto{
+    line-height: 0.5;
+  }
+  div.foto{
+    width:200px;
+  }
+  p.reput{
+    color:red;
+  }
+  div.conf{
+    width: 20%;
+    display: inline-block;
+    right: 150px;
+    float:left;
+  }
+  .barra-perfil{
 
-  border-bottom: 1px solid;
-  border-radius: 5px;
-  background-color: #4b3621;
-  color: white;
-  font-family: "Lucida Console", "Courier New", monospace;
-  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+    border-bottom: 1px solid;
+    border-radius: 5px;
+    background-color: #4b3621;
+    color: white;
+    font-family: "Lucida Console", "Courier New", monospace;
+    text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+  }
+
+  #pos1 {
+   position: absolute;
+    top: 400px;
+    left: 20%;
+    color: white;
+  }
+  #pos2 {
+    position: absolute;
+    top: 400px;
+    left: 37%;
+    color: white;
+
+  }
+  #pos3 {
+    position: absolute;
+    top: 400px;
+    left: 51%;
+    color: white;
+
+  }
+  #pos4 {
+    position: absolute;
+    top: 400px;
+    left: 65%;
+    color: white;
 }
 
-#pos1 {
- position: absolute;
-  top: 400px;
-  left: 20%;
-  color: white;
-}
-#pos2 {
-  position: absolute;
-  top: 400px;
-  left: 37%;
-  color: white;
-
-}
-#pos3 {
-  position: absolute;
-  top: 400px;
-  left: 51%;
-  color: white;
-
-}
-#pos4 {
-  position: absolute;
-  top: 400px;
-  left: 65%;
-  color: white;
-}
-
-div.container2{
-  margin:2% 5% 10% 5%;
-}
-div.list{
-  right: 20px;
-  border: 1px solid;
-  border-radius: 10px;
-  height: 250px;
-}
-.principal{
-  background-color: rgba(231, 231, 231, 0.76);
-  border-radius: 5px;
-}
+  div.container2{
+    margin:2% 5% 10% 5%;
+  }
+  div.list{
+    right: 20px;
+    border: 1px solid;
+    border-radius: 10px;
+    height: 250px;
+  }
+  .principal{
+    background-color: rgba(231, 231, 231, 0.76);
+    border-radius: 5px;
+  }
 .nav-link:visited {
-  color:white;
+    color:white;
 }
+.nav-link:active {
+    color:white;
+}
+
 #config {
-  background-color: #4b3621;
+    background-color: #4b3621;
+
 }
 .icone{
-  color:white;
+    color:white;
+
+}
+.modal-header{
+    background-color: #d2b48c;
+    text-align: center;
+}
+.modal-body{
+    background-color: #ddd9ce;
+}
+.modal-footer{
+    background-color: #ddd9ce;
+}
+#botaoatualizar{
+    background-color: #be935a;
+    color: white;
+}
+#obs{
+    color: red;
+}
+.alerta{
+    text-align: center;
+    margin-left: 20%;
+    width: 58%;
+    border-left: 6px solid #c73a33;
+    border-radius: 2px;
 }
