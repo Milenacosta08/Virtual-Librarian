@@ -18,25 +18,20 @@
         <h1>Estante</h1>
     </div>
     <div class = "card-columns" align='center'>
+        {% for livro in livros: %}
         <div class="col-xs">
             <div class = 'card'>
-                <img src='https://m.media-amazon.com/images/I/51XULadddlL.jpg' class="card-img-top" id="imagemcard" alt="Card image cap">
+                <a href='/livros/{{current_user.id}}/{{livroid[livro]}}'}}>
+                    <img src='https://m.media-amazon.com/images/I/51XULadddlL.jpg' class="card-img-top" id="imagemcard" alt="Card image cap">
+                </a>
                 <div class = 'card-body'>
-                    <p class = 'card-text'>Dom Quixote</p>
-                </div>
-            </div>
-        </div>
-        {% for livro in livros %}
-        <div class="col-xs">
-            <div class = 'card'>
-                <img src='https://m.media-amazon.com/images/I/51XULadddlL.jpg' class="card-img-top" id="imagemcard" alt="Card image cap">
-                <div class = 'card-body'>
-                    <p class = 'card-text'>{{livro.titulo}}</p>
+                    <p class = 'card-text'>{{livros[livro]['titulo']}}</p>
+                    <p class = 'card-text'>{{livros[livro]['autor']}}</p>
+                    <p class = 'card-text'>{{livros[livro]['genero']}}</p>
                 </div>
             </div>
         </div>
         {% endfor %}
-
 
     </div>
     <!-- CADASTRO DE LIVROS -->
@@ -68,11 +63,13 @@
                                         <button class="file-button btn btn-light" type="button"><i class="material-icons">open_in_browser</i></button><br>
                                         <input class="file-chooser" name = "imagemsel" type="file" accept="image/*" hidden>
                                         <img class="previa">
+
                                         <!-- JAVASCRIPT -->
                                         <script src="/static/js/estante.js"></script>
+
                                     <div class="resumo">
                                         <label for="resumo">Resumo</label>
-                                        <textarea class="form-control" id="resumo" aria-label="Com textarea"></textarea>
+                                        <textarea class="form-control" name="resumo" id="resumo" aria-label="Com textarea"></textarea>
                                     </div>
                                 </div>
 
@@ -81,10 +78,10 @@
                                     <label for="titulo">Titulo</label>
                                     <input type="text" name = "titulo" class="form-control"id="titulo_livro">
                                     <label for="autor">Autor</label>
-                                    <input type="text" class="form-control" id="autor">
+                                    <input type="text" name = "autor" class="form-control" id="autor">
                                     <div class="form-group">
                                         <label for="genero">Gênero</label>
-                                        <select class="form-control" id="genero">
+                                        <select class="form-control" name = "genero" id="genero">
                                             <option>Escolher gênero</option>
                                             <option>Romance</option>
                                             <option>Poesia</option>
