@@ -6,7 +6,7 @@
     <link rel="stylesheet" href={{url_for('static', filename= 'css/item1.css' )}}>
 {% endblock %}
 
-{% block titulo %}Dom Quixote - Virtual Librarian{% endblock %}
+{% block titulo %}{{livro.titulo}} - Virtual Librarian{% endblock %}
 
 {% block conteudo %}
     {{ super() }}
@@ -16,7 +16,7 @@
     <div class="media border p-3">
       <img id="imagem1" src='https://m.media-amazon.com/images/I/51XULadddlL.jpg' class="align-self-start mr-2" alt="Dom Quixote"/>
       <div class="media-body">
-        <h4>Dom Quixote <small><i>(Miguel de Cervantes)</i></small></h4>
+        <h4>{{livro.titulo}} <small><i>({{livro.autor}})</i></small></h4>
         <small><i>Adicionado em 06 de Março de 2021 <br></i></small>
         <button class="btn btn-secondary btn-sm" type="button" data-toggle="collapse" data-target="#resumo">Resumo</button>
         <div id="resumo" class="collapse">
