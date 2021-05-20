@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block csss %}
     {{ super() }}
-
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href={{url_for('static', filename= 'css/feed.css' )}}>
 {% endblock %}
 
@@ -11,6 +11,7 @@
     {{ super() }}
     <!--INICIO FEED-->
     <div class="main container-fluid">
+        {% if current_user.is_authenticated %}
         <div class="row">
           <div class="col-sm-3">
             <div class = "barradefuncao">
@@ -45,32 +46,51 @@
             <hr class="d-sm-none">
         </div>
           <!--USUARIO ESCREVENDO-->
-        <div class="col-sm-8">
+
+        <div class="col-md-8">
             <div class = "caixadosbotoes container-fluid">
                 <div class="media border p-4">
                     <div class="fakeimg mr-2">Foto do usuário</div>
                     <div class="media-body">
-                        <h5>{{nome}} {{sobrenome}}</h5>
-                        <div class = "formatopostagem">
-                            <textarea  name="comentario" cols="" rows="2" placeholder="Resenha..."></textarea>
-                            <button type="button" class="botaoenviar btn" hef="#">Publicar</button>
-                        </div>
+                        <h5>{{current_user.nome}} {{current_user.sobrenome}}</h5>
+                        <form action = '/feed-post' method='POST' enctype="multipart/form-data">
+                            <div class = "formatopostagem">
+                                <textarea  name="comentario" cols="" rows="2" placeholder="Resenha..."></textarea>
+                                <button type="submit" class="botaoenviar btn">Publicar</button>
+
+                                <button id = "anexos" class="file-button btn btn-light" type="button"><i class="material-icons">open_in_browser</i></button><br>
+                                <input class="file-chooser" name = "imagemsel" type="file" accept="image/*" hidden>
+                                <img class="previa">
+
+                                <!-- JAVASCRIPT -->
+                                <script src="/static/js/estante.js"></script>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
             <!--USUARIO TESTE-->
+            {% for post in postagem: %}
             <div class="teste media">
-                <div class="fakeimg mr-2">Foto do José</div>
+                <div class="fakeimg mr-2">Foto do {{postagem[post]['nome']}}</div>
                 <div class="media-body">
-                    <h5>José Maria <small><i>Postou em 08 de março de 2021</i></small></h5>
-                    <a id="livro" href="/pequeno-principe"><h5>O pequeno príncipe</h5></a>
-                    <img id="imagem2" src='https://images-na.ssl-images-amazon.com/images/I/81oeku8iPtL.jpg' alt="O pequeno príncipe"/>
-                    <p><b>Resenha: </b>O livro é bem interessante, ele mostra as aventuras do Pequeno Príncipe, passando pela rosa e a raposa.</p>
+                    <h5>{{postagem[post]['nome']}} {{postagem[post]['sobrenome']}} <small><i>Postou em {{postagem[post]['data'].strftime("%d/%m/%Y")}}</i></small></h5>
+                    {% if post.imagem %}
+                        <img class="img-fluid" src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual_Librarian/PVL/uploads/{{post.imagem}}'>
+                    {% endif %}
+                    <p class = "textopostagem">{{postagem[post]['conteudo']}}</p>
                     <button type="button" class="botao btn-outline-info">Curtir</button>
                 </div>
             </div>
+
+            {% endfor %}
         </div>
     </div>
+    {% else %}
+    <div class="alerta alert alert-danger">
+        É preciso estar logado para ter acesso a esta página!
+    </div>
+    {% endif %}
 </div>
 
 {% endblock %}
