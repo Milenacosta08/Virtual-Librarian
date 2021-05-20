@@ -1,87 +1,87 @@
 body{
-  background-color: #f5f5dc;
-  padding-top: 5vh; /* view hwight -> 5% da tela */
-  background-image: url('/static/img/PAGINAINICIAL1-1024w.png');
-  background-size: cover;
-  background-position-y: -150px;
-  font-family: "Lucida Console", "Courier New", monospace;
+    background-color: #f5f5dc;
+    padding-top: 5vh; /* view hwight -> 5% da tela */
+    background-image: url('/static/img/PAGINAINICIAL1-1024w.png');
+    background-size: cover;
+    background-position-y: -150px;
+    font-family: "Lucida Console", "Courier New", monospace;
 }
 .form{
-  background-color: white;
-  width: 400px;
-  margin: 2%;
-  margin-left: 35%;
-  padding: 30px;
-  padding-top: 40px;
-  float: center;/* Coloquei o formulario p esquerda */
-  border-radius: 10px;
-  box-shadow: 1px 1px 5px #ccc;
+    background-color: white;
+    width: 400px;
+    margin: 2%;
+    margin-left: 35%;
+    padding: 30px;
+    padding-top: 40px;
+    float: center;/* Coloquei o formulario p esquerda */
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px #ccc;
 }
 
 .card-top{
-  text-align: center;
+    text-align: center;
 }
 .card-group{
-  margin-bottom: 3%;
+    margin-bottom: 3%;
 }
 .card-group > label{
-  font-weight: bold;
-  font-size: .8rem;
+    font-weight: bold;
+    font-size: .8rem;
 }
 .card-group > input{
-  border: 0.5px solid #ccc;
-  border-bottom: 2px solid #323232;
-  border-radius: spx;
-  outline: 0;
-  width: 100%;
-  height: 40px;
-  padding: 5px;
+    border: 0.5px solid #ccc;
+    border-bottom: 2px solid #323232;
+    border-radius: spx;
+    outline: 0;
+    width: 100%;
+    height: 40px;
+    padding: 5px;
 }
 .card-group > button{
-  background-color: #4b3621;
-  width: 100%;
-  border-radius: 30px;
-  padding: 15px;
-  border: 10px;
-  color: white;
-  flex: 1 1 100%;
-  text-decoration: none;
-  outline: 0;
-  margin-bottom: 15px;
+    background-color: #4b3621;
+    width: 100%;
+    border-radius: 30px;
+    padding: 15px;
+    border: 10px;
+    color: white;
+    flex: 1 1 100%;
+    text-decoration: none;
+    outline: 0;
+    margin-bottom: 15px;
 }
 .title{
-  color: #4b3621;
+    color: #4b3621;
 
 }
 
 
 p.botao a {
-  position: relative;
-  top: -15px;
-  border: 10px;
-  margin-bottom: 50px;
-  padding: 15px;
-  text-decoration: none;
-  text-align: center;
-  color: white;
-  background: #4b3621;
-  border-radius: 30px;
-  display: block;
+    position: relative;
+    top: -15px;
+    border: 10px;
+    margin-bottom: 50px;
+    padding: 15px;
+    text-decoration: none;
+    text-align: center;
+    color: white;
+    background: #4b3621;
+    border-radius: 30px;
+    display: block;
 }
 .boximagem {
-  display: flex;
+    display: flex;
 }
 .imagem {
-  width: 80px;
-  height: 88px;
+    width: 80px;
+    height: 88px;
 }
 .boxtexto {
-  margin: 8px 0px 0px 20px;
+    margin: 8px 0px 0px 20px;
 }
 .card-header {
-  background-color: white;
-  border: none;
+    background-color: white;
+    border: none;
 }
 .card {
-  border: none;
+    border: none;
 }
