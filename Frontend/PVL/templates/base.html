@@ -18,8 +18,8 @@
       <!--Cabeçalho geral-->
       <div class = "header">
         <div class = "d-flex justify-content-center">
-            <div><img id = "LOGO" src="/static/img/LOGOTIPO VIRTUAL LIBRARIAN.png" alt="VIRTUAL LIBRARIAN"></div>
-            <div><h1 id = "TITULO">Virtual Librarian</h1></div>
+         <a href="/"<div><img id = "LOGO" src="/static/img/LOGOTIPO VIRTUAL LIBRARIAN.png" alt="VIRTUAL LIBRARIAN"></div></a>
+           <a href="/"<div><h1 id = "TITULO">Virtual Librarian</h1></div></a>
         </div>
       </div>
       <nav class="sub-header navbar navbar-expand-sm bg navbar-light">
@@ -34,12 +34,21 @@
             <li class="nav-item">
               <ul id = "ulsub2"><a href="/feed">Feed</a></ul>
             </li>
-            <li class="nav-item">
-              <ul id = "ulsub3"><a href="/cadastro">Cadastro</a></ul>
-            </li>
-            <li class="nav-item">
-              <ul id = "ulsub4"><a href="/login">Login</a></ul>
-            </li>
+            {% if current_user.is_authenticated %}
+                <li class="nav-item">
+                  <ul id = "ulsub3"><a href="/perfil">Perfil</a></ul>
+                </li>
+                <li class="nav-item">
+                  <ul id = "ulsub4"><a href="/logout/">Logout</a></ul>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <ul id = "ulsub3"><a href="/cadastro">Cadastro</a></ul>
+                </li>
+                <li class="nav-item">
+                  <ul id = "ulsub4"><a href="/login">Login</a></ul>
+                </li>
+            {% endif %}
           </ul>
         </div>
         <!--BARRA DE PESQUISA-->
