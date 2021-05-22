@@ -21,13 +21,13 @@
         {% for livro in livros: %}
         <div class="col-xs">
             <div class = 'card'>
-                <a href='/livros/{{current_user.id}}/{{livroid[livro]}}'}}>
+                <a href='/livros/{{current_user.id}}/{{livros[livro].idlivro}}'}}>
                     <img src='https://m.media-amazon.com/images/I/51XULadddlL.jpg' class="card-img-top" id="imagemcard" alt="Card image cap">
                 </a>
                 <div class = 'card-body'>
-                    <p class = 'card-text'>{{livros[livro]['titulo']}}</p>
-                    <p class = 'card-text'>{{livros[livro]['autor']}}</p>
-                    <p class = 'card-text'>{{livros[livro]['genero']}}</p>
+                    <p class = 'card-text'>{{livros[livro].titulo}}</p>
+                    <p class = 'card-text'>{{livros[livro].autor}}</p>
+                    <p class = 'card-text'>{{livros[livro].genero}}</p>
                 </div>
             </div>
         </div>
