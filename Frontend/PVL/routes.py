@@ -32,7 +32,7 @@ def feed():
 
     for post in postagens:
         pessoa = Usuario.query.get(post.usuario_id)
-        posts[post] = {'nome': pessoa.nome, 'sobrenome': pessoa.sobrenome, 'conteudo': post.conteudo, 'data': post.data}
+        posts[post] = {'nome': pessoa.nome, 'sobrenome': pessoa.sobrenome, 'conteudo': post.conteudo, 'data': post.data, 'idpostagem': post.id, 'curtidas': post.curtidas}
 
 
     return render_template('feed.html', postagem = posts)
@@ -105,6 +105,16 @@ def perfil_log():
 
         return render_template('cadastro.html', erro = erro)
 
+@app.route('/<idusuario>/<idpostagem>')
+def curtir(idusuario, idpostagem):
+    #usuario = Usuario.query.filter_by(id = idusuario)
+    postagem = Postagem.query.filter_by(id = idpostagem).first()
+
+    postagem.curtidas += 1
+    db.session.commit()
+
+    return redirect('/feed')
+
 
 @app.route('/dom-quixote')
 def item1():
@@ -141,7 +151,16 @@ def feed_log():
 
 @app.route('/perfil')
 def perfil():
-    return render_template("perfil.html")
+    conta = 1
+    return render_template("perfil.html", acesso = conta)
+
+
+@app.route('/perfil/<usuario_id>')
+def perfil_usu(usuario_id):
+    usu = Usuario.query.filter_by(id=usuario_id).first()
+    conta = 0
+    return render_template("perfil.html", usuario = usu, acesso = conta)
+    return render_template("perfil.html", usuario = usu)
 
 
 @app.route('/pequeno-principe')
@@ -158,7 +177,7 @@ def estante():
     for livro in livros:
         if(livro.usuario_id==session['user_id']):
             #pessoa = Usuario.query.get(livro.usuario_id)
-            exemplar[livro] = {'titulo': livro.titulo, 'autor': livro.autor, 'genero': livro.genero}
+            exemplar[livro] = {'titulo': livro.titulo, 'autor': livro.autor, 'genero': livro.genero, 'idlivro': livro.id}
             livro_id[livro] = livro.id
     return render_template("estante.html", livros = exemplar, livroid = livro_id)
 
@@ -203,16 +222,27 @@ def cadlivros():
 def buscas():
     existe = 0
     busca = request.args.get('pesquisass')
-    buscaz = busca.lower()
-    sites = ["página inicial", "feed", "estante", "meu perfil", "dom quixote", "pequeno príncipe", "cadastro", "login"]
-    links = ["/", "/feed", "/estante", "/perfil", "/dom-quixote", "/pequeno-principe", "/cadastro", "/login"]
+    nomes = Usuario.query.filter_by(nome = busca).all()
+    sobrenomes = Usuario.query.filter_by(sobrenome = busca).all()
+    livros = Livros.query.filter_by(titulo = busca).all()
 
-    for item in range(8):
-        if buscaz == sites[item]:
-            existe = 1
-            break
+    if nomes or sobrenomes or livros:
+        existe = 1
 
-    return render_template('buscas.html', busca = buscaz, sites = sites, links = links, existe = existe)
+    return render_template('buscas.html', busca = busca, nomes = nomes, sobrenomes = sobrenomes, livros = livros, existe = existe)
+
+
+    #busca = request.args.get('pesquisass')
+    #buscaz = busca.lower()
+    #sites = ["página inicial", "feed", "estante", "meu perfil", "dom quixote", "pequeno príncipe", "cadastro", "login"]
+    #links = ["/", "/feed", "/estante", "/perfil", "/dom-quixote", "/pequeno-principe", "/cadastro", "/login"]
+
+    #for item in range(8):
+        #if buscaz == sites[item]:
+            #existe = 1
+            #break
+
+    #return render_template('buscas.html', busca = buscaz, sites = sites, links = links, existe = existe)
 
 @app.route('/amigos')
 def amigo():
