@@ -20,7 +20,7 @@
         <small><i>Adicionado em 06 de Março de 2021 <br></i></small>
         <button class="btn btn-secondary btn-sm" type="button" data-toggle="collapse" data-target="#resumo">Resumo</button>
         <div id="resumo" class="collapse">
-          Descreve sobre romances de cavalaria que gozaram de imensa popularidade. A obra narra as aventuras e desventuras de Dom Quixote, um homem de meia idade que resolveu se tornar cavaleiro andante depois de ler muitos romances de cavalaria.
+            <p class="text-justify">{{livro.resumo}}</p>
         </div>
         <div class="botao">
           <button type="button" class="btn btn-outline-success btn-sm">Desejo</button>
@@ -37,7 +37,7 @@
           <div class="media">
             <div class="foto fakeimg align-self-start" alt="Nome do usuário">Foto do usuário</div>
             <div class="media-body">
-              <h5><a href="/perfil">Nome do usuário</a></h5>
+              <h5><a href="/perfil/{{livro.usuario_id}}">{{usuario.nome}} {{usuario.sobrenome}}</a></h5>
               <p><small id="reput">Confiável/duvidosa</small></p>
               <button type="button" id = "botaochat" class="mensagem btn btn-warning btn-sm"><a href="#"class="material-icons">message</a></button>
             </div>
