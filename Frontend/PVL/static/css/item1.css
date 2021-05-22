@@ -137,3 +137,7 @@ b{
     background-color: #4b3621;
     border: none;
 }
+.text-justify{
+    max-width: 97ch;
+    word-wrap: break-word;
+}
