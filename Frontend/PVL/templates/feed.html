@@ -68,7 +68,7 @@
                 <div class="media-body">
                     <h5>{{postagem[post]['nome']}} {{postagem[post]['sobrenome']}} <small><i>Postou em {{postagem[post]['data'].strftime("%d/%m/%Y")}}</i></small></h5>
                     {% if post.imagem %}
-                        <img class="img-fluid" src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual_Librarian/PVL/uploads/{{post.imagem}}'>
+                        <img class="img-fluid" src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{post.imagem}}'>
                     {% endif %}
                     <p class = "textopostagem">{{postagem[post]['conteudo']}}</p>
                     <a class="btn btn-outline-info botao" href='/{{current_user.id}}/{{postagem[post].idpostagem}}' >Curtir</a>
