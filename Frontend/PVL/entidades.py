@@ -24,4 +24,5 @@ class Postagem(db.Model):
     conteudo = db.Column(db.String(250), nullable=False)
     usuario_id = db.Column(db.Integer, db.ForeignKey("usuario.id"), nullable = False)
     imagem = db.Column(db.String(100), default= '')
+    curtidas = db.Column(db.Integer, default = 0)
     data = db.Column(db.DateTime, default=datetime.now(tz=timezone(-timedelta(hours=3))))
