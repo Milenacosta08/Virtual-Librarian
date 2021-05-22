@@ -11,9 +11,10 @@
 {% block conteudo %}
     {{ super() }}
 
-    <div class="main container-fluid" >
+<div class="main container-fluid" >
         <!--Cabeçalho do perfil-->
-        {% if current_user.is_authenticated %}
+
+    {% if current_user.is_authenticated %}
             {% if erro: %}
                 <div class="alerta alert alert-danger alert-dismissible fade show">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -21,77 +22,88 @@
                 </div>
             {% endif %}
         <div class="media border p-3">
-            <div class="foto fakeimg mr-3">Foto do usuário</div>
+	    {% if usuario %}
+            <div class="foto fakeimg mr-3">Foto do Usuário</div>
+            <div class="media-body">
+                <h4>{{usuario.nome}} {{usuario.sobrenome}}</h4>
+                <p>(Biografia) ex: sou um leitor que ama thrillers e terror, e também tenho uma queda enorme por fantasia. Meu hobbie é escrever resenhas e críticas das obras que já li.mdsndinaçkjnjjdsbfubfmsncsd fy fradbhscbv sdfbuy faudf asbv ahbv afgghhn esenhas e críticas das obras que já li.mdsndinaçkjnjjdsbfubfmsncsd fy fradbhscbv sdfbuy faudf asbv ahbv afgghhn</p>
+                <div class="texto">
+                    <p><small>{{usuario.email}}</small></p>
+                    <p class="reput"> <small> Reputação:  (Confiável/Duvidosa) </small></p>
+                </div>
+        {% else %}
+            <div class="foto fakeimg mr-3">Foto do Usuário</div>
             <div class="media-body">
                 <h4>{{current_user.nome}} {{current_user.sobrenome}}</h4>
                 <p>(Biografia) ex: sou um leitor que ama thrillers e terror, e também tenho uma queda enorme por fantasia. Meu hobbie é escrever resenhas e críticas das obras que já li.mdsndinaçkjnjjdsbfubfmsncsd fy fradbhscbv sdfbuy faudf asbv ahbv afgghhn esenhas e críticas das obras que já li.mdsndinaçkjnjjdsbfubfmsncsd fy fradbhscbv sdfbuy faudf asbv ahbv afgghhn</p>
                 <div class="texto">
-                  <p><small>{{current_user.email}}</small></p>
-                  <p class="reput"> <small> Reputação:  (Confiável/Duvidosa) </small></p>
+                    <p><small>{{current_user.email}}</small></p>
+                    <p class="reput"> <small> Reputação:  (Confiável/Duvidosa) </small></p>
                 </div>
-            </div>
 
         <!--Botão de configuração-->
-            <div class="conf dropdown dropleft ">
-                <button id = 'config' type="button" class="btn dropdown-toggle btn-sm" data-toggle="dropdown">
-                  <i class="icone material-icons">settings</i>
-                </button>
-                <div class="dropdown-menu">
-                  <a class="conf dropdown-item" href="#modal" data-toggle="modal">Dados de Cadastro</a>
-                  <a class="conf dropdown-item" href="#">Dados Gerais</a>
-                </div>
-            </div>
-
-        <!-- The Modal -->
-            <div class="modal fade" id="modal">
-                <div class="modal-dialog modal-dialog-centered modal-lg">
-                    <div class="modal-content">
-
-                    <!-- Modal Header -->
-                        <div class="modal-header">
-                            <h4 class="modal-title">Dados de Cadastro</h4>
-                            <small id="obs">Preencha apenas os campos que deseja alterar</small>
-                        </div>
-
-                    <!-- Modal body -->
-                        <form action="/atualiza/{{current_user.id}}" method='POST'>
-                            <div class="modal-body">
-                                <div class="row">
-
-                                <!-- COLUNA 1 -->
-                                    <div class='col md-5'>
-                                        <label for="nome_atual">Nome Atual</label>
-                                        <input type="text" name="nome_atual" class="form-control" value="{{current_user.nome}}"disabled>
-                                        <label for="sobrenome_atual">Sobrenome Atual</label>
-                                        <input type="text" name="sobrenome_atual" class="form-control"value="{{current_user.sobrenome}}"disabled>
-                                        <label for="email_atual">Email Atual</label>
-                                        <input type="email" name="email_atual" class="form-control"value="{{current_user.email}}"disabled>
-                                        <label for="senha_atual">Senha Atual  <small id="obs">*Campo Obrigatório</small></label>
-                                        <input type="password" name="senha_atual" class="form-control" required>
-                                    </div>
-
-                                <!-- COLUNA 2 -->
-                                    <div class="col md-5 ml-auto">
-                                        <label for="nome_novo">Novo Nome</label>
-                                        <input type="text" name="nome_novo" class="form-control">
-                                        <label for="sobrenome_novo">Novo Sobrenome</label>
-                                        <input type="text" name="sobrenome_novo" class="form-control">
-                                        <label for="email_novo">Novo Email</label>
-                                        <input type="email" name="email_novo" class="form-control">
-                                        <label for="senha_nova">Nova Senha</label>
-                                        <input type="password" name="senha_nova" class="form-control">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Modal footer -->
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancelar</button>
-                                <button type="submit" id="botaoatualizar" class="btn btn-light">Atualizar</button>
-                            </div>
-                        </form>
+                <div class="conf dropdown dropright">
+                    <button id = 'config' type="button" class="btn dropdown-toggle btn-sm" data-toggle="dropdown">
+                      <i class="icone material-icons">settings</i>
+                    </button>
+                    <div class="dropdown-menu">
+                      <a class="conf dropdown-item" href="#modal" data-toggle="modal">Dados de Cadastro</a>
+                      <a class="conf dropdown-item" href="#">Dados Gerais</a>
                     </div>
                 </div>
+
+            <!-- The Modal -->
+                <div class="modal fade" id="modal">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+
+                        <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">Dados de Cadastro</h4>
+                                <small id="obs">Preencha apenas os campos que deseja alterar</small>
+                            </div>
+
+                        <!-- Modal body -->
+                            <form action="/atualiza/{{current_user.id}}" method='POST'>
+                                <div class="modal-body">
+                                    <div class="row">
+
+                                    <!-- COLUNA 1 -->
+                                        <div class='col md-5'>
+                                            <label for="nome_atual">Nome Atual</label>
+                                            <input type="text" name="nome_atual" class="form-control" value="{{current_user.nome}}"disabled>
+                                            <label for="sobrenome_atual">Sobrenome Atual</label>
+                                            <input type="text" name="sobrenome_atual" class="form-control"value="{{current_user.sobrenome}}"disabled>
+                                            <label for="email_atual">Email Atual</label>
+                                            <input type="email" name="email_atual" class="form-control"value="{{current_user.email}}"disabled>
+                                            <label for="senha_atual">Senha Atual  <small id="obs">*Campo Obrigatório</small></label>
+                                            <input type="password" name="senha_atual" class="form-control" required>
+                                        </div>
+
+                                    <!-- COLUNA 2 -->
+                                        <div class="col md-5 ml-auto">
+                                            <label for="nome_novo">Novo Nome</label>
+                                            <input type="text" name="nome_novo" class="form-control">
+                                            <label for="sobrenome_novo">Novo Sobrenome</label>
+                                            <input type="text" name="sobrenome_novo" class="form-control">
+                                            <label for="email_novo">Novo Email</label>
+                                            <input type="email" name="email_novo" class="form-control">
+                                            <label for="senha_nova">Nova Senha</label>
+                                            <input type="password" name="senha_nova" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancelar</button>
+                                    <button type="submit" id="botaoatualizar" class="btn btn-light">Atualizar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+        {% endif %}
             </div>
         </div>
 
@@ -111,9 +123,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/amigos">Amigos</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Mensagens (0)</a>
-                    </li>
+                    {% if acesso == 1 %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Mensagens (0)</a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
         </nav>
@@ -156,23 +170,26 @@
                 </div>
 
       <!--Coluna avisos-->
-                <div class="aviso col-md-3">
-                    <h4>Quadro de avisos:</h4>
-                    <div class="alert alert-success alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        <strong>Disponíveis</strong><br>José Maria quer <a href="/dom-quixote" class="alert-link">livro tal</a> da sua lista.
+                {% if acesso == 1 %}
+                    <div class="aviso col-md-3">
+                        <h4>Quadro de avisos:</h4>
+                        <div class="alert alert-success alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <strong>Disponíveis</strong><br>José Maria quer <a href="/dom-quixote" class="alert-link">livro tal</a> da sua lista.
+                        </div>
+                        <div class="alert alert-danger alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                        <strong>Erro</strong><br><a href="/dom-quixote" class="alert-link">Livro tal</a>não está disponível.
+                        </div>
+                        <div class="alert alert-info alert-dismissible">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                            <strong>Desejados</strong><br>Maria José sinalizou que tem <a href="/pequeno-principe" class="alert-link">livro tal</a>  da sua lista.
+                        </div>
                     </div>
-                    <div class="alert alert-danger alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <strong>Erro</strong><br><a href="/dom-quixote" class="alert-link">Livro tal</a>não está disponível.
-                    </div>
-                    <div class="alert alert-info alert-dismissible">
-                        <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        <strong>Desejados</strong><br>Maria José sinalizou que tem <a href="/pequeno-principe" class="alert-link">livro tal</a>  da sua lista.
-                    </div>
-                </div>
+                {% endif %}
             </div>
         </div>
-        {% endif %}
-    </div>
+
+    {% endif %}
+</div>
 {% endblock%}
