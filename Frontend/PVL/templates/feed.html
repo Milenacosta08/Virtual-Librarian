@@ -22,14 +22,6 @@
                     <p class = "botaoperfil">
                         <a class = "perfilzin" href="/perfil">Meu Perfil</a>
                     </p>
-                    <div class = "nomelivros">
-                        <button class = "btn">Livros</button>
-                        <div class = "conteudo">
-                            <a id = "livrof" href="/dom-quixote">Dom Quixote</a>
-                            <a id = "livrof" href="/pequeno-principe">Pequeno Príncipe</a>
-                            <a id = "livrof" href="/estante">Ver mais</a>
-                        </div>
-                    </div>
                     <!--BOTOES DA TABELA DE FUNÇÃO FAKE-->
                     <div class = "botoesfake">
                         <a href='/amigos'>
@@ -79,7 +71,9 @@
                         <img class="img-fluid" src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual_Librarian/PVL/uploads/{{post.imagem}}'>
                     {% endif %}
                     <p class = "textopostagem">{{postagem[post]['conteudo']}}</p>
-                    <button type="button" class="botao btn-outline-info">Curtir</button>
+                    <a class="btn btn-outline-info botao" href='/{{current_user.id}}/{{postagem[post].idpostagem}}' >Curtir</a>
+                    <span class="badge badge-success">+{{postagem[post]['curtidas']}}</span>
+
                 </div>
             </div>
 
