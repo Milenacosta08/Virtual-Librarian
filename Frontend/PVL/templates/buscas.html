@@ -16,27 +16,40 @@
 
     <div = "caixasite">
         {% if existe == 1 %}
-            {% for q in range(0,8) %}
-                {% if busca == sites[q] %}
+            {% if nomes != {} or sobrenomes != {} or livros != {} %}
+                <div class="table-responsive">
+                    <table class="table table-bordered table-sm">
+                        <thead class="pesquisas">
+                            <tr>
+                                <th>Busca</th>
+                                <th>Link</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-sm">
-                            <thead class="pesquisas">
-                                <tr>
-                                    <th>Busca</th>
-                                    <th>Link</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>{{busca}}</td>
-                                    <td><a class = "linksite" href={{links[q]}}>{{sites[q].capitalize()}}</a></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                {% endif %}
-            {% endfor %}
+                {% for nome in nomes %}
+                            <tr>
+                                <td>{{nome.nome}} {{nome.sobrenome}}</td>
+                                <td><a class = "linksite" href='/'>{{nome.nome}} {{nome.sobrenome}}</a></td>
+                            </tr>
+                {% endfor %}
+                {% for sobrenome in sobrenomes %}
+                            <tr>
+                                <td>{{sobrenome.nome}} {{sobrenome.sobrenome}}</td>
+                                <td><a class = "linksite" href='/'>{{sobrenome.nome}} {{sobrenome.sobrenome}}</a></td>
+                            </tr>
+                {% endfor %}
+                {% for livro in livros %}
+                            <tr>
+                                <td>{{livro.titulo}} ({{livro.autor}})</td>
+                                <td><a class = "linksite" href='/livros/{{livro.usuario_id}}/{{livro.id}}'>{{livro.titulo}} ({{livro.autor}})</a></td>
+                            </tr>
+                {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            {% endif %}
 
         {% else %}
 
