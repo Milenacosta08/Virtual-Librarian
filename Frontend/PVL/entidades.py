@@ -2,12 +2,20 @@ from PVL import db
 from flask_login import UserMixin
 from datetime import datetime, timezone, timedelta
 
+categorizados = db.Table(
+    'categorizados',
+    db.Column('livro_id', db.Integer, db.ForeignKey('livros.id')),
+    db.Column('genero_id', db.Integer, db.ForeignKey('genero.id')))
+
 class Usuario(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(50), nullable=False)
     sobrenome = db.Column(db.String(50), nullable=False)
+    nome_completo = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     senha = db.Column(db.String(20), nullable=False)
+    biografia = db.Column(db.String(200), default='Nenhuma biografia')
+    imagem = db.Column(db.String(100), default= 'padrao.png')
     postagens = db.relationship("Postagem", backref='usuario', lazy=True)
     livros = db.relationship("Livros", backref='usuario',lazy=True)
 
@@ -15,9 +23,12 @@ class Livros(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     titulo = db.Column(db.String(100), nullable=False)
     autor = db.Column(db.String(100), nullable=False)
-    genero = db.Column(db.String(50), nullable=False)
+    imagem = db.Column(db.String(100), default= '')
+    status = db.Column(db.String(100), nullable=True)
+    condicao = db.Column(db.String(150), nullable=True)
     resumo = db.Column(db.String(500), nullable=False)
     usuario_id = db.Column(db.Integer, db.ForeignKey("usuario.id"), nullable = False)
+    generos = db.relationship('Genero', secondary=categorizados, backref=db.backref('livros', lazy='dynamic'))
 
 class Postagem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -26,3 +37,19 @@ class Postagem(db.Model):
     imagem = db.Column(db.String(100), default= '')
     curtidas = db.Column(db.Integer, default = 0)
     data = db.Column(db.DateTime, default=datetime.now(tz=timezone(-timedelta(hours=3))))
+
+class ForumLivro(db.Model):
+    usuario_id = db.Column(db.Integer, db.ForeignKey("usuario.id"), nullable = False)
+    id = db.Column(db.Integer, primary_key=True)
+    id_livro = db.Column(db.Integer, db.ForeignKey('livros.id'), nullable = False)
+    texto = db.Column(db.String(250), nullable = False)
+    data = db.Column(db.DateTime, default=datetime.now(tz=timezone(-timedelta(hours=3))))
+
+class Genero(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    nome = db.Column(db.String(50), nullable = False)
+    livro = db.relationship('Livros', secondary=categorizados, backref=db.backref('genero', lazy='dynamic'))
+
+
+
+

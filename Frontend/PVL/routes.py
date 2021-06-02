@@ -1,12 +1,11 @@
 from flask import current_app as app, render_template, request, redirect, url_for, session
-from PVL.entidades import Usuario, Livros, Postagem
+from PVL.entidades import Usuario, Livros, Postagem, Genero, categorizados, ForumLivro
 from PVL import db, login_manager
 from flask_login import login_user, logout_user, login_required
 from sqlalchemy import desc
 import os
 from werkzeug.utils import secure_filename
 
-livros = []
 
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
@@ -32,7 +31,7 @@ def feed():
 
     for post in postagens:
         pessoa = Usuario.query.get(post.usuario_id)
-        posts[post] = {'nome': pessoa.nome, 'sobrenome': pessoa.sobrenome, 'conteudo': post.conteudo, 'data': post.data, 'idpostagem': post.id, 'curtidas': post.curtidas}
+        posts[post] = {'nome': pessoa.nome, 'sobrenome': pessoa.sobrenome, 'conteudo': post.conteudo, 'data': post.data, 'idpostagem': post.id, 'curtidas': post.curtidas, 'imagem': pessoa.imagem, 'idusuario': pessoa.id}
 
 
     return render_template('feed.html', postagem = posts)
@@ -63,9 +62,27 @@ def feed_post():
         db.session.add(postagem)
         db.session.commit()
 
+    return redirect('/feed')
+
+@app.route('/<idusuario>/<idpostagem>')
+def curtir(idusuario, idpostagem):
+
+    postagem = Postagem.query.filter_by(id = idpostagem).first()
+
+    postagem.curtidas += 1
+    db.session.commit()
 
     return redirect('/feed')
 
+@app.route('/<idpostagem>')
+def descurtir(idpostagem):
+
+    postagem = Postagem.query.filter_by(id = idpostagem).first()
+
+    postagem.curtidas -= 1
+    db.session.commit()
+
+    return redirect('/feed')
 
 @app.route('/cadastro')
 def cadastro():
@@ -85,6 +102,7 @@ def perfil_log():
             novo = Usuario()
             novo.nome = nome
             novo.sobrenome = sobrenome
+            novo.nome_completo = '{} {}'.format(nome, sobrenome)
             novo.email = email
             novo.senha = senha
             session['user_email'] = email
@@ -104,16 +122,6 @@ def perfil_log():
         erro = 'Email já cadastrado!'
 
         return render_template('cadastro.html', erro = erro)
-
-@app.route('/<idusuario>/<idpostagem>')
-def curtir(idusuario, idpostagem):
-    #usuario = Usuario.query.filter_by(id = idusuario)
-    postagem = Postagem.query.filter_by(id = idpostagem).first()
-
-    postagem.curtidas += 1
-    db.session.commit()
-
-    return redirect('/feed')
 
 
 @app.route('/dom-quixote')
@@ -151,16 +159,17 @@ def feed_log():
 
 @app.route('/perfil')
 def perfil():
-    conta = 1
-    return render_template("perfil.html", acesso = conta)
+    post = Postagem.query.filter_by(usuario_id=session['user_id']).order_by(desc(Postagem.id)).all()
+
+    return render_template("perfil.html", postagens = post)
 
 
-@app.route('/perfil/<usuario_id>')
-def perfil_usu(usuario_id):
-    usu = Usuario.query.filter_by(id=usuario_id).first()
-    conta = 0
-    return render_template("perfil.html", usuario = usu, acesso = conta)
-    return render_template("perfil.html", usuario = usu)
+@app.route('/perfil/<id_usuario>')
+def perfil_usu(id_usuario):
+    usu = Usuario.query.filter_by(id=id_usuario).first()
+    post = Postagem.query.filter_by(usuario_id=id_usuario).order_by(desc(Postagem.id)).all()
+
+    return render_template("perfil.html", usuario = usu, postagens=post)
 
 
 @app.route('/pequeno-principe')
@@ -168,41 +177,87 @@ def item2():
     return render_template("item2.html")
 
 
-@app.route('/estante')
-def estante():
-    livros = Livros.query.all()
+@app.route('/estante/<user_id>')
+def estante(user_id):
+    livros = Livros.query.filter_by(usuario_id = user_id).all()
+
     exemplar = {}
     livro_id = {}
 
     for livro in livros:
-        if(livro.usuario_id==session['user_id']):
-            #pessoa = Usuario.query.get(livro.usuario_id)
-            exemplar[livro] = {'titulo': livro.titulo, 'autor': livro.autor, 'genero': livro.genero, 'idlivro': livro.id}
-            livro_id[livro] = livro.id
-    return render_template("estante.html", livros = exemplar, livroid = livro_id)
+        #if(livro.usuario_id==session['user_id']):
+        exemplar[livro] = {'titulo': livro.titulo, 'autor': livro.autor, 'genero': livro.generos, 'idlivro': livro.id, 'capa':livro.imagem}
+        livro_id[livro] = livro.id
+
+    usu = Usuario.query.get(user_id)
+
+    if usu.id != session['user_id']:
+        id_user = usu.id
+
+        return render_template("estante.html", livros = exemplar, livroid = livro_id, usuario = id_user)
+    else:
+        return render_template("estante.html", livros = exemplar, livroid = livro_id)
 
 
-@app.route('/livro-cadastrado', methods=['POST'])
-def livro_cadastrado():
-    titulo = request.form["titulo"]
-    autor = request.form["autor"]
-    genero = request.form["genero"]
-    resumo = request.form["resumo"]
+@app.route('/delete/<id_user>/<id>')
+def deletarLivro(id_user, id):
+    user = Usuario.query.get(id_user)
+    livro = Livros.query.get(id)
 
-    usu = Usuario.query.filter_by(email=session['user_email']).first()
-
-
-    novo = Livros()
-    novo.titulo = titulo
-    novo.autor = autor
-    novo.genero = genero
-    novo.resumo = resumo
-    novo.usuario_id = usu.id
-
-    db.session.add(novo)
+    livro.generos.clear()
     db.session.commit()
 
-    return redirect('/estante')
+    db.session.delete(livro)
+    db.session.commit()
+
+    return redirect(f'/estante/{user.id}')
+
+
+@app.route('/livro-cadastrado/<id>', methods=['POST'])
+def livro_cadastrado(id):
+    titulo = request.form["titulo"]
+    autor = request.form["autor"]
+    genero = request.form.getlist('genero')
+    resumo = request.form["resumo"]
+
+    usu = Usuario.query.get(id)
+
+    livro = Livros()
+    livro.titulo = titulo
+    livro.autor = autor
+    livro.resumo = resumo
+    livro.usuario_id = usu.id
+
+    # percorre a lista "genero" que contém os gêneros selecionados pelo usuário
+    for g in genero:
+        genero1 = db.session.query(Genero).filter(Genero.nome == g).first()
+
+        if genero1 is None:
+            genero1 = Genero()
+            genero1.nome = g
+            db.session.add(genero1)
+            db.session.commit()
+
+        livro.generos.append(genero1)
+
+
+    file = request.files['imagemsel']
+
+    if file is not None:
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+
+            imgs = os.listdir(app.config['UPLOAD_FOLDER'])
+            filename = f'{len(imgs)+1:08}.{filename.rsplit(".", 1)[1].lower()}'
+
+            file.save(app.config['UPLOAD_FOLDER']+'/'+filename)
+            livro.imagem = filename
+
+
+        db.session.add(livro)
+        db.session.commit()
+
+    return redirect(f'/estante/{usu.id}')
 
 #return render_template("estante.html", livros = livros[:8], titulo = titulo)
 
@@ -210,12 +265,29 @@ def livro_cadastrado():
 def paglivros(id_usuario, id_livro):
     livro = Livros.query.filter_by(id=id_livro).first()
     usuario = Usuario.query.filter_by(id=id_usuario).first()
-    return render_template('item1.html', livro = livro, usuario = usuario)
+    forum = ForumLivro.query.filter_by(id_livro = id_livro).order_by(desc(ForumLivro.id)).all()
+    posts = {}
 
+    for comentario in forum:
+        pessoa = Usuario.query.get(comentario.usuario_id)
+        posts[comentario] = {'nome': pessoa.nome, 'sobrenome': pessoa.sobrenome, 'conteudo': comentario.texto, 'data': comentario.data, 'idlivro': comentario.id_livro, 'imagem': pessoa.imagem, 'idusuario': pessoa.id}
+    return render_template('item1.html', livro = livro, usuario = usuario, posts = posts)
 
-@app.route('/cadastrolivros')
-def cadlivros():
-    return render_template("cadastrolivros.html")
+@app.route('/forum/cadastro/<id_usu>/<id_li>', methods=['POST'])
+def Forum(id_usu, id_li):
+    comentario = request.form['comentario']
+    livro = Livros.query.filter_by(usuario_id = id_usu).first()
+
+    if comentario != '':
+        novo = ForumLivro()
+        novo.usuario_id = id_usu
+        novo.id_livro = id_li
+        novo.texto = comentario
+
+        db.session.add(novo)
+        db.session.commit()
+
+    return redirect('/livros/' + id_usu + '/' + id_li)
 
 
 @app.route('/buscas')
@@ -225,11 +297,13 @@ def buscas():
     nomes = Usuario.query.filter_by(nome = busca).all()
     sobrenomes = Usuario.query.filter_by(sobrenome = busca).all()
     livros = Livros.query.filter_by(titulo = busca).all()
+    nomecomp = Usuario.query.filter_by(nome_completo = busca).all()
 
-    if nomes or sobrenomes or livros:
+    if nomes or sobrenomes or livros or nomecomp:
         existe = 1
 
-    return render_template('buscas.html', busca = busca, nomes = nomes, sobrenomes = sobrenomes, livros = livros, existe = existe)
+    return render_template('buscas.html', busca = busca, nomes = nomes, sobrenomes = sobrenomes, livros = livros, nomecomp = nomecomp, existe = existe)
+
 
 
     #busca = request.args.get('pesquisass')
@@ -244,8 +318,8 @@ def buscas():
 
     #return render_template('buscas.html', busca = buscaz, sites = sites, links = links, existe = existe)
 
-@app.route('/amigos')
-def amigo():
+@app.route('/amigos/<id>')
+def amigo(id):
     return render_template('amigos.html')
 
 @app.route("/logout/")
@@ -292,7 +366,31 @@ def atualiza(id):
         erro = 'Alterações não concluídas pois a senha inserida é inválida!'
         return render_template('perfil.html', erro=erro)
 
+@app.route('/atualizardg/<int:id>', methods=['POST'])
+def atualizardg(id):
+    biografia = request.form['biografia']
+    file = request.files['imagemsel']
 
+    usuario = Usuario.query.get(id)
+    if biografia != '':
+        usuario.biografia = biografia
+
+    if file is not None:
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+
+            imgs = os.listdir(app.config['UPLOAD_FOLDER'])
+            filename = f'{len(imgs)+1:08}.{filename.rsplit(".", 1)[1].lower()}'
+
+            file.save(app.config['UPLOAD_FOLDER']+'/'+filename)
+            usuario.imagem = filename
+
+    else:
+        usuario.imagem = 'padrao'
+
+    db.session.commit()
+
+    return redirect ('/perfil')
 
 
 

@@ -17,44 +17,54 @@
     <div = "caixasite">
         {% if existe == 1 %}
             {% if nomes != {} or sobrenomes != {} or livros != {} %}
-                <div class="table-responsive">
-                    <table class="table table-bordered table-sm">
-                        <thead class="pesquisas">
-                            <tr>
-                                <th>Busca</th>
-                                <th>Link</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
+                <div class='media'>
                 {% for nome in nomes %}
-                            <tr>
-                                <td>{{nome.nome}} {{nome.sobrenome}}</td>
-                                <td><a class = "linksite" href='/'>{{nome.nome}} {{nome.sobrenome}}</a></td>
-                            </tr>
+                    <div class="media border p-4">
+                        <img class='perfil img-fluid align-self-center' src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{nome.imagem}}'>
+                        <div class="media-body">
+                            <a class = "linksite" href="/perfil/{{nome.id}}">{{nome.nome_completo}}</a>
+                            <p><small>reputação</small></p>
+                        </div>
+                    </div>
+                    <br>
                 {% endfor %}
                 {% for sobrenome in sobrenomes %}
-                            <tr>
-                                <td>{{sobrenome.nome}} {{sobrenome.sobrenome}}</td>
-                                <td><a class = "linksite" href='/'>{{sobrenome.nome}} {{sobrenome.sobrenome}}</a></td>
-                            </tr>
+                    <div class="media border p-4">
+                        <img class='perfil img-fluid align-self-center' src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{sobrenome.imagem}}'>
+                        <div class="media-body">
+                            <a class = "linksite" href="/perfil/{{sobrenome.id}}">{{sobrenome.nome_completo}}</a>
+                            <p><small>reputação</small></p>
+                        </div>
+                    </div>
+                    <br>
+                {% endfor %}
+                {% for nomecom in nomecomp %}
+                    <div class="media border p-4">
+                        <a class = "linksite" href='/perfil/{{nomecom.id}}'><img class='perfil img-fluid align-self-center' src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{nomecom.imagem}}'></a>
+                        <div class="media-body">
+                            <a class = "linksite" href="/perfil/{{nomecom.id}}">{{nomecom.nome_completo}}</a>
+                            <p><small>reputação</small></p>
+                        </div>
+                    </div>
+                    <br>
                 {% endfor %}
                 {% for livro in livros %}
-                            <tr>
-                                <td>{{livro.titulo}} ({{livro.autor}})</td>
-                                <td><a class = "linksite" href='/livros/{{livro.usuario_id}}/{{livro.id}}'>{{livro.titulo}} ({{livro.autor}})</a></td>
-                            </tr>
+                    <div class="media border p-4">
+                        <a class = "linksite" href='/livros/{{livro.usuario_id}}/{{livro.id}}'><img class='perfil img-fluid align-self-center' src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{livro.imagem}}'></a>
+                        <div class="media-body">
+                            <a class = "linksite" href="/livros/{{livro.usuario_id}}/{{livro.id}}">{{livro.titulo}} ({{livro.autor}})</a>
+                            {% for genero in livro.genero %}
+                                <small>{{genero.nome}}</small>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <br>
                 {% endfor %}
-
-                        </tbody>
-                    </table>
                 </div>
             {% endif %}
 
         {% else %}
-
             <p class="paragrafo">Página não encontrada</p>
-
         {% endif %}
     </div>
 </div>

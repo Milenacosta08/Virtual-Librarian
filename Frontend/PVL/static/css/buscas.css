@@ -120,4 +120,14 @@ a:active {
 .pesquisas {
     background-color: #935c29 ;
 }
-
+.img-fluid{
+    max-width: 200px;
+    max-height: 250px;
+}
+.perfil{
+  margin-right: 16px;
+  width: 100px;
+}
+small{
+    color: red;
+}

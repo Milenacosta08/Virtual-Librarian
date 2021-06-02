@@ -190,9 +190,9 @@ b{
     color:blue;
 }
 .teste{
-margin: 1% 3% 5% 3%;
-border: 0.3px solid whitesmoke;
-padding: 2%;
+    margin: 1% 3% 5% 3%;
+    border: 0.3px solid whitesmoke;
+    padding: 2%;
 }
 div.foto{
     width: auto;
@@ -241,15 +241,61 @@ div.foto{
 }
 
 .previa{
+    max-height: 200px;
     max-width: 50%;
-    max-height: 50%;
 }
 .img-fluid {
     max-height: 200px;
     max-width: auto;
     padding-bottom: 10px;
+    padding-left: 10px;
 }
 .textopostagem {
-    max-width: 63ch;
+    max-width: 60ch;
     word-wrap: break-word;
+    padding-left: 10px;
+}
+
+#curtir {
+    max-height: 50px;
+    flex: 1;
+
+}
+#descurtir {
+    max-height: 50px;
+    flex: 1;
+}
+.flex {
+    display: flex;
+
+}
+.flex-wrap {
+	flex-wrap: wrap;
+}
+#teste {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+}
+
+@media only screen and (min-width: 440px) {
+    #descurtir {
+        max-height: 50px;
+        flex: 1;
+        margin-left: 50px;
+    }
+}
+#imagem-usu{
+    height: 110px;
+    max-width: 20%;
+    min-width: 110px;
+    padding-left: 10px;
+    margin-right: 1%;
+}
+#img-usu{
+    width: 90px;
+    margin-right: 1%;
+}
+#nomeusu {
+    margin-left: 10px;
 }

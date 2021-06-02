@@ -23,19 +23,27 @@
             {% endif %}
         <div class="media border p-3">
 	    {% if usuario %}
-            <div class="foto fakeimg mr-3">Foto do Usuário</div>
+	        {% if current_user.imagem %}
+                <img class='img-fluid' id='imagem-perfil' src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{usuario.imagem}}'>
+            {% else %}
+                <div class="foto fakeimg mr-3">Foto do Usuário</div>
+            {% endif %}
             <div class="media-body">
                 <h4>{{usuario.nome}} {{usuario.sobrenome}}</h4>
-                <p>(Biografia) ex: sou um leitor que ama thrillers e terror, e também tenho uma queda enorme por fantasia. Meu hobbie é escrever resenhas e críticas das obras que já li.mdsndinaçkjnjjdsbfubfmsncsd fy fradbhscbv sdfbuy faudf asbv ahbv afgghhn esenhas e críticas das obras que já li.mdsndinaçkjnjjdsbfubfmsncsd fy fradbhscbv sdfbuy faudf asbv ahbv afgghhn</p>
+                <p>{{usuario.biografia}}</p>
                 <div class="texto">
                     <p><small>{{usuario.email}}</small></p>
                     <p class="reput"> <small> Reputação:  (Confiável/Duvidosa) </small></p>
                 </div>
         {% else %}
+        {% if current_user.imagem %}
+            <img class='img-fluid' id='imagem-perfil' src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{current_user.imagem}}'>
+        {% else %}
             <div class="foto fakeimg mr-3">Foto do Usuário</div>
+        {% endif %}
             <div class="media-body">
                 <h4>{{current_user.nome}} {{current_user.sobrenome}}</h4>
-                <p>(Biografia) ex: sou um leitor que ama thrillers e terror, e também tenho uma queda enorme por fantasia. Meu hobbie é escrever resenhas e críticas das obras que já li.mdsndinaçkjnjjdsbfubfmsncsd fy fradbhscbv sdfbuy faudf asbv ahbv afgghhn esenhas e críticas das obras que já li.mdsndinaçkjnjjdsbfubfmsncsd fy fradbhscbv sdfbuy faudf asbv ahbv afgghhn</p>
+                <p>{{current_user.biografia}}</p>
                 <div class="texto">
                     <p><small>{{current_user.email}}</small></p>
                     <p class="reput"> <small> Reputação:  (Confiável/Duvidosa) </small></p>
@@ -48,11 +56,11 @@
                     </button>
                     <div class="dropdown-menu">
                       <a class="conf dropdown-item" href="#modal" data-toggle="modal">Dados de Cadastro</a>
-                      <a class="conf dropdown-item" href="#">Dados Gerais</a>
+                      <a class="conf dropdown-item" href="#modal_geral" data-toggle="modal">Dados Gerais</a>
                     </div>
                 </div>
 
-            <!-- The Modal -->
+            <!-- The Modal Cadastrais-->
                 <div class="modal fade" id="modal">
                     <div class="modal-dialog modal-dialog-centered modal-lg">
                         <div class="modal-content">
@@ -103,6 +111,57 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- The Modal Gerais-->
+                <div class="modal fade" id="modal_geral">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+
+                        <!-- Modal Header -->
+                            <div class="modal-header">
+                                <h4 class="modal-title">Dados Gerais</h4>
+                                <small id="obs">Preencha apenas os campos que deseja alterar</small>
+                            </div>
+
+                        <!-- Modal body -->
+                            <form action="/atualizardg/{{current_user.id}}" method='POST' enctype="multipart/form-data">
+                                <div class="modal-body">
+                                    <div class="row">
+
+                                    <!-- COLUNA 1 -->
+                                        <div class='col md-5'>
+                                            {% if current_user.imagem %}
+                                                <img class='img-fluid' src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{current_user.imagem}}'>
+                                            {% else %}
+                                                <div class="foto fakeimg mr-3">Foto do Usuário</div>
+                                            {% endif %}
+
+                                            <button id = "anexos" class="file-button btn btn-light" type="button"><i class="material-icons">open_in_browser</i></button><br>
+                                            <input class="file-chooser" name = "imagemsel" type="file" accept="image/*" hidden>
+                                            <img class="previa">
+                                            <!-- JAVASCRIPT -->
+                                            <script src="/static/js/estante.js"></script>
+                                        </div>
+
+                                    <!-- COLUNA 2 -->
+                                        <div class="col md-5 ml-auto">
+                                            <div class="biografia">
+                                                <label for="biografia">Biografia</label>
+                                                <textarea class="form-control" name="biografia" id="biografia" aria-label="Com textarea"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Modal footer -->
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancelar</button>
+                                    <button type="submit" id="botaoatualizar" class="btn btn-light">Atualizar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
         {% endif %}
             </div>
         </div>
@@ -117,13 +176,20 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Detalhes</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/estante">Estante</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/amigos">Amigos</a>
-                    </li>
-                    {% if acesso == 1 %}
+                    {% if usuario %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/amigos/{{usuario.id}}">Amigos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/estante/{{usuario.id}}">Estante</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/amigos/{{current_user.id}}">Amigos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/estante/{{current_user.id}}">Estante</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Mensagens (0)</a>
                         </li>
@@ -140,37 +206,69 @@
                 <div class="list col-md-2">
                     <h4>Listas</h4>
                     <ul class="nav nav-pills flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Livros desejados</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Livros disponíveis</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Favoritos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Sugestões</a>
-                        </li>
+                        {% if usuario %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="/estante/{{usuario.id}}">Estante de Exibição</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Estante de Troca</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Estante de Venda</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">XXXXX</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="/estante/{{current_user.id}}">Estante de Exibição</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Estante de Troca</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Estante de Venda</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">XXXXX</a>
+                            </li>
+                        {% endif %}
                     </ul>
-                    <hr class="d-sm-none">
                 </div>
 
       <!--Coluna Principal-->
                 <div class="principal col-md-7">
-                    <h3>Resenha Literária</h3>
-                    <h5>(nome do livro),<small><i> 4 de março de 2021</i></small></h5>
-                    <div class="fakeimg">Imagem do livro</div>
-                    <p><br> Frase inicial..</p>
-                    <p>(Resenha em si) ex: msnufuryutiorpwçlejahgdgcv mncd baysbdetrurti msaqeweurity poiyut dyu dgtsfvxbck xbdmxjd cxmfjnvifnv cnsdhbcusfbvjcnmcx vx nx csh dfbguydf mafsuc cbsydvdmiulosx abysdbjufhifdcc hbxyuadvldiufsd hxbcsateiownfs kjxcbnsiud.<br></p>
-                    <h3><br>Livro adicionado aos disponíveis</h3>
-                    <h5>(nome do livro),<small><i> 3 de março de 2021</i></small></h5>
-                    <div class="fakeimg">Imagem do livro</div>
-                    <p><br>Descrição: Livro usado, com a capa um pouco surrada mas ainda em bom estado. Qualquer interesse de troca ou compra, por favor entrar em contato.</p>
+                    {% if not usuario %}
+                        {% if postagens %}
+                            {% for postagem in postagens %}
+                                <h4>Resenha Literária<small id="data"><i>Postou em {{postagem.data.strftime("%d/%m/%Y")}}</i></small></h4>
+                                {% if postagem.imagem %}
+                                    <img class='img-fluid' id="capa-resenha" src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{postagem.imagem}}'>
+                                {% endif %}
+                                <p>{{postagem.conteudo}}</p>
+                                <br>
+                            {% endfor %}
+                        {% else %}
+                            <p id="nada"><i>Nenhuma postagem</i></p>
+                        {% endif %}
+                    {% else %}
+                        {% if postagens %}
+                            {% for postagem in postagens %}
+                                <h3>Resenha Literária<small id="data"><i>Postou em {{postagem.data.strftime("%d/%m/%Y")}}</i></small></h3>
+                                {% if postagem.imagem %}
+                                    <img class='img-fluid' id="capa-resenha" src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{postagem.imagem}}'>
+                                {% endif %}
+                                <p>{{postagem.conteudo}}</p>
+                                <br>
+                            {% endfor %}
+                        {% else %}
+                            <p id="nada"><i>Nenhuma postagem</i></p>
+                        {% endif %}
+                    {% endif %}
                 </div>
 
       <!--Coluna avisos-->
-                {% if acesso == 1 %}
+                {% if not usuario %}
                     <div class="aviso col-md-3">
                         <h4>Quadro de avisos:</h4>
                         <div class="alert alert-success alert-dismissible">

@@ -22,12 +22,19 @@
         <div class="col-xs">
             <div class = 'card'>
                 <a href='/livros/{{current_user.id}}/{{livros[livro].idlivro}}'}}>
-                    <img src='https://m.media-amazon.com/images/I/51XULadddlL.jpg' class="card-img-top" id="imagemcard" alt="Card image cap">
+                    <img class="card-img-top" id="imagemcard">
+                    {% if livro.imagem %}
+                        <img class="img-fluid" src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{livro.imagem}}'>
+                    {% endif %}
                 </a>
                 <div class = 'card-body'>
                     <p class = 'card-text'>{{livros[livro].titulo}}</p>
                     <p class = 'card-text'>{{livros[livro].autor}}</p>
-                    <p class = 'card-text'>{{livros[livro].genero}}</p>
+                    {% if not usuario %}
+                        <a href="/delete/{{current_user.id}}/{{livros[livro].idlivro}}">
+                            <button type="button" class="delete btn btn-danger"><i class="material-icons">delete</i></button>
+                        </a>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -51,7 +58,7 @@
                     </div>
 
                     <!-- Modal body -->
-                    <form action="/livro-cadastrado" method="POST" encType="multipart/form-data">
+                    <form action = '/livro-cadastrado/{{current_user.id}}' method='POST' enctype="multipart/form-data">
                         <div class="modal-body">
 
                             <!-- INÍCIO DAS COLUNAS -->
@@ -79,20 +86,59 @@
                                     <input type="text" name = "titulo" class="form-control"id="titulo_livro">
                                     <label for="autor">Autor</label>
                                     <input type="text" name = "autor" class="form-control" id="autor">
-                                    <div class="form-group">
-                                        <label for="genero">Gênero</label>
-                                        <select class="form-control" name = "genero" id="genero">
-                                            <option>Escolher gênero</option>
-                                            <option>Romance</option>
-                                            <option>Poesia</option>
-                                            <option>Conto</option>
-                                            <option>Crônica</option>
-                                            <option>Ensaio</option>
-                                            <option>Drama</option>
-                                            <option>Novela</option>
-                                        </select>
+                                    <label for="generos">Gêneros</label>
+                                    <div class="generos container" id="generos">
+                                    	<div class="row">
+                                        	<div classs="col-sm-6">
+
+                                            	<div class="custom-control custom-checkbox">
+                                                 	<input type="checkbox" class="custom-control-input" id="Romance" name="genero" value="Romance">
+                                                  	<label class="custom-control-label" for="Romance">Romance</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox">
+                                                 	<input type="checkbox" class="custom-control-input" id="Crônica" name="genero" value="Crônica">
+                                                  	<label class="custom-control-label" for="Crônica">Crônica</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox">
+                                                 	<input type="checkbox" class="custom-control-input" id="Ensaio" name="genero" value="Ensaio">
+                                                  	<label class="custom-control-label" for="Ensaio">Ensaio</label>
+                                                </div>
+                                            	<div class="custom-control custom-checkbox">
+                                                 	<input type="checkbox" class="custom-control-input" id="Drama" name="genero" value="Drama">
+                                                  	<label class="custom-control-label" for="Drama">Drama</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox">
+                                                 	<input type="checkbox" class="custom-control-input" id="Fantasia" name="genero" value="Fantasia">
+                                                  	<label class="custom-control-label" for="Fantasia">Fantasia</label>
+                                                </div>
+                                        	</div>
+
+                                            <div class="col-sm-6">
+                                            	<div class="custom-control custom-checkbox">
+                                                 	<input type="checkbox" class="custom-control-input" id="Conto" name="genero" value="Conto">
+                                                  	<label class="custom-control-label" for="Conto">Conto</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox">
+                                                 	<input type="checkbox" class="custom-control-input" id="Poema" name="genero" value="Poema">
+                                                  	<label class="custom-control-label" for="Poema">Poema</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox">
+                                                 	<input type="checkbox" class="custom-control-input" id="Terror" name="genero" value="Terror">
+                                                  	<label class="custom-control-label" for="Terror">Terror</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox">
+                                                 	<input type="checkbox" class="custom-control-input" id="Thriller" name="genero" value="Thriller">
+                                                  	<label class="custom-control-label" for="Thriller">Thriller</label>
+                                                </div>
+                                                <div class="custom-control custom-checkbox">
+                                                 	<input type="checkbox" class="custom-control-input" id="Novela" name="genero" value="Novela">
+                                                  	<label class="custom-control-label" for="Novela">Novela</label>
+                                                </div>
+                                            </div>
+                                    	</div>
                                     </div>
-                                    </div>
+
+                                </div>
                             </div>
                         </div>
 

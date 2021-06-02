@@ -1,7 +1,7 @@
 body{
     margin: 0;
     background-color: lightgray;
-
+    font-family: "Lucida Console", "Courier New", monospace;
   }
   div.header {
     background-color: #4b3621;
@@ -58,11 +58,20 @@ body{
 
     }
 }
-a:link {
+
+div.conf{
+    width: 20%;
+    display: inline-block;
+    float:left;
+    color: black;
+  }
+
+li a:link {
     display : block;
     text-decoration: none;
-    color: black;
+    color: white;
 }
+
 ul a:hover {
     border: 5em;
     border-radius: 5px;
@@ -89,6 +98,7 @@ a:active {
     height: 200px;
     width: 60%;
     background: #aaa;
+    margin-bottom: 2%;
   }
   div.texto{
     line-height: 0.5;
@@ -99,11 +109,7 @@ a:active {
   p.reput{
     color:red;
   }
-  div.conf{
-    width: 20%;
-    display: inline-block;
-    float:left;
-  }
+
   .barra-perfil{
 
     border-bottom: 1px solid;
@@ -148,7 +154,7 @@ a:active {
     right: 20px;
     border: 1px solid;
     border-radius: 10px;
-    height: 250px;
+    height: 20%;
   }
   .principal{
     background-color: rgba(231, 231, 231, 0.76);
@@ -192,4 +198,35 @@ a:active {
     width: 58%;
     border-left: 6px solid #c73a33;
     border-radius: 2px;
+}
+.previa{
+    max-height: 200px;
+    max-width: 60%;
+}
+#imagem-perfil{
+    height: 130px;
+    max-width: 20%;
+    min-width: 130px;
+    padding-left: 10px;
+    margin-right: 2%;
+}
+.textopostagem {
+    max-width: 186ch;
+    word-wrap: break-word;
+}
+
+#nada{
+    color: #a29a9a;
+    text-align: center;
+}
+#data{
+    color: black;
+    font-size: 13px;
+    margin-left: 1%;
+    opacity: 0.8;
+}
+#capa-resenha{
+    max-height: 200px;
+    max-width: 50%;
+    margin-bottom: 2%;
 }

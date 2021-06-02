@@ -7,7 +7,7 @@ from flask_login import LoginManager
 
 db = SQLAlchemy()
 login_manager = LoginManager()
-UPLOAD_FOLDER = '/home/VirtualLibrarian/Virtual_Librarian/PVL/uploads'
+UPLOAD_FOLDER = '/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads'
 
 def create_app():
     app = Flask(__name__)

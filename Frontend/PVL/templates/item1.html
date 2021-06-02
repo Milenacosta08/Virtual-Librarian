@@ -14,7 +14,7 @@
 
     <!--CAIXA DO ITEM 1-->
     <div class="media border p-3">
-      <img id="imagem1" src='https://m.media-amazon.com/images/I/51XULadddlL.jpg' class="align-self-start mr-2" alt="Dom Quixote"/>
+      <img class="img-fluid" id='imagem-livro' src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{livro.imagem}}'>
       <div class="media-body">
         <h4>{{livro.titulo}} <small><i>({{livro.autor}})</i></small></h4>
         <small><i>Adicionado em 06 de Março de 2021 <br></i></small>
@@ -28,6 +28,7 @@
         </div>
       </div>
     </div>
+
     <!--DETALHES ITEM 1-->
     <div class="main container">
       <div class="row">
@@ -35,7 +36,7 @@
         <div class="contato col-md-4">
           <h3 id="contato"> Contato</h3>
           <div class="media">
-            <div class="foto fakeimg align-self-start" alt="Nome do usuário">Foto do usuário</div>
+            <img class= 'img-fluid' id='imagem-usu' src= https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{usuario.imagem}}>
             <div class="media-body">
               <h5><a href="/perfil/{{livro.usuario_id}}">{{usuario.nome}} {{usuario.sobrenome}}</a></h5>
               <p><small id="reput">Confiável/duvidosa</small></p>
@@ -53,5 +54,52 @@
       </div>
     </div>
   </div>
+
+    <div class = "container">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 id="detalhes">Dúvidas</h2>
+                <div class="media border p-4">
+                    <img class= 'img-fluid' id='imagem-usu' src= https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{current_user.imagem}}>
+                    <div class="media-body">
+                        <h5>{{current_user.nome}} {{current_user.sobrenome}}</h5>
+                        <form action = '/forum/cadastro/{{current_user.id}}/{{livro.id}}' method='POST'>
+                            <div class = "formatopostagem">
+                                <textarea  name="comentario" cols="" rows="2" placeholder="Dúvida..."></textarea>
+                                <button id='enviar' type="submit" class="botaoenviar btn">Publicar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                {% for post in posts %}
+                    {% if posts %}
+                        {% if posts[post].idlivro == livro.id %}
+
+                    <div class = "caixadosbotoes container-fluid">
+                        <div class="media border p-4">
+                            <div class="teste media">
+                                {% if posts[post].imagem %}
+                                    <img class='rounded-circle' id='img-usu' src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{posts[post].imagem}}'>
+                                {% else %}
+                                    <div class="fakeimg mr-2">Foto do {{posts[post]['nome']}}</div>
+                                {% endif %}
+                                <div class="formatopostagem">
+                                    <div class = "p-2 flex-fill bd-highlight">
+                                        <h5 id="data">{{posts[post]['nome']}} {{posts[post]['sobrenome']}} <small><i>Postou em {{posts[post]['data'].strftime("%d/%m/%Y")}}</i></small></h5>
+                                        <p class = "textopostagem">{{posts[post]['conteudo']}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
 
 {% endblock %}

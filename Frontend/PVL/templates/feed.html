@@ -28,7 +28,7 @@
                             <button class = "btn">Amigos</button>
                         </a>
                         <button class = "btn">Chat</button>
-                        <a href='/estante'>
+                        <a href='/estante/{{current_user.id}}'>
                             <button class = "btn">Minha Estante</button>
                         </a>
                         <button class = "btn">Estantes</button>
@@ -42,9 +42,13 @@
         <div class="col-md-8">
             <div class = "caixadosbotoes container-fluid">
                 <div class="media border p-4">
-                    <div class="fakeimg mr-2">Foto do usuário</div>
+                    {% if current_user.imagem %}
+                        <img class='img-fluid' id='imagem-usu' src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{current_user.imagem}}'>
+                    {% else %}
+                    <div class="fakeimg mr-2">Foto do {{current_user.nome}}</div>
+                    {% endif %}
                     <div class="media-body">
-                        <h5>{{current_user.nome}} {{current_user.sobrenome}}</h5>
+                        <h5 id='nomeusu'>{{current_user.nome}} {{current_user.sobrenome}}</h5>
                         <form action = '/feed-post' method='POST' enctype="multipart/form-data">
                             <div class = "formatopostagem">
                                 <textarea  name="comentario" cols="" rows="2" placeholder="Resenha..."></textarea>
@@ -64,15 +68,34 @@
             <!--USUARIO TESTE-->
             {% for post in postagem: %}
             <div class="teste media">
-                <div class="fakeimg mr-2">Foto do {{postagem[post]['nome']}}</div>
+                    {% if postagem[post].imagem %}
+                        <img class='rounded-circle' id='img-usu' src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{postagem[post].imagem}}'>
+                    {% else %}
+                    <div class="fakeimg mr-2">Foto do {{postagem[post]['nome']}}</div>
+                    {% endif %}
                 <div class="media-body">
                     <h5>{{postagem[post]['nome']}} {{postagem[post]['sobrenome']}} <small><i>Postou em {{postagem[post]['data'].strftime("%d/%m/%Y")}}</i></small></h5>
                     {% if post.imagem %}
                         <img class="img-fluid" src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{post.imagem}}'>
                     {% endif %}
                     <p class = "textopostagem">{{postagem[post]['conteudo']}}</p>
-                    <a class="btn btn-outline-info botao" href='/{{current_user.id}}/{{postagem[post].idpostagem}}' >Curtir</a>
-                    <span class="badge badge-success">+{{postagem[post]['curtidas']}}</span>
+                    <div class = 'container wrap' id='teste'>
+                        <a class="btn btn-outline-info botao" id = 'curtir' href='/{{current_user.id}}/{{postagem[post].idpostagem}}' >Curtir</a>
+                        <a class="btn btn-outline-info botao" id = 'descurtir' href='/{{postagem[post].idpostagem}}' >Descurtir</a>
+                    </div>
+
+                    {% if postagem[post]['curtidas'] > 0 %}
+                        <span class="badge badge-success">+{{postagem[post]['curtidas']}}</span>
+                    {% endif %}
+
+                    {% if postagem[post]['curtidas'] == 0 %}
+                        <span class="badge badge-secondary">{{postagem[post]['curtidas']}}</span>
+                    {% endif %}
+
+
+                    {% if postagem[post]['curtidas'] < 0 %}
+                        <span class="badge badge-danger">{{postagem[post]['curtidas']}}</span>
+                    {% endif %}
 
                 </div>
             </div>

@@ -84,11 +84,7 @@ a:active {
     width: 60%;
     text-align: center;
 }
-.fakeimg {
-    height: 200px;
-    width: 40%;
-    background: #aaa;
-  }
+
 div.main{
     margin: 1% 5% 10% 2%;
 }
@@ -136,8 +132,82 @@ b{
 #botaochat {
     background-color: #4b3621;
     border: none;
+    margin-right: 50px;
 }
 .text-justify{
     max-width: 97ch;
     word-wrap: break-word;
+}
+#imagem-usu{
+    height: 110px;
+    max-width: 20%;
+    min-width: 110px;
+    margin-right: 20px;
+
+}
+#imagem-livro{
+    height: 250px;
+    max-width: 20%;
+    min-width: 110px;
+    margin-right: 20px;
+}
+.fakeimg {
+    height: 100px;
+    width: 100px;
+    background: #aaa;
+}
+textarea {
+    padding: 10px;
+    line-height: 1.5;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 1px 1px 1px #999;
+    width: 60%;
+    min-width: 100px;
+    max-width: 70%;
+  	max-height: 100px;
+}
+button.botaoenviar {
+    margin-bottom: 7%;
+    text-align: center;
+    max-width: 100px;
+    border-radius: 5px;
+}
+#enviar {
+    width: 100%;
+    background-color: #d2b48c;
+    color: black;
+    padding: 16px;
+    font-size: 14px;
+    border: none;
+    outline: none;
+}
+#img-usu{
+    width: 90px;
+    margin-right: 1%;
+}
+#nomeusu {
+    margin-left: 10px;
+}
+#teste {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
+}
+.textopostagem {
+    max-width: 60ch;
+    word-wrap: break-word;
+    padding-left: 10px;
+}
+.caixadosbotoes {
+    align-content: center;
+}
+#data{
+    min-width: 40ch;
+}
+@media only screen and (max-width: 775px) {
+    #data{
+        min-width: 0ch;
+    }
+
 }
