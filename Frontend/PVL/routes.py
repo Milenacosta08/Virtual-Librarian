@@ -1,5 +1,5 @@
 from flask import current_app as app, render_template, request, redirect, url_for, session
-from PVL.entidades import Usuario, Livros, Postagem, Genero, categorizados, ForumLivro
+from PVL.entidades import Usuario, Livros, Postagem, Genero, categorizados, ForumLivro, Resposta
 from PVL import db, login_manager
 from flask_login import login_user, logout_user, login_required
 from sqlalchemy import desc
@@ -266,12 +266,20 @@ def paglivros(id_usuario, id_livro):
     livro = Livros.query.filter_by(id=id_livro).first()
     usuario = Usuario.query.filter_by(id=id_usuario).first()
     forum = ForumLivro.query.filter_by(id_livro = id_livro).order_by(desc(ForumLivro.id)).all()
+    respostas = Resposta.query.all()
     posts = {}
+    respostas = {}
+
+    for resposta in respostas:
+        respostas[resposta] = {'texto' : resposta.texto, 'idforum' : resposta.id_forum}
+
 
     for comentario in forum:
         pessoa = Usuario.query.get(comentario.usuario_id)
-        posts[comentario] = {'nome': pessoa.nome, 'sobrenome': pessoa.sobrenome, 'conteudo': comentario.texto, 'data': comentario.data, 'idlivro': comentario.id_livro, 'imagem': pessoa.imagem, 'idusuario': pessoa.id}
-    return render_template('item1.html', livro = livro, usuario = usuario, posts = posts)
+        posts[comentario] = {'nome': pessoa.nome, 'sobrenome': pessoa.sobrenome, 'conteudo': comentario.texto, 'id': comentario.id, 'data': comentario.data, 'idlivro': comentario.id_livro, 'imagem': pessoa.imagem, 'idusuario': pessoa.id}
+
+
+    return render_template('item1.html', livro = livro, usuario = usuario, posts = posts, respostas = respostas)
 
 @app.route('/forum/cadastro/<id_usu>/<id_li>', methods=['POST'])
 def Forum(id_usu, id_li):
@@ -287,7 +295,21 @@ def Forum(id_usu, id_li):
         db.session.add(novo)
         db.session.commit()
 
-    return redirect('/livros/' + id_usu + '/' + id_li)
+    return redirect(f'/livros/{id_usu}/{id_li}')
+
+@app.route('/forum/cadastro/resposta/<id_usu>/<id_livro>/<usu_post>', methods=['POST'])
+def resposta(id_usu, id_livro, usu_post):
+    resposta = request.form['resposta']
+
+    if resposta != '':
+        novo = Resposta()
+        novo.id_forum = usu_post
+        novo.texto = resposta
+
+        db.session.add(novo)
+        db.session.commit()
+
+    return redirect(f'/livros/{id_usu}/{id_livro}')
 
 
 @app.route('/buscas')
@@ -304,19 +326,6 @@ def buscas():
 
     return render_template('buscas.html', busca = busca, nomes = nomes, sobrenomes = sobrenomes, livros = livros, nomecomp = nomecomp, existe = existe)
 
-
-
-    #busca = request.args.get('pesquisass')
-    #buscaz = busca.lower()
-    #sites = ["página inicial", "feed", "estante", "meu perfil", "dom quixote", "pequeno príncipe", "cadastro", "login"]
-    #links = ["/", "/feed", "/estante", "/perfil", "/dom-quixote", "/pequeno-principe", "/cadastro", "/login"]
-
-    #for item in range(8):
-        #if buscaz == sites[item]:
-            #existe = 1
-            #break
-
-    #return render_template('buscas.html', busca = buscaz, sites = sites, links = links, existe = existe)
 
 @app.route('/amigos/<id>')
 def amigo(id):

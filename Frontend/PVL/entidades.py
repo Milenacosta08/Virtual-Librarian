@@ -14,10 +14,11 @@ class Usuario(db.Model, UserMixin):
     nome_completo = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     senha = db.Column(db.String(20), nullable=False)
-    biografia = db.Column(db.String(200), default='Nenhuma biografia')
+    biografia = db.Column(db.String(200), default='Alterar biografia')
     imagem = db.Column(db.String(100), default= 'padrao.png')
     postagens = db.relationship("Postagem", backref='usuario', lazy=True)
     livros = db.relationship("Livros", backref='usuario',lazy=True)
+    amigos = db.relationship("Amigo", backref='usuario', lazy=True)
 
 class Livros(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -43,6 +44,7 @@ class ForumLivro(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     id_livro = db.Column(db.Integer, db.ForeignKey('livros.id'), nullable = False)
     texto = db.Column(db.String(250), nullable = False)
+    respostas = db.relationship("Resposta", backref='forumlivro',lazy=True)
     data = db.Column(db.DateTime, default=datetime.now(tz=timezone(-timedelta(hours=3))))
 
 class Genero(db.Model):
@@ -50,6 +52,15 @@ class Genero(db.Model):
     nome = db.Column(db.String(50), nullable = False)
     livro = db.relationship('Livros', secondary=categorizados, backref=db.backref('genero', lazy='dynamic'))
 
+class Resposta(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    id_forum = db.Column(db.Integer, db.ForeignKey(ForumLivro.id), nullable = False)
+    texto = db.Column(db.String(250), nullable = False)
+    data = db.Column(db.DateTime, default=datetime.now(tz=timezone(-timedelta(hours=3))))
 
-
+class Amigo(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    id_usuario = db.Column(db.Integer, db.ForeignKey(Usuario.id), nullable = False)
+    nome = db.Column(db.String(50), nullable=False)
+    sobrenome = db.Column(db.String(50), nullable=False)
 

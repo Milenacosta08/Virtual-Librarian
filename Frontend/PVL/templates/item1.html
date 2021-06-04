@@ -87,18 +87,55 @@
                                     <div class = "p-2 flex-fill bd-highlight">
                                         <h5 id="data">{{posts[post]['nome']}} {{posts[post]['sobrenome']}} <small><i>Postou em {{posts[post]['data'].strftime("%d/%m/%Y")}}</i></small></h5>
                                         <p class = "textopostagem">{{posts[post]['conteudo']}}</p>
+                                        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#formResposta{{posts[post].id}}">Responder</button>
+                                        <div id="formResposta{{posts[post].id}}" class="collapse">
+
+
+
+
+
+                                            <form action = '/forum/cadastro/resposta/{{current_user.id}}/{{posts[post].idlivro}}/{{posts[post].id}}' method='POST'>
+                                                <div class = "formatopostagem">
+                                                    <textarea  name="resposta" cols="" rows="2" placeholder="Dúvida..."></textarea>
+                                                    <button id='enviar' type="submit" class="botaoenviar btn">Publicar</button>
+                                                </div>
+                                            </form>
+
+
+
+
+
+                                        </div>
                                     </div>
+
+                                {% for resposta in respostas %}
+                                    {% if respostas[resposta].idforum == posts[post].id %}
+                                        <div class = "media mt-3">
+                                            <div class="teste media">
+                                                <img class='rounded-circle' id='img-usu' src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{posts[post].imagem}}'>
+
+                                                <div class="formatopostagem">
+                                                    <div class = "p-2 flex-fill bd-highlight">
+                                                        <h5 id="data">{{posts[post]['nome']}} {{posts[post]['sobrenome']}} <small><i>Postou em {{posts[post]['data'].strftime("%d/%m/%Y")}}</i></small></h5>
+                                                        <p class = "textopostagem">{{posts[post]['conteudo']}}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+
+
                                 </div>
                             </div>
                         </div>
                     </div>
 
-
-
                         {% endif %}
                     {% endif %}
                 {% endfor %}
             </div>
+
         </div>
     </div>
 

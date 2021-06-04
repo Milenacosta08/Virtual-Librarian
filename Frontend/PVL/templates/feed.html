@@ -42,13 +42,11 @@
         <div class="col-md-8">
             <div class = "caixadosbotoes container-fluid">
                 <div class="media border p-4">
-                    {% if current_user.imagem %}
-                        <img class='img-fluid' id='imagem-usu' src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{current_user.imagem}}'>
-                    {% else %}
-                    <div class="fakeimg mr-2">Foto do {{current_user.nome}}</div>
-                    {% endif %}
+
+                    <a href="/perfil/{{current_user.id}}"><img class='img-fluid' id='imagem-usu' src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{current_user.imagem}}'></a>
+
                     <div class="media-body">
-                        <h5 id='nomeusu'>{{current_user.nome}} {{current_user.sobrenome}}</h5>
+                        <a href="/perfil/{{current_user.id}}"><h5 id='nomeusu'>{{current_user.nome}} {{current_user.sobrenome}}</h5></a>
                         <form action = '/feed-post' method='POST' enctype="multipart/form-data">
                             <div class = "formatopostagem">
                                 <textarea  name="comentario" cols="" rows="2" placeholder="Resenha..."></textarea>
@@ -68,11 +66,9 @@
             <!--USUARIO TESTE-->
             {% for post in postagem: %}
             <div class="teste media">
-                    {% if postagem[post].imagem %}
-                        <img class='rounded-circle' id='img-usu' src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{postagem[post].imagem}}'>
-                    {% else %}
-                    <div class="fakeimg mr-2">Foto do {{postagem[post]['nome']}}</div>
-                    {% endif %}
+
+                <a href="/perfil/{{postagem[post].idusuario}}"><img class='rounded-circle' id='img-usu' src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{postagem[post].imagem}}'></a>
+
                 <div class="media-body">
                     <h5>{{postagem[post]['nome']}} {{postagem[post]['sobrenome']}} <small><i>Postou em {{postagem[post]['data'].strftime("%d/%m/%Y")}}</i></small></h5>
                     {% if post.imagem %}
