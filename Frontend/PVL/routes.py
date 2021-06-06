@@ -199,7 +199,7 @@ def estante(user_id):
         return render_template("estante.html", livros = exemplar, livroid = livro_id)
 
 
-@app.route('/delete/<id_user>/<id>')
+@app.route('/delete/<id_user>/<id>',methods=['POST'])
 def deletarLivro(id_user, id):
     user = Usuario.query.get(id_user)
     livro = Livros.query.get(id)
@@ -266,12 +266,13 @@ def paglivros(id_usuario, id_livro):
     livro = Livros.query.filter_by(id=id_livro).first()
     usuario = Usuario.query.filter_by(id=id_usuario).first()
     forum = ForumLivro.query.filter_by(id_livro = id_livro).order_by(desc(ForumLivro.id)).all()
-    respostas = Resposta.query.all()
+    respostas = Resposta.query.filter_by(id_livro = id_livro).order_by(desc(Resposta.data)).all()
     posts = {}
-    respostas = {}
+    respostass = {}
 
     for resposta in respostas:
-        respostas[resposta] = {'texto' : resposta.texto, 'idforum' : resposta.id_forum}
+        usu = Usuario.query.get(resposta.id_usuario)
+        respostass[resposta] = {'texto' : resposta.texto, 'idforum' : resposta.id_forum, 'usuario' : usu, 'data' : resposta.data}
 
 
     for comentario in forum:
@@ -279,7 +280,7 @@ def paglivros(id_usuario, id_livro):
         posts[comentario] = {'nome': pessoa.nome, 'sobrenome': pessoa.sobrenome, 'conteudo': comentario.texto, 'id': comentario.id, 'data': comentario.data, 'idlivro': comentario.id_livro, 'imagem': pessoa.imagem, 'idusuario': pessoa.id}
 
 
-    return render_template('item1.html', livro = livro, usuario = usuario, posts = posts, respostas = respostas)
+    return render_template('item1.html', livro = livro, usuario = usuario, posts = posts, respostas = respostass)
 
 @app.route('/forum/cadastro/<id_usu>/<id_li>', methods=['POST'])
 def Forum(id_usu, id_li):
@@ -297,12 +298,35 @@ def Forum(id_usu, id_li):
 
     return redirect(f'/livros/{id_usu}/{id_li}')
 
+@app.route('/delete/forum/<idusu>/<idcomentario>/<idliv>', methods=['POST'])
+def deletarforum(idusu, idcomentario, idliv):
+
+    respostas = Resposta.query.filter(Resposta.id_forum == idcomentario).all()
+
+    for resposta in respostas:
+        db.session.delete(resposta)
+        db.session.commit()
+
+
+
+    ForumLivro.query.filter_by(id = idcomentario).delete()
+
+
+    db.session.commit()
+
+
+    return redirect(f'/livros/{idusu}/{idliv}')
+
+
+
 @app.route('/forum/cadastro/resposta/<id_usu>/<id_livro>/<usu_post>', methods=['POST'])
 def resposta(id_usu, id_livro, usu_post):
     resposta = request.form['resposta']
 
     if resposta != '':
         novo = Resposta()
+        novo.id_usuario = id_usu
+        novo.id_livro = id_livro
         novo.id_forum = usu_post
         novo.texto = resposta
 

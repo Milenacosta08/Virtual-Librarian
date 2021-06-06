@@ -211,3 +211,10 @@ button.botaoenviar {
     }
 
 }
+.material-icons{
+    margin-top:5px;
+}
+#responder {
+    height: 50px;
+    margin-top: 5px;
+}

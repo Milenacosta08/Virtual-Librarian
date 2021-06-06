@@ -25,6 +25,12 @@
         <div class="botao">
           <button type="button" class="btn btn-outline-success btn-sm">Desejo</button>
           <button type="button" class="btn btn-outline-info btn-sm">Tenho</button>
+          {% if current_user.id == livro.usuario_id: %}
+          <form action = '/delete/{{current_user.id}}/{{livro.id}}' method='POST'>
+                <p><button type="submit" class="delete btn btn-danger"><i class="material-icons">delete</i></button></p>
+          </form>
+          {% endif %}
+
         </div>
       </div>
     </div>
@@ -87,7 +93,14 @@
                                     <div class = "p-2 flex-fill bd-highlight">
                                         <h5 id="data">{{posts[post]['nome']}} {{posts[post]['sobrenome']}} <small><i>Postou em {{posts[post]['data'].strftime("%d/%m/%Y")}}</i></small></h5>
                                         <p class = "textopostagem">{{posts[post]['conteudo']}}</p>
-                                        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#formResposta{{posts[post].id}}">Responder</button>
+                                        <div class = 'row'>
+                                            <button id = 'responder' class="btn btn-primary" type="button" data-toggle="collapse" data-target="#formResposta{{posts[post].id}}">Responder</button>
+                                            {% if current_user.id == posts[post].idusuario %}
+                                                <form action = '/delete/forum/{{current_user.id}}/{{posts[post].id}}/{{posts[post].idlivro}}' method='POST'>
+                                                    <p><button type="submit" class="delete btn btn-danger"><i class="material-icons">delete</i></button></p>
+                                                </form>
+                                            {% endif %}
+                                        </div>
                                         <div id="formResposta{{posts[post].id}}" class="collapse">
 
 
@@ -108,22 +121,29 @@
                                         </div>
                                     </div>
 
-                                {% for resposta in respostas %}
-                                    {% if respostas[resposta].idforum == posts[post].id %}
-                                        <div class = "media mt-3">
-                                            <div class="teste media">
-                                                <img class='rounded-circle' id='img-usu' src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{posts[post].imagem}}'>
 
-                                                <div class="formatopostagem">
-                                                    <div class = "p-2 flex-fill bd-highlight">
-                                                        <h5 id="data">{{posts[post]['nome']}} {{posts[post]['sobrenome']}} <small><i>Postou em {{posts[post]['data'].strftime("%d/%m/%Y")}}</i></small></h5>
-                                                        <p class = "textopostagem">{{posts[post]['conteudo']}}</p>
+                                    {% for resposta in respostas %}
+                                        {% if respostas[resposta].idforum == posts[post].id %}
+                                            {% if posts[post].id %}
+
+                                                <div class = "media mt-3">
+
+
+
+                                                    <div class="teste media">
+                                                        <img class='rounded-circle' id='img-usu' src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{respostas[resposta].usuario.imagem}}'>
+
+                                                        <div class="formatopostagem">
+                                                            <div class = "p-2 flex-fill bd-highlight">
+                                                                <h5 id="data">{{respostas[resposta].usuario.nome}} {{respostas[resposta].usuario.sobrenome}} <small><i>Postou em {{respostas[resposta]['data'].strftime("%d/%m/%Y")}}</i></small></h5>
+                                                                <p class = "textopostagem">{{respostas[resposta].texto}}</p>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    {% endif %}
-                                {% endfor %}
+                                            {% endif %}
+                                        {% endif %}
+                                    {% endfor %}
 
 
                                 </div>

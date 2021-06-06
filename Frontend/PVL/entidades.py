@@ -55,6 +55,8 @@ class Genero(db.Model):
 class Resposta(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     id_forum = db.Column(db.Integer, db.ForeignKey(ForumLivro.id), nullable = False)
+    id_usuario = db.Column(db.Integer, db.ForeignKey(Usuario.id), nullable = False)
+    id_livro = db.Column(db.Integer, db.ForeignKey(Livros.id), nullable = False)
     texto = db.Column(db.String(250), nullable = False)
     data = db.Column(db.DateTime, default=datetime.now(tz=timezone(-timedelta(hours=3))))
 

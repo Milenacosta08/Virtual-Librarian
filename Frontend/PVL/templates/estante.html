@@ -31,9 +31,10 @@
                     <p class = 'card-text'>{{livros[livro].titulo}}</p>
                     <p class = 'card-text'>{{livros[livro].autor}}</p>
                     {% if not usuario %}
-                        <a href="/delete/{{current_user.id}}/{{livros[livro].idlivro}}">
-                            <button type="button" class="delete btn btn-danger"><i class="material-icons">delete</i></button>
-                        </a>
+
+                        <form action = '/delete/{{current_user.id}}/{{livros[livro].idlivro}}' method='POST'>
+                            <button type="submit" class="delete btn btn-danger"><i class="material-icons">delete</i></button>
+                        </form>
                     {% endif %}
                 </div>
             </div>
