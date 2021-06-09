@@ -26,7 +26,7 @@
           <button type="button" class="btn btn-outline-success btn-sm">Desejo</button>
           <button type="button" class="btn btn-outline-info btn-sm">Tenho</button>
           {% if current_user.id == livro.usuario_id: %}
-          <form action = '/delete/{{current_user.id}}/{{livro.id}}' method='POST'>
+          <form action = '/delete/{{livro.id}}'>
                 <p><button type="submit" class="delete btn btn-danger"><i class="material-icons">delete</i></button></p>
           </form>
           {% endif %}
@@ -44,7 +44,11 @@
           <div class="media">
             <img class= 'img-fluid' id='imagem-usu' src= https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{usuario.imagem}}>
             <div class="media-body">
-              <h5><a href="/perfil/{{livro.usuario_id}}">{{usuario.nome}} {{usuario.sobrenome}}</a></h5>
+              <form action="/perfil/{{livro.usuario_id}}/{{current_user.id}}" method="POST">
+                <input type="hidden" name="var" value="1" />
+                <button class="tim"><h5>{{usuario.nome}} {{usuario.sobrenome}}</h5></button>
+              </form>
+
               <p><small id="reput">Confiável/duvidosa</small></p>
               <button type="button" id = "botaochat" class="mensagem btn btn-warning btn-sm"><a href="#"class="material-icons">message</a></button>
             </div>
@@ -53,7 +57,7 @@
     <!--COLUNA PRINCIPAL-->
         <div class="col-md-8">
           <h2 id="detalhes">Detalhes</h2>
-          <b>Status do livro:</b> Disponível para troca.
+          <b>Status do livro:</b> {{livro.status}}.
           <p><b>Condições do livro:</b> Apresenta poucas marcas de uso, com todas as páginas sem danos ou rasgos. Além disso, o livro possui um estado de conservação bem elevado, já que obteve somente um dono.</p>
           <div class="fakeimg"><i>Foto dos danos</i></div>
         </div>
@@ -95,6 +99,7 @@
                                         <p class = "textopostagem">{{posts[post]['conteudo']}}</p>
                                         <div class = 'row'>
                                             <button id = 'responder' class="btn btn-primary" type="button" data-toggle="collapse" data-target="#formResposta{{posts[post].id}}">Responder</button>
+                                            <button id = 'responder' class="btn btn-primary" type="button" data-toggle="collapse" data-target="#formRespostas{{posts[post].id}}">Respostas</button>
                                             {% if current_user.id == posts[post].idusuario %}
                                                 <form action = '/delete/forum/{{current_user.id}}/{{posts[post].id}}/{{posts[post].idlivro}}' method='POST'>
                                                     <p><button type="submit" class="delete btn btn-danger"><i class="material-icons">delete</i></button></p>
@@ -121,7 +126,7 @@
                                         </div>
                                     </div>
 
-
+                                <div id = "formRespostas{{posts[post].id}}" class="collapse">
                                     {% for resposta in respostas %}
                                         {% if respostas[resposta].idforum == posts[post].id %}
                                             {% if posts[post].id %}
@@ -144,7 +149,7 @@
                                             {% endif %}
                                         {% endif %}
                                     {% endfor %}
-
+                                </div>
 
                                 </div>
                             </div>

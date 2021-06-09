@@ -230,3 +230,9 @@ a:active {
     max-width: 50%;
     margin-bottom: 2%;
 }
+
+.remover{
+    font-size: 24px;
+    height: 30px;
+    color: red;
+}

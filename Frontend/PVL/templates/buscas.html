@@ -20,9 +20,11 @@
                 <div class='media'>
                 {% for nome in nomes %}
                     <div class="media border p-4">
-                        <img class='perfil img-fluid align-self-center' src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{nome.imagem}}'>
+                        <a href="/perfil/{{nome.id}}"><img class='perfil img-fluid align-self-center' src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{nome.imagem}}'></a>
                         <div class="media-body">
-                            <a class = "linksite" href="/perfil/{{nome.id}}">{{nome.nome_completo}}</a>
+
+                            <a href="/perfil/{{nome.id}}">{{nome.nome_completo}}</a>
+
                             <p><small>reputação</small></p>
                         </div>
                     </div>
@@ -30,9 +32,11 @@
                 {% endfor %}
                 {% for sobrenome in sobrenomes %}
                     <div class="media border p-4">
-                        <img class='perfil img-fluid align-self-center' src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{sobrenome.imagem}}'>
+                        <a href="/perfil/{{sobrenome.id}}"><img class='perfil img-fluid align-self-center' src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{sobrenome.imagem}}'></a>
                         <div class="media-body">
-                            <a class = "linksite" href="/perfil/{{sobrenome.id}}">{{sobrenome.nome_completo}}</a>
+
+                            <a href="/perfil/{{sobrenome.id}}">{{sobrenome.nome_completo}}</a>
+
                             <p><small>reputação</small></p>
                         </div>
                     </div>
@@ -40,9 +44,11 @@
                 {% endfor %}
                 {% for nomecom in nomecomp %}
                     <div class="media border p-4">
-                        <a class = "linksite" href='/perfil/{{nomecom.id}}'><img class='perfil img-fluid align-self-center' src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{nomecom.imagem}}'></a>
+                        <a href="/perfil/{{nomecom.id}}"><img class='perfil img-fluid align-self-center' src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{nomecom.imagem}}'></a>
                         <div class="media-body">
-                            <a class = "linksite" href="/perfil/{{nomecom.id}}">{{nomecom.nome_completo}}</a>
+
+                            <a href="/perfil/{{nomecom.id}}">{{nomecom.nome_completo}}</a>
+
                             <p><small>reputação</small></p>
                         </div>
                     </div>
@@ -50,7 +56,7 @@
                 {% endfor %}
                 {% for livro in livros %}
                     <div class="media border p-4">
-                        <a class = "linksite" href='/livros/{{livro.usuario_id}}/{{livro.id}}'><img class='perfil img-fluid align-self-center' src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{livro.imagem}}'></a>
+                        <img class='perfil img-fluid align-self-center' src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{livro.imagem}}'>
                         <div class="media-body">
                             <a class = "linksite" href="/livros/{{livro.usuario_id}}/{{livro.id}}">{{livro.titulo}} ({{livro.autor}})</a>
                             {% for genero in livro.genero %}

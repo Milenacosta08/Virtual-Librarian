@@ -36,7 +36,20 @@
                     <p class="reput"> <small> Reputação:  (Confiável/Duvidosa) </small></p>
                 </div>
                 <div class="d-flex justify-content-start">
-                    <a href="#" class="amigos btn btn-info btn-sm" role="button">Adicionar amigos</a>
+
+                    {% if existe == 0 %}
+                        <a class = "amigos btn btn-info btn-sm" href="/adicionar/{{usuario.id}}">
+                            Adicionar amigo
+                        </a>
+
+                    {% else %}
+                         <form action = "/adicionar/{{current_user.id}}/{{usuario.id}}">
+                            <button class = "amigos btn btn-info btn-sm" type="submit">Remover amigo</button>
+                        </form>
+
+                    {% endif %}
+
+
                 </div>
         {% else %}
         {% if current_user.imagem %}
@@ -165,7 +178,15 @@
                         </div>
                     </div>
                 </div>
+
+                <form action = '/delete/{{current_user.id}}' method='POST'>
+                    <div class="d-flex justify-content-end">
+                        <button class="remover"><i class="material-icons">close</i></button>
+                    </div>
+                </form>
+
         {% endif %}
+
             </div>
         </div>
 

@@ -1,7 +1,7 @@
 from flask import current_app as app, render_template, request, redirect, url_for, session
-from PVL.entidades import Usuario, Livros, Postagem, Genero, categorizados, ForumLivro, Resposta
+from PVL.entidades import Usuario, Livros, Postagem, Genero, categorizados, ForumLivro, Resposta, Amigo
 from PVL import db, login_manager
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required, current_user
 from sqlalchemy import desc
 import os
 from werkzeug.utils import secure_filename
@@ -55,7 +55,7 @@ def feed_post():
             imgs = os.listdir(app.config['UPLOAD_FOLDER'])
             filename = f'{len(imgs)+1:08}.{filename.rsplit(".", 1)[1].lower()}'
 
-            file.save(app.config['UPLOAD_FOLDER']+'/'+filename) # era aqui o problema. Tava "app.config['UPLOAD_FOLDER'], filename" aí ele tentava salvar na pasta PVL com o nome de uploads e dizia que uploads já é um diretório.
+            file.save(app.config['UPLOAD_FOLDER']+'/'+filename)
             postagem.imagem = filename
 
     if postagem.conteudo is not None:
@@ -64,8 +64,8 @@ def feed_post():
 
     return redirect('/feed')
 
-@app.route('/<idusuario>/<idpostagem>')
-def curtir(idusuario, idpostagem):
+@app.route('/curtir/<idpostagem>')
+def curtir(idpostagem):
 
     postagem = Postagem.query.filter_by(id = idpostagem).first()
 
@@ -74,7 +74,7 @@ def curtir(idusuario, idpostagem):
 
     return redirect('/feed')
 
-@app.route('/<idpostagem>')
+@app.route('/descurtir/<idpostagem>')
 def descurtir(idpostagem):
 
     postagem = Postagem.query.filter_by(id = idpostagem).first()
@@ -166,15 +166,45 @@ def perfil():
 
 @app.route('/perfil/<id_usuario>')
 def perfil_usu(id_usuario):
+    amigo = Amigo.query.filter(Amigo.id_usuario == current_user.id).filter(Amigo.id_amigo == id_usuario).all()
+    existe = 1
+
+    if amigo == []:
+        existe = 0
+
+
     usu = Usuario.query.filter_by(id=id_usuario).first()
     post = Postagem.query.filter_by(usuario_id=id_usuario).order_by(desc(Postagem.id)).all()
 
-    return render_template("perfil.html", usuario = usu, postagens=post)
+    return render_template("perfil.html", usuario = usu, postagens=post, existe = existe)
 
 
-@app.route('/pequeno-principe')
-def item2():
-    return render_template("item2.html")
+@app.route('/delete/<id_user>',methods=['POST'])
+def deletarUsuario(id_user):
+    user = Usuario.query.get(id_user)
+
+    # for postagem in user.postagens:
+    #   db.session.delete(postagem)
+
+    db.session.delete(user)
+    db.session.commit()
+
+    return redirect('/')
+
+
+@app.route('/adicionar/<idamigo>')
+def amigo(idamigo):
+    amigo = Amigo.query.filter(Amigo.id_amigo == idamigo).filter(Amigo.id_usuario == current_user.id).all()
+
+    if current_user.id != idamigo:
+        if amigo == []:
+            novo = Amigo()
+            novo.id_usuario = current_user.id
+            novo.id_amigo = idamigo
+            db.session.add(novo)
+            db.session.commit()
+
+    return redirect(f"/perfil/{idamigo}")
 
 
 @app.route('/estante/<user_id>')
@@ -199,34 +229,39 @@ def estante(user_id):
         return render_template("estante.html", livros = exemplar, livroid = livro_id)
 
 
-@app.route('/delete/<id_user>/<id>',methods=['POST'])
-def deletarLivro(id_user, id):
-    user = Usuario.query.get(id_user)
+@app.route('/delete/<id>')
+@login_required
+def deletarLivro(id):
+    user = Usuario.query.get(current_user.id)
     livro = Livros.query.get(id)
 
-    livro.generos.clear()
-    db.session.commit()
+    if livro.usuario_id == current_user.id:
+        livro.generos.clear()
+        db.session.commit()
 
-    db.session.delete(livro)
-    db.session.commit()
+        db.session.delete(livro)
+        db.session.commit()
 
     return redirect(f'/estante/{user.id}')
 
 
-@app.route('/livro-cadastrado/<id>', methods=['POST'])
-def livro_cadastrado(id):
+@app.route('/livro-cadastrado', methods=['POST'])
+@login_required
+def livro_cadastrado():
     titulo = request.form["titulo"]
     autor = request.form["autor"]
     genero = request.form.getlist('genero')
     resumo = request.form["resumo"]
+    status = request.form["status"]
 
-    usu = Usuario.query.get(id)
+    usu = Usuario.query.get(current_user.id)
 
     livro = Livros()
     livro.titulo = titulo
     livro.autor = autor
     livro.resumo = resumo
     livro.usuario_id = usu.id
+    livro.status = status
 
     # percorre a lista "genero" que contém os gêneros selecionados pelo usuário
     for g in genero:
@@ -261,10 +296,10 @@ def livro_cadastrado(id):
 
 #return render_template("estante.html", livros = livros[:8], titulo = titulo)
 
-@app.route('/livros/<id_usuario>/<id_livro>')
-def paglivros(id_usuario, id_livro):
+@app.route('/livros/<id_livro>')
+def paglivros(id_livro):
     livro = Livros.query.filter_by(id=id_livro).first()
-    usuario = Usuario.query.filter_by(id=id_usuario).first()
+    usuario = Usuario.query.filter_by(id=current_user.id).first()
     forum = ForumLivro.query.filter_by(id_livro = id_livro).order_by(desc(ForumLivro.id)).all()
     respostas = Resposta.query.filter_by(id_livro = id_livro).order_by(desc(Resposta.data)).all()
     posts = {}
@@ -307,13 +342,9 @@ def deletarforum(idusu, idcomentario, idliv):
         db.session.delete(resposta)
         db.session.commit()
 
-
-
     ForumLivro.query.filter_by(id = idcomentario).delete()
 
-
     db.session.commit()
-
 
     return redirect(f'/livros/{idusu}/{idliv}')
 
@@ -352,8 +383,15 @@ def buscas():
 
 
 @app.route('/amigos/<id>')
-def amigo(id):
-    return render_template('amigos.html')
+def amigos(id):
+    amigos = Amigo.query.filter(Amigo.id_usuario == id).all()
+    amigoss = []
+
+    for amigo in amigos:
+        usu = Usuario.query.get(amigo.id_amigo)
+        amigoss.append({'usuario' : usu})
+
+    return render_template('amigos.html', amigos = amigoss)
 
 @app.route("/logout/")
 @login_required

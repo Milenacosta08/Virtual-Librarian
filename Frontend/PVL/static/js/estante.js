@@ -13,3 +13,14 @@ fileChooser.onchange = e => {
     reader.onload = e => previewImg.src = e.target.result;
     reader.readAsDataURL(fileToUpload);
 };
+
+
+var select = document.getElementById("status");
+var valor = select.options[select.selectedIndex].value;
+
+if(valor != 'Venda'){
+    document.getElementById('preco').classList.add('hidden')
+
+}
+
+

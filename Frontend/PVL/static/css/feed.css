@@ -299,3 +299,9 @@ div.foto{
 #nomeusu {
     margin-left: 10px;
 }
+.tim {
+    border: 0;
+    padding: 0;
+    display: inline;
+    background: none;
+}

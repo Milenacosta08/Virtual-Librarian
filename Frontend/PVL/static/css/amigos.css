@@ -88,7 +88,7 @@ a:active {
     flex-direction: row;
 }
 .card {
-    width: 18rem;
+    min-width: 18rem;
 }
 .card-body {
     text-align: center;
@@ -102,4 +102,9 @@ a:active {
 }
 .card-img-top {
     height: auto;
+}
+.img-fluid {
+    max-width: 100%;
+    width: 200px;
+    height: 150px;
 }

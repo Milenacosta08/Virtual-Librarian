@@ -63,6 +63,6 @@ class Resposta(db.Model):
 class Amigo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     id_usuario = db.Column(db.Integer, db.ForeignKey(Usuario.id), nullable = False)
-    nome = db.Column(db.String(50), nullable=False)
-    sobrenome = db.Column(db.String(50), nullable=False)
+    id_amigo = db.Column(db.Integer, nullable = False)
+
 

@@ -14,6 +14,7 @@ def create_app():
     app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqldb://VirtualLibrarian:156156156Oi@VirtualLibrarian.mysql.pythonanywhere-services.com/VirtualLibrarian$site'
     #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///VirtualLibrarian.db'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config['SQLALCHEMY_POOL_TIMEOUT'] = 280
     app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
     app.secret_key = '123456'
 

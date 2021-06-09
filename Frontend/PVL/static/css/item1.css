@@ -217,4 +217,11 @@ button.botaoenviar {
 #responder {
     height: 50px;
     margin-top: 5px;
+    margin-right: 10px;
+}
+.tim {
+    border: 0;
+    padding: 0;
+    display: inline;
+    background: none;
 }

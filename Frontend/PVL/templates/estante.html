@@ -21,7 +21,7 @@
         {% for livro in livros: %}
         <div class="col-xs">
             <div class = 'card'>
-                <a href='/livros/{{current_user.id}}/{{livros[livro].idlivro}}'}}>
+                <a href='/livros/{{livros[livro].idlivro}}'}}>
                     <img class="card-img-top" id="imagemcard">
                     {% if livro.imagem %}
                         <img class="img-fluid" src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{livro.imagem}}'>
@@ -32,9 +32,10 @@
                     <p class = 'card-text'>{{livros[livro].autor}}</p>
                     {% if not usuario %}
 
-                        <form action = '/delete/{{current_user.id}}/{{livros[livro].idlivro}}' method='POST'>
-                            <button type="submit" class="delete btn btn-danger"><i class="material-icons">delete</i></button>
-                        </form>
+                        <a href = "/delete/{{livros[livro].idlivro}}">
+                            <button class="delete btn btn-danger"><i class="material-icons">delete</i></button>
+                        </a>
+
                     {% endif %}
                 </div>
             </div>
@@ -48,7 +49,7 @@
             <i class="material-icons">add</i>
         </button>
 
-      <!-- The Modal -->
+          <!-- The Modal -->
         <div class="modal fade" id="myModal">
             <div class="modal-dialog modal-dialog-centered modal-lg">
                 <div class="modal-content">
@@ -59,7 +60,7 @@
                     </div>
 
                     <!-- Modal body -->
-                    <form action = '/livro-cadastrado/{{current_user.id}}' method='POST' enctype="multipart/form-data">
+                    <form action = '/livro-cadastrado' method='POST' enctype="multipart/form-data">
                         <div class="modal-body">
 
                             <!-- INÍCIO DAS COLUNAS -->
@@ -83,6 +84,23 @@
 
                                 <!-- COLUNA 2 -->
                                 <div class="col md-5 ml-auto">
+                                    <div class="form-group">
+                                        <select class="form-control" name="status" id="status">
+                                            <option selected>Selecione o status do livro</option>
+                                            <option value="Exibição">Exibição</option>
+                                            <option value="Troca">Troca</option>
+                                            <option value="Venda">Venda</option>
+                                            <option value="Troca e Venda">Troca e venda</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="input-group" id="preco">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">R$</span>
+                                        </div>
+                                        <input type="number" class="form-control">
+                                    </div>
+
                                     <label for="titulo">Titulo</label>
                                     <input type="text" name = "titulo" class="form-control"id="titulo_livro">
                                     <label for="autor">Autor</label>
