@@ -26,6 +26,7 @@ class Livros(db.Model):
     autor = db.Column(db.String(100), nullable=False)
     imagem = db.Column(db.String(100), default= '')
     status = db.Column(db.String(100), nullable=True)
+    preco = db.Column(db.Float, default = 0.0)
     condicao = db.Column(db.String(150), nullable=True)
     resumo = db.Column(db.String(500), nullable=False)
     usuario_id = db.Column(db.Integer, db.ForeignKey("usuario.id"), nullable = False)

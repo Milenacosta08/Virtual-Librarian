@@ -16,6 +16,7 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config['SQLALCHEMY_POOL_TIMEOUT'] = 280
     app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+    app.config['DEBUG'] = True
     app.secret_key = '123456'
 
     db.init_app(app)

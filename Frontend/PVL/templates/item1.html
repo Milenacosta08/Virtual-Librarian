@@ -58,6 +58,9 @@
         <div class="col-md-8">
           <h2 id="detalhes">Detalhes</h2>
           <b>Status do livro:</b> {{livro.status}}.
+          {% if livro.preco != 0.0 %}
+            <p><b>Preço: </b>R$ {{livro.preco}}</p>
+          {% endif %}
           <p><b>Condições do livro:</b> Apresenta poucas marcas de uso, com todas as páginas sem danos ou rasgos. Além disso, o livro possui um estado de conservação bem elevado, já que obteve somente um dono.</p>
           <div class="fakeimg"><i>Foto dos danos</i></div>
         </div>
@@ -73,7 +76,7 @@
                     <img class= 'img-fluid' id='imagem-usu' src= https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{current_user.imagem}}>
                     <div class="media-body">
                         <h5>{{current_user.nome}} {{current_user.sobrenome}}</h5>
-                        <form action = '/forum/cadastro/{{current_user.id}}/{{livro.id}}' method='POST'>
+                        <form action = '/forum/cadastro/{{livro.id}}' method='POST'>
                             <div class = "formatopostagem">
                                 <textarea  name="comentario" cols="" rows="2" placeholder="Dúvida..."></textarea>
                                 <button id='enviar' type="submit" class="botaoenviar btn">Publicar</button>
@@ -101,7 +104,7 @@
                                             <button id = 'responder' class="btn btn-primary" type="button" data-toggle="collapse" data-target="#formResposta{{posts[post].id}}">Responder</button>
                                             <button id = 'responder' class="btn btn-primary" type="button" data-toggle="collapse" data-target="#formRespostas{{posts[post].id}}">Respostas</button>
                                             {% if current_user.id == posts[post].idusuario %}
-                                                <form action = '/delete/forum/{{current_user.id}}/{{posts[post].id}}/{{posts[post].idlivro}}' method='POST'>
+                                                <form action = '/delete/forum/{{posts[post].id}}/{{posts[post].idlivro}}' method='POST'>
                                                     <p><button type="submit" class="delete btn btn-danger"><i class="material-icons">delete</i></button></p>
                                                 </form>
                                             {% endif %}
@@ -112,7 +115,7 @@
 
 
 
-                                            <form action = '/forum/cadastro/resposta/{{current_user.id}}/{{posts[post].idlivro}}/{{posts[post].id}}' method='POST'>
+                                            <form action = '/forum/cadastro/resposta/{{posts[post].idlivro}}/{{posts[post].id}}' method='POST'>
                                                 <div class = "formatopostagem">
                                                     <textarea  name="resposta" cols="" rows="2" placeholder="Dúvida..."></textarea>
                                                     <button id='enviar' type="submit" class="botaoenviar btn">Publicar</button>

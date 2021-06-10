@@ -15,12 +15,17 @@ fileChooser.onchange = e => {
 };
 
 
-var select = document.getElementById("status");
-var valor = select.options[select.selectedIndex].value;
+// EXIBIR CAMPO "PRECO" NO FORMULÁRIO DE CADASTRO DE LIVROS
+function showPreco(valor){
+    const preco = document.getElementById('preco');
 
-if(valor != 'Venda'){
-    document.getElementById('preco').classList.add('hidden')
-
+	if(valor == "Venda"){
+		preco.removeAttribute("hidden");
+	}
+    else if(valor == "Troca e Venda"){
+  	    preco.removeAttribute("hidden");
+    }
+    else{
+        preco.setAttribute("hidden", true);
+    }
 }
-
-

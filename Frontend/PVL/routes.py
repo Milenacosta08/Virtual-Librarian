@@ -24,6 +24,7 @@ def home():
 
 
 @app.route('/feed')
+@login_required
 def feed():
 
     posts = {}
@@ -38,6 +39,7 @@ def feed():
 
 
 @app.route('/feed-post', methods=['POST'])
+@login_required
 def feed_post():
     comentario = request.form['comentario']
     usu = Usuario.query.filter_by(email=session['user_email']).first()
@@ -65,6 +67,7 @@ def feed_post():
     return redirect('/feed')
 
 @app.route('/curtir/<idpostagem>')
+@login_required
 def curtir(idpostagem):
 
     postagem = Postagem.query.filter_by(id = idpostagem).first()
@@ -75,6 +78,7 @@ def curtir(idpostagem):
     return redirect('/feed')
 
 @app.route('/descurtir/<idpostagem>')
+@login_required
 def descurtir(idpostagem):
 
     postagem = Postagem.query.filter_by(id = idpostagem).first()
@@ -124,11 +128,6 @@ def perfil_log():
         return render_template('cadastro.html', erro = erro)
 
 
-@app.route('/dom-quixote')
-def item1():
-    return render_template("item1.html")
-
-
 @app.route('/login')
 def login():
     return render_template("login.html")
@@ -158,6 +157,7 @@ def feed_log():
 
 
 @app.route('/perfil')
+@login_required
 def perfil():
     post = Postagem.query.filter_by(usuario_id=session['user_id']).order_by(desc(Postagem.id)).all()
 
@@ -165,6 +165,7 @@ def perfil():
 
 
 @app.route('/perfil/<id_usuario>')
+@login_required
 def perfil_usu(id_usuario):
     amigo = Amigo.query.filter(Amigo.id_usuario == current_user.id).filter(Amigo.id_amigo == id_usuario).all()
     existe = 1
@@ -179,20 +180,37 @@ def perfil_usu(id_usuario):
     return render_template("perfil.html", usuario = usu, postagens=post, existe = existe)
 
 
-@app.route('/delete/<id_user>',methods=['POST'])
-def deletarUsuario(id_user):
-    user = Usuario.query.get(id_user)
+@app.route('/delete')
+@login_required
+def deletarUsuario():
+    user = Usuario.query.get(current_user.id)
 
-    # for postagem in user.postagens:
-    #   db.session.delete(postagem)
+    for postagem in user.postagens:
+        db.session.delete(postagem)
+        db.session.commit()
+
+    for livro in user.livros:
+        livro.generos.clear()
+        db.session.commit()
+
+        db.session.delete(livro)
+        db.session.commit()
+
+
+    for amigo in user.amigos:
+        db.session.delete(amigo)
+        db.session.commit()
+
+
 
     db.session.delete(user)
     db.session.commit()
 
-    return redirect('/')
+    return redirect('/login')
 
 
 @app.route('/adicionar/<idamigo>')
+@login_required
 def amigo(idamigo):
     amigo = Amigo.query.filter(Amigo.id_amigo == idamigo).filter(Amigo.id_usuario == current_user.id).all()
 
@@ -206,10 +224,21 @@ def amigo(idamigo):
 
     return redirect(f"/perfil/{idamigo}")
 
+@app.route('/remover/<idamigo>')
+@login_required
+def removeramigo(idamigo):
+    amigo = Amigo.query.filter(Amigo.id_amigo == idamigo).filter(Amigo.id_usuario == current_user.id).all()
 
-@app.route('/estante/<user_id>')
-def estante(user_id):
-    livros = Livros.query.filter_by(usuario_id = user_id).all()
+    db.session.delete(amigo)
+    db.session.commit()
+
+    return redirect(f"/perfil{idamigo}")
+
+
+@app.route('/estante')
+@login_required
+def estante():
+    livros = Livros.query.filter_by(usuario_id = current_user.id).all()
 
     exemplar = {}
     livro_id = {}
@@ -219,7 +248,7 @@ def estante(user_id):
         exemplar[livro] = {'titulo': livro.titulo, 'autor': livro.autor, 'genero': livro.generos, 'idlivro': livro.id, 'capa':livro.imagem}
         livro_id[livro] = livro.id
 
-    usu = Usuario.query.get(user_id)
+    usu = Usuario.query.get(current_user.id)
 
     if usu.id != session['user_id']:
         id_user = usu.id
@@ -242,7 +271,7 @@ def deletarLivro(id):
         db.session.delete(livro)
         db.session.commit()
 
-    return redirect(f'/estante/{user.id}')
+    return redirect(f'/estante')
 
 
 @app.route('/livro-cadastrado', methods=['POST'])
@@ -253,6 +282,7 @@ def livro_cadastrado():
     genero = request.form.getlist('genero')
     resumo = request.form["resumo"]
     status = request.form["status"]
+    preco = request.form["preco"]
 
     usu = Usuario.query.get(current_user.id)
 
@@ -262,6 +292,7 @@ def livro_cadastrado():
     livro.resumo = resumo
     livro.usuario_id = usu.id
     livro.status = status
+    livro.preco = preco
 
     # percorre a lista "genero" que contém os gêneros selecionados pelo usuário
     for g in genero:
@@ -292,11 +323,12 @@ def livro_cadastrado():
         db.session.add(livro)
         db.session.commit()
 
-    return redirect(f'/estante/{usu.id}')
+    return redirect(f'/estante')
 
 #return render_template("estante.html", livros = livros[:8], titulo = titulo)
 
 @app.route('/livros/<id_livro>')
+@login_required
 def paglivros(id_livro):
     livro = Livros.query.filter_by(id=id_livro).first()
     usuario = Usuario.query.filter_by(id=current_user.id).first()
@@ -317,24 +349,26 @@ def paglivros(id_livro):
 
     return render_template('item1.html', livro = livro, usuario = usuario, posts = posts, respostas = respostass)
 
-@app.route('/forum/cadastro/<id_usu>/<id_li>', methods=['POST'])
-def Forum(id_usu, id_li):
+@app.route('/forum/cadastro/<id_li>', methods=['POST'])
+@login_required
+def Forum(id_li):
     comentario = request.form['comentario']
-    livro = Livros.query.filter_by(usuario_id = id_usu).first()
+    livro = Livros.query.filter_by(usuario_id = current_user.id).first()
 
     if comentario != '':
         novo = ForumLivro()
-        novo.usuario_id = id_usu
+        novo.usuario_id = current_user.id
         novo.id_livro = id_li
         novo.texto = comentario
 
         db.session.add(novo)
         db.session.commit()
 
-    return redirect(f'/livros/{id_usu}/{id_li}')
+    return redirect(f'/livros/{id_li}')
 
-@app.route('/delete/forum/<idusu>/<idcomentario>/<idliv>', methods=['POST'])
-def deletarforum(idusu, idcomentario, idliv):
+@app.route('/delete/forum/<idcomentario>/<idliv>', methods=['POST'])
+@login_required
+def deletarforum(idcomentario, idliv):
 
     respostas = Resposta.query.filter(Resposta.id_forum == idcomentario).all()
 
@@ -346,17 +380,18 @@ def deletarforum(idusu, idcomentario, idliv):
 
     db.session.commit()
 
-    return redirect(f'/livros/{idusu}/{idliv}')
+    return redirect(f'/livros/{idliv}')
 
 
 
-@app.route('/forum/cadastro/resposta/<id_usu>/<id_livro>/<usu_post>', methods=['POST'])
-def resposta(id_usu, id_livro, usu_post):
+@app.route('/forum/cadastro/resposta/<id_livro>/<usu_post>', methods=['POST'])
+@login_required
+def resposta(id_livro, usu_post):
     resposta = request.form['resposta']
 
     if resposta != '':
         novo = Resposta()
-        novo.id_usuario = id_usu
+        novo.id_usuario = current_user.id
         novo.id_livro = id_livro
         novo.id_forum = usu_post
         novo.texto = resposta
@@ -364,10 +399,11 @@ def resposta(id_usu, id_livro, usu_post):
         db.session.add(novo)
         db.session.commit()
 
-    return redirect(f'/livros/{id_usu}/{id_livro}')
+    return redirect(f'/livros/{id_livro}')
 
 
 @app.route('/buscas')
+@login_required
 def buscas():
     existe = 0
     busca = request.args.get('pesquisass')
@@ -382,14 +418,16 @@ def buscas():
     return render_template('buscas.html', busca = busca, nomes = nomes, sobrenomes = sobrenomes, livros = livros, nomecomp = nomecomp, existe = existe)
 
 
-@app.route('/amigos/<id>')
-def amigos(id):
-    amigos = Amigo.query.filter(Amigo.id_usuario == id).all()
+@app.route('/amigos')
+@login_required
+def amigos():
+    amigos = Amigo.query.filter(Amigo.id_usuario == current_user.id).all()
     amigoss = []
 
     for amigo in amigos:
-        usu = Usuario.query.get(amigo.id_amigo)
-        amigoss.append({'usuario' : usu})
+        if amigo != []:
+            usu = Usuario.query.get(amigo.id_amigo)
+            amigoss.append({'usuario' : usu})
 
     return render_template('amigos.html', amigos = amigoss)
 
@@ -400,15 +438,16 @@ def logout():
     logout_user()
     return redirect(url_for('home'))
 
-@app.route('/atualiza/<int:id>', methods=['POST'])
-def atualiza(id):
+@app.route('/atualiza', methods=['POST'])
+@login_required
+def atualiza():
     novo_nome = request.form['nome_novo']
     novo_sobrenome = request.form['sobrenome_novo']
     novo_email = request.form['email_novo']
     nova_senha = request.form['senha_nova']
     senha_inserida = request.form['senha_atual']
 
-    quem = Usuario.query.get(id)
+    quem = Usuario.query.get(current_user.id)
 
     if(quem.senha==senha_inserida):
 
@@ -437,12 +476,13 @@ def atualiza(id):
         erro = 'Alterações não concluídas pois a senha inserida é inválida!'
         return render_template('perfil.html', erro=erro)
 
-@app.route('/atualizardg/<int:id>', methods=['POST'])
-def atualizardg(id):
+@app.route('/atualizardg', methods=['POST'])
+@login_required
+def atualizardg():
     biografia = request.form['biografia']
     file = request.files['imagemsel']
 
-    usuario = Usuario.query.get(id)
+    usuario = Usuario.query.get(current_user.id)
     if biografia != '':
         usuario.biografia = biografia
 

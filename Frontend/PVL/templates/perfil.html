@@ -43,9 +43,11 @@
                         </a>
 
                     {% else %}
-                         <form action = "/adicionar/{{current_user.id}}/{{usuario.id}}">
-                            <button class = "amigos btn btn-info btn-sm" type="submit">Remover amigo</button>
-                        </form>
+
+                        <a class = "amigos btn btn-info btn-sm" href="/remover/{{usuario.id}}">
+                            Remover amigo
+                        </a>
+
 
                     {% endif %}
 
@@ -88,7 +90,7 @@
                             </div>
 
                         <!-- Modal body -->
-                            <form action="/atualiza/{{current_user.id}}" method='POST'>
+                            <form action="/atualiza" method='POST'>
                                 <div class="modal-body">
                                     <div class="row">
 
@@ -140,7 +142,7 @@
                             </div>
 
                         <!-- Modal body -->
-                            <form action="/atualizardg/{{current_user.id}}" method='POST' enctype="multipart/form-data">
+                            <form action="/atualizardg" method='POST' enctype="multipart/form-data">
                                 <div class="modal-body">
                                     <div class="row">
 
@@ -179,7 +181,7 @@
                     </div>
                 </div>
 
-                <form action = '/delete/{{current_user.id}}' method='POST'>
+                <form action = '/delete'>
                     <div class="d-flex justify-content-end">
                         <button class="remover"><i class="material-icons">close</i></button>
                     </div>
@@ -202,17 +204,17 @@
                     </li>
                     {% if usuario %}
                         <li class="nav-item">
-                            <a class="nav-link" href="/amigos/{{usuario.id}}">Amigos</a>
+                            <a class="nav-link" href="/amigos">Amigos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/estante/{{usuario.id}}">Estante</a>
+                            <a class="nav-link" href="/estante">Estante</a>
                         </li>
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="/amigos/{{current_user.id}}">Amigos</a>
+                            <a class="nav-link" href="/amigos">Amigos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/estante/{{current_user.id}}">Estante</a>
+                            <a class="nav-link" href="/estante">Estante</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Mensagens (0)</a>
@@ -232,7 +234,7 @@
                     <ul class="nav nav-pills flex-column">
                         {% if usuario %}
                             <li class="nav-item">
-                                <a class="nav-link" href="/estante/{{usuario.id}}">Estante de Exibição</a>
+                                <a class="nav-link" href="/estante">Estante de Exibição</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Estante de Troca</a>
@@ -245,7 +247,7 @@
                             </li>
                         {% else %}
                             <li class="nav-item">
-                                <a class="nav-link" href="/estante/{{current_user.id}}">Estante de Exibição</a>
+                                <a class="nav-link" href="/estante">Estante de Exibição</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="#">Estante de Troca</a>
