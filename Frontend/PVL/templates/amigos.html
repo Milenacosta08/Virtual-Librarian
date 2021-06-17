@@ -15,8 +15,9 @@
         <div class = "card-columns" align='center'>
             {% for amigo in amigos %}
 
+            {% if amigo.usuario %}
                 <div class="col-md-10">
-                    <div class = 'card'>
+                    <div class = 'card' id="card-amigos">
                         <a href="/perfil/{{amigo.usuario.id}}"><img class = "img-fluid" src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{amigo.usuario.imagem}}' class="card-img-top" alt="Card image cap"></a>
                         <div class = 'card-body'>
                             <p class = 'card-text'>{{amigo.usuario.nome}} {{amigo.usuario.sobrenome}}</p>
@@ -26,16 +27,17 @@
                             <div class ="row justify-content-between">
                                 <div class = "col-4">
 
-                                    <a href="/perfil/{{amigo.usuario.id}}">Perfil</a>
+                                    <a href="/perfil/{{amigo.usuario.id}}" id="url-amigo">Perfil</a>
 
                                 </div>
                                 <div class = "col-4">
-                                    <a href='#' class='card-link'>Chat</a>
+                                    <a href='/forum/{{amigo.usuario.id}}/{{current_user.id}}' class='card-link'>Fórum</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            {% endif %}
 
             {% endfor %}
 

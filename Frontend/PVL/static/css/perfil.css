@@ -215,6 +215,11 @@ a:active {
     word-wrap: break-word;
 }
 
+#sem{
+  color: #626164;
+  text-align: center;
+}
+
 #nada{
     color: #a29a9a;
     text-align: center;
@@ -235,4 +240,19 @@ a:active {
     font-size: 24px;
     height: 30px;
     color: red;
+}
+
+@media only screen and (max-width: 1000px) {
+    #botao {
+    font-size: 10px;
+    right:400px;
+    max-height: 300px;
+    margin-right:11px;
+
+    }
+}
+@media only screen and (max-width: 400px) {
+    .fixar {
+        display: inline;
+    }
 }

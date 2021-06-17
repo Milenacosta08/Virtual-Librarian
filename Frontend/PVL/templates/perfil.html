@@ -183,9 +183,20 @@
 
                 <form action = '/delete'>
                     <div class="d-flex justify-content-end">
-                        <button class="remover"><i class="material-icons">close</i></button>
+                        <div class = "fixar">
+                            <span id="botao" onclick="funcao1();">Excluir conta?</span>
+                        </div>
                     </div>
                 </form>
+
+                <!-- JAVASCRIPT -->
+                        <script src="/static/js/pagando.js"></script>
+
+
+
+
+
+
 
         {% endif %}
 
@@ -199,25 +210,22 @@
             </button>
             <div class="barra-perfil collapse navbar-collapse justify-content-center" id="collapsibleNavbar">
                 <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Detalhes</a>
-                    </li>
                     {% if usuario %}
                         <li class="nav-item">
                             <a class="nav-link" href="/amigos">Amigos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/estante">Estante</a>
+                            <a class="nav-link" href="/estante/Exibição/{{usuario.id}}">Estante</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/forum/{{usuario.id}}/{{current_user.id}}">Mensagem</a>
                         </li>
                     {% else %}
                         <li class="nav-item">
                             <a class="nav-link" href="/amigos">Amigos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/estante">Estante</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Mensagens (0)</a>
+                            <a class="nav-link" href="/estante/Exibição/{{current_user.id}}">Estante</a>
                         </li>
                     {% endif %}
                 </ul>
@@ -234,29 +242,23 @@
                     <ul class="nav nav-pills flex-column">
                         {% if usuario %}
                             <li class="nav-item">
-                                <a class="nav-link" href="/estante">Estante de Exibição</a>
+                                <a class="nav-link" href="/estante/Exibição/{{usuario.id}}">Estante de Exibição</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Estante de Troca</a>
+                                <a class="nav-link" href="/estante/Troca/{{usuario.id}}">Estante de Troca</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Estante de Venda</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">XXXXX</a>
+                                <a class="nav-link" href="/estante/Venda/{{usuario.id}}">Estante de Venda</a>
                             </li>
                         {% else %}
                             <li class="nav-item">
-                                <a class="nav-link" href="/estante">Estante de Exibição</a>
+                                <a class="nav-link" href="/estante/Exibição/{{current_user.id}}">Estante de Exibição</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Estante de Troca</a>
+                                <a class="nav-link" href="/estante/Troca/{{current_user.id}}">Estante de Troca</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Estante de Venda</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">XXXXX</a>
+                                <a class="nav-link" href="/estante/Venda/{{current_user.id}}">Estante de Venda</a>
                             </li>
                         {% endif %}
                     </ul>
@@ -297,18 +299,23 @@
                 {% if not usuario %}
                     <div class="aviso col-md-3">
                         <h4>Quadro de avisos:</h4>
-                        <div class="alert alert-success alert-dismissible">
-                            <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            <strong>Disponíveis</strong><br>José Maria quer <a href="/dom-quixote" class="alert-link">livro tal</a> da sua lista.
-                        </div>
-                        <div class="alert alert-danger alert-dismissible">
-                            <button type="button" class="close" data-dismiss="alert">&times;</button>
-                        <strong>Erro</strong><br><a href="/dom-quixote" class="alert-link">Livro tal</a>não está disponível.
-                        </div>
-                        <div class="alert alert-info alert-dismissible">
-                            <button type="button" class="close" data-dismiss="alert">&times;</button>
-                            <strong>Desejados</strong><br>Maria José sinalizou que tem <a href="/pequeno-principe" class="alert-link">livro tal</a>  da sua lista.
-                        </div>
+                        {% if notificacoes %}
+                            {% for n in notificacoes %}
+                                {% if n.notificacao.conteudo == 'deseja o livro' %}
+                                    <div class="alert alert-success alert-dismissible">
+                                        <button type="button" class="close" onclick="deletNotif({{n.notificacao.id}})" data-dismiss="alert">&times;</button>
+                                        <strong>Desejados</strong><br><a class="alert-link" href="/perfil/{{n.usuario.id}}">{{n.usuario.nome_completo}}</a> {{n.notificacao.conteudo}} <a href="/livros/{{n.livro.id}}" class="alert-link">{{n.livro.titulo}}</a> da sua estante.
+                                    </div>
+                                {% else %}
+                                    <div class="alert alert-info alert-dismissible">
+                                        <button type="button" onclick="deletNotif({{n.notificacao.id}})" class="close" data-dismiss="alert">&times;</button>
+                                        <strong>Disponíveis</strong><br><a class="alert-link" href="/perfil/{{n.usuario.id}}">{{n.usuario.nome_completo}}</a> {{n.notificacao.conteudo}} <a href="/livros/{{n.livro.id}}" class="alert-link">{{n.livro.titulo}}</a>  da sua estante.
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            <p id="sem"><i>Nenhuma Notificação</i></p>
+                        {% endif %}
                     </div>
                 {% endif %}
             </div>

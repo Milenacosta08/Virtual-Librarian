@@ -15,34 +15,40 @@
 <div class = "container">
 
     <div class = "Tituloestante">
-        <h1>Estante</h1>
+        <h1>Estante de {{status}}</h1>
     </div>
     <div class = "card-columns" align='center'>
         {% for livro in livros: %}
-        <div class="col-xs">
-            <div class = 'card'>
-                <a href='/livros/{{livros[livro].idlivro}}'}}>
-                    <img class="card-img-top" id="imagemcard">
-                    {% if livro.imagem %}
-                        <img class="img-fluid" src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{livro.imagem}}'>
-                    {% endif %}
-                </a>
-                <div class = 'card-body'>
-                    <p class = 'card-text'>{{livros[livro].titulo}}</p>
-                    <p class = 'card-text'>{{livros[livro].autor}}</p>
-                    {% if not usuario %}
 
-                        <a href = "/delete/{{livros[livro].idlivro}}">
-                            <button class="delete btn btn-danger"><i class="material-icons">delete</i></button>
+            {% if livro.status == status %}
+                <div class="col-xs">
+                    <div class = 'card'>
+                        <a href='/livros/{{livros[livro].idlivro}}'}}>
+                            <img class="card-img-top" id="imagemcard">
+                            {% if livro.imagem %}
+                                <img class="img-fluid" src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{livro.imagem}}'>
+                            {% endif %}
                         </a>
+                        <div class = 'card-body'>
+                            <p class = 'card-text'>{{livros[livro].titulo}}</p>
+                            <p class = 'card-text'>{{livros[livro].autor}}</p>
+                            {% if not usuario %}
 
-                    {% endif %}
+                                <a href = "/delete/{{livros[livro].idlivro}}">
+                                    <button class="delete btn btn-danger"><i class="material-icons">delete</i></button>
+                                </a>
+
+                            {% endif %}
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+            {% endif %}
+
         {% endfor %}
 
     </div>
+
+    {% if not usuario %}
     <!-- CADASTRO DE LIVROS -->
     <div class="cad_livro">
         <button type="button" class="btn btn-light" data-toggle="modal" data-target="#myModal">
@@ -73,12 +79,17 @@
                                         <input class="file-chooser" name = "imagemsel" type="file" accept="image/*" hidden>
                                         <img class="previa">
 
+                                        <div id="danos" hidden>
+                                            <label for="file-button2">Condição do Livro (Danos)</label><br>
+                                            <button class="file-button2 btn btn-light" type="button"><i class="material-icons">open_in_browser</i></button><br>
+                                            <input class="file-chooser2" name = "imagemsel2" type="file" accept="image/*" hidden>
+                                            <img class="previa2">
+                                        </div>
 
-
-                                    <div class="resumo">
-                                        <label for="resumo">Resumo</label>
-                                        <textarea class="form-control" name="resumo" id="resumo" aria-label="Com textarea" required></textarea>
-                                    </div>
+                                        <div class="resumo">
+                                            <label for="resumo">Resumo</label>
+                                            <textarea class="form-control" name="resumo" id="resumo" aria-label="Com textarea" required></textarea>
+                                        </div>
                                 </div>
 
                                 <!-- COLUNA 2 -->
@@ -89,7 +100,6 @@
                                             <option value="Exibição">Exibição</option>
                                             <option value="Troca">Troca</option>
                                             <option value="Venda">Venda</option>
-                                            <option value="Troca e Venda">Troca e Venda</option>
                                         </select>
                                     </div>
 
@@ -159,21 +169,25 @@
                                             </div>
                                     	</div>
                                     </div>
-
+                                <div id="condicoes" hidden>
+                                    <label for="condicao">Descrição dos Danos</label>
+                                    <textarea class="form-control" name="condicao" id="condicao" aria-label="Com textarea"></textarea>
+                                </div>
                                 </div>
                             </div>
                         </div>
 
-                            <!-- Modal footer -->
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancelar</button>
-                                <button type="submit" id="botaocad" class="btn btn-light">Cadastrar</button>
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancelar</button>
+                            <button type="submit" id="botaocad" class="btn btn-light">Cadastrar</button>
                         </div>
                     </form>
                 </div>
             </div>
-      </div>
-  </div>
+        </div>
+    {% endif %}
+    </div>
 </div>
 
 {% endblock %}

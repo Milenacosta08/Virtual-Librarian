@@ -19,6 +19,8 @@ class Usuario(db.Model, UserMixin):
     postagens = db.relationship("Postagem", backref='usuario', lazy=True)
     livros = db.relationship("Livros", backref='usuario',lazy=True)
     amigos = db.relationship("Amigo", backref='usuario', lazy=True)
+    notificacoes = db.relationship("Notificacao", backref='usuario', lazy=True)
+
 
 class Livros(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -27,7 +29,8 @@ class Livros(db.Model):
     imagem = db.Column(db.String(100), default= '')
     status = db.Column(db.String(100), nullable=True)
     preco = db.Column(db.Float, default = 0.0)
-    condicao = db.Column(db.String(150), nullable=True)
+    dano = db.Column(db.String(150), nullable=True)
+    condicao = db.Column(db.String(500), nullable=True)
     resumo = db.Column(db.String(500), nullable=False)
     usuario_id = db.Column(db.Integer, db.ForeignKey("usuario.id"), nullable = False)
     generos = db.relationship('Genero', secondary=categorizados, backref=db.backref('livros', lazy='dynamic'))
@@ -66,4 +69,23 @@ class Amigo(db.Model):
     id_usuario = db.Column(db.Integer, db.ForeignKey(Usuario.id), nullable = False)
     id_amigo = db.Column(db.Integer, nullable = False)
 
+class ForumIndividual(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    id_usuario = db.Column(db.Integer, db.ForeignKey(Usuario.id), nullable = False)
+    id_amigo = db.Column(db.Integer, nullable = False)
+    texto = db.Column(db.String(250), nullable = False)
+    data = db.Column(db.DateTime, default=datetime.now(tz=timezone(-timedelta(hours=3))))
+    imagem = db.Column(db.String(100), default= '')
 
+class Notificacao(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    id_user = db.Column(db.Integer, db.ForeignKey("usuario.id"), nullable = False)
+    usu_notificou = db.Column(db.Integer, nullable = False)
+    id_livro = db.Column(db.Integer, nullable=False)
+    conteudo = db.Column(db.String(100), nullable = False)
+
+class Mensagem(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    id_forumind = db.Column(db.Integer, nullable = False)
+    id_usuario = db.Column(db.Integer, nullable = False)
+    texto = db.Column(db.String(250), nullable = False)

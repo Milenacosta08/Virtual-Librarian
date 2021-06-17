@@ -1,10 +1,11 @@
 from flask import current_app as app, render_template, request, redirect, url_for, session
-from PVL.entidades import Usuario, Livros, Postagem, Genero, categorizados, ForumLivro, Resposta, Amigo
+from PVL.entidades import Usuario, Livros, Postagem, Genero, categorizados, ForumLivro, Resposta, Amigo, ForumIndividual, Notificacao, Mensagem
 from PVL import db, login_manager
 from flask_login import login_user, logout_user, login_required, current_user
-from sqlalchemy import desc
+from sqlalchemy import desc, or_
 import os
 from werkzeug.utils import secure_filename
+from datetime import datetime, timezone, timedelta
 
 
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
@@ -160,8 +161,17 @@ def feed_log():
 @login_required
 def perfil():
     post = Postagem.query.filter_by(usuario_id=session['user_id']).order_by(desc(Postagem.id)).all()
+    noti = Notificacao.query.filter_by(id_user = current_user.id).order_by(desc(Notificacao.id)).all()
+    notificacoes = []
 
-    return render_template("perfil.html", postagens = post)
+    for n in noti:
+        usu = Usuario.query.get(n.usu_notificou)
+        livro = Livros.query.get(n.id_livro)
+        notificacoes.append({'usuario':usu, 'notificacao':n, 'livro':livro})
+
+
+
+    return render_template("perfil.html", postagens = post, notificacoes = notificacoes)
 
 
 @app.route('/perfil/<id_usuario>')
@@ -184,10 +194,30 @@ def perfil_usu(id_usuario):
 @login_required
 def deletarUsuario():
     user = Usuario.query.get(current_user.id)
+    amigos = Amigo.query.filter(Amigo.id_usuario == current_user.id).all()
+    forumindividual = ForumIndividual.query.filter(ForumIndividual.id_usuario == current_user.id).all()
+    resposta = Resposta.query.filter(Resposta.id_usuario == current_user.id).all()
+    forumlivro = ForumLivro.query.filter(ForumLivro.usuario_id == current_user.id).all()
 
     for postagem in user.postagens:
         db.session.delete(postagem)
         db.session.commit()
+
+    for notificacao in user.notificacoes:
+        db.session.delete(notificacao)
+        db.session.commit()
+
+    for forumlivro in forumlivro:
+        forumlivro.resposta.clear()
+        db.session.commit()
+
+        db.session.delete(forumlivro)
+        db.session.commit()
+
+    for resposta in resposta:
+        db.session.delete(resposta)
+        db.session.commit()
+
 
     for livro in user.livros:
         livro.generos.clear()
@@ -196,11 +226,13 @@ def deletarUsuario():
         db.session.delete(livro)
         db.session.commit()
 
-
-    for amigo in user.amigos:
-        db.session.delete(amigo)
+    for forumindividual in forumindividual:
+        db.session.delete(forumindividual)
         db.session.commit()
 
+    for amigo in amigos:
+        db.session.delete(amigo)
+        db.session.commit()
 
 
     db.session.delete(user)
@@ -227,35 +259,36 @@ def amigo(idamigo):
 @app.route('/remover/<idamigo>')
 @login_required
 def removeramigo(idamigo):
-    amigo = Amigo.query.filter(Amigo.id_amigo == idamigo).filter(Amigo.id_usuario == current_user.id).all()
+    Amigo.query.filter(Amigo.id_amigo == idamigo).filter(Amigo.id_usuario == current_user.id).delete()
 
-    db.session.delete(amigo)
     db.session.commit()
 
-    return redirect(f"/perfil{idamigo}")
+    return redirect(f"/perfil/{idamigo}")
 
 
-@app.route('/estante')
+@app.route('/estante/<string:stt>/<id_user>')
 @login_required
-def estante():
-    livros = Livros.query.filter_by(usuario_id = current_user.id).all()
+def estante(stt, id_user):
+    session['status'] = stt
+
+    livros = Livros.query.filter_by(usuario_id = id_user).all()
 
     exemplar = {}
     livro_id = {}
 
     for livro in livros:
         #if(livro.usuario_id==session['user_id']):
-        exemplar[livro] = {'titulo': livro.titulo, 'autor': livro.autor, 'genero': livro.generos, 'idlivro': livro.id, 'capa':livro.imagem}
+        exemplar[livro] = {'titulo': livro.titulo, 'autor': livro.autor, 'status':livro.status, 'genero': livro.generos, 'idlivro': livro.id, 'capa':livro.imagem}
         livro_id[livro] = livro.id
 
-    usu = Usuario.query.get(current_user.id)
+    usu = Usuario.query.get(id_user)
 
     if usu.id != session['user_id']:
         id_user = usu.id
 
-        return render_template("estante.html", livros = exemplar, livroid = livro_id, usuario = id_user)
+        return render_template("estante.html", livros = exemplar, livroid = livro_id, usuario = id_user, status = stt)
     else:
-        return render_template("estante.html", livros = exemplar, livroid = livro_id)
+        return render_template("estante.html", livros = exemplar, livroid = livro_id, status = stt)
 
 
 @app.route('/delete/<id>')
@@ -271,7 +304,7 @@ def deletarLivro(id):
         db.session.delete(livro)
         db.session.commit()
 
-    return redirect(f'/estante')
+    return redirect(f"/estante/{session['status']}/{user.id}")
 
 
 @app.route('/livro-cadastrado', methods=['POST'])
@@ -283,6 +316,7 @@ def livro_cadastrado():
     resumo = request.form["resumo"]
     status = request.form["status"]
     preco = request.form["preco"]
+    condicao = request.form["condicao"]
 
     usu = Usuario.query.get(current_user.id)
 
@@ -293,6 +327,7 @@ def livro_cadastrado():
     livro.usuario_id = usu.id
     livro.status = status
     livro.preco = preco
+    livro.condicao = condicao
 
     # percorre a lista "genero" que contém os gêneros selecionados pelo usuário
     for g in genero:
@@ -320,10 +355,23 @@ def livro_cadastrado():
             livro.imagem = filename
 
 
-        db.session.add(livro)
-        db.session.commit()
+    file2 = request.files['imagemsel2']
 
-    return redirect(f'/estante')
+    if file2 is not None:
+        if file2 and allowed_file(file2.filename):
+            filename2 = secure_filename(file2.filename)
+
+            imgs2 = os.listdir(app.config['UPLOAD_FOLDER'])
+            filename2 = f'{len(imgs2)+1:08}.{filename2.rsplit(".", 1)[1].lower()}'
+
+            file2.save(app.config['UPLOAD_FOLDER']+'/'+filename2)
+            livro.dano = filename2
+
+
+    db.session.add(livro)
+    db.session.commit()
+
+    return redirect(f"/estante/{session['status']}/{usu.id}")
 
 #return render_template("estante.html", livros = livros[:8], titulo = titulo)
 
@@ -331,7 +379,7 @@ def livro_cadastrado():
 @login_required
 def paglivros(id_livro):
     livro = Livros.query.filter_by(id=id_livro).first()
-    usuario = Usuario.query.filter_by(id=current_user.id).first()
+    usuario = Usuario.query.filter_by(id= livro.usuario_id).first()
     forum = ForumLivro.query.filter_by(id_livro = id_livro).order_by(desc(ForumLivro.id)).all()
     respostas = Resposta.query.filter_by(id_livro = id_livro).order_by(desc(Resposta.data)).all()
     posts = {}
@@ -405,17 +453,11 @@ def resposta(id_livro, usu_post):
 @app.route('/buscas')
 @login_required
 def buscas():
-    existe = 0
     busca = request.args.get('pesquisass')
-    nomes = Usuario.query.filter_by(nome = busca).all()
-    sobrenomes = Usuario.query.filter_by(sobrenome = busca).all()
-    livros = Livros.query.filter_by(titulo = busca).all()
-    nomecomp = Usuario.query.filter_by(nome_completo = busca).all()
+    livros = Livros.query.filter(or_(Livros.titulo.ilike(f'%{busca}%'), Livros.autor.ilike(f'%{busca}%'))).all()
+    usuarios = Usuario.query.filter(Usuario.nome_completo.ilike(f'%{busca}%')).all()
 
-    if nomes or sobrenomes or livros or nomecomp:
-        existe = 1
-
-    return render_template('buscas.html', busca = busca, nomes = nomes, sobrenomes = sobrenomes, livros = livros, nomecomp = nomecomp, existe = existe)
+    return render_template('buscas.html', busca = busca, livros = livros, usuarios = usuarios)
 
 
 @app.route('/amigos')
@@ -503,6 +545,123 @@ def atualizardg():
 
     return redirect ('/perfil')
 
+@app.route("/forum/<idamigo>/<idusuario>")
+@login_required
+def forumind(idamigo, idusuario):
+    amigo = Usuario.query.filter(Usuario.id == idamigo).first()
+    usuarioo = Usuario.query.filter(Usuario.id == idusuario).first()
 
+    if amigo is not None and usuarioo is not None and idusuario != idamigo:
+        if amigo.id == current_user.id or usuarioo.id == current_user.id:
+            lista = Amigo.query.filter(Amigo.id_usuario == idusuario).order_by(Amigo.id).all()
+            amigoreal = Usuario.query.filter(Usuario.id == idamigo).first()
+            listamg = []
+            #postagens = ForumIndividual.query.filter(or_(ForumIndividual.id_amigo == amigo.id, ForumIndividual.id_amigo == usuarioo.id)).filter(or_(ForumIndividual.id_usuario == usuarioo.id, ForumIndividual.id_usuario == amigo.id)).order_by(ForumIndividual.data).all()
+            postagens = ForumIndividual.query.filter(ForumIndividual.id_amigo == amigo.id).filter(ForumIndividual.id_usuario == usuarioo.id).first()
+            posts = []
+
+            if postagens is not None:
+                mensagens = Mensagem.query.filter(Mensagem.id_forumind.id == postagens.id).all()
+
+                for postagem in mensagens:
+                    usuario = Usuario.query.get(postagem.id_usuario)
+                    posts.append({'usuario' : usuario, 'postagem' : postagem})
+
+            for amigo in lista:
+                amigo = Usuario.query.get(amigo.id_amigo)
+                listamg.append({'usuario' : amigo})
+
+
+
+            if amigo is not None:
+                return render_template('forumind.html', amigo = amigoreal, idamigo = idamigo, posts = posts, amigos = listamg)
+            else:
+                return redirect('/feed')
+        else:
+            return redirect('/feed')
+    else:
+        return redirect('/feed')
+
+
+
+@app.route("/forum/<idamigo>/post", methods=['POST'])
+@login_required
+def forumpost(idamigo):
+    comentario = request.form['comentario']
+    amigo = Usuario.query.get(idamigo)
+
+    forum = ForumIndividual.query.filter(ForumIndividual.id_usuario == current_user.id).filter(ForumIndividual.id_amigo == amigo.id).first()
+
+    if forum is None:
+        post = ForumIndividual()
+        post.id_usuario = current_user.id
+        post.id_amigo = amigo.id
+        post.texto = comentario
+        post.data = datetime.now(tz=timezone(-timedelta(hours=3)))
+
+        file = request.files['imagemsel']
+
+        if file is not None:
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+
+                imgs = os.listdir(app.config['UPLOAD_FOLDER'])
+                filename = f'{len(imgs)+1:08}.{filename.rsplit(".", 1)[1].lower()}'
+
+                file.save(app.config['UPLOAD_FOLDER']+'/'+filename)
+                post.imagem = filename
+
+        if post.texto is not None:
+            db.session.add(post)
+            db.session.commit()
+
+        msg = Mensagem()
+        msg.id_forumind = forum.id
+        msg.id_usuario = current_user.id
+        msg.texto = comentario
+
+        if msg.texto is not None:
+            db.session.add(msg)
+            db.session.commit()
+
+        return redirect(f'/forum/{idamigo}/{current_user.id}')
+
+    else:
+        return redirect('feed')
+
+
+@app.route("/notificacao/<string:noti>/<idlivro>")
+@login_required
+def notificar(noti, idlivro):
+    livro = Livros.query.filter_by(id=idlivro).first()
+    user_notificou = Usuario.query.get(current_user.id)
+    usu = Usuario.query.filter_by(id=livro.usuario_id).first()
+
+    if noti == "Desejo":
+        notificacao = f'deseja o livro'
+    else:
+        notificacao = f'sinalizou que tem o livro'
+
+    nova = Notificacao()
+    nova.id_user = usu.id
+    nova.usu_notificou = user_notificou.id
+    nova.conteudo = notificacao
+    nova.id_livro = livro.id
+
+    db.session.add(nova)
+    db.session.commit()
+
+    return redirect(f'/livros/{livro.id}')
+
+@app.route('/delete/notificacao/<id>')
+@login_required
+def deletar_notificacao(id):
+    notificacao = Notificacao.query.get(id)
+
+    if notificacao.id_user == current_user.id:
+        db.session.delete(notificacao)
+        db.session.commit()
+
+    return redirect("/perfil")
 
 

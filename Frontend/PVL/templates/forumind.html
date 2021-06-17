@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+
+{% block csss %}
+    {{ super() }}
+    <link rel="stylesheet" href={{url_for('static', filename = '/css/forumind.css')}}>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+{% endblock %}
+
+{% block titulo %}Virtual Librarian - Fórum{% endblock %}
+
+{% block conteudo %}
+    {{ super() }}
+<div class="main container-fluid">
+    <div class = "row">
+
+            <div class = "usuario">
+                <div class = "d-flex justify-content-center">
+                        <img id='imagem-usu' src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{amigo.imagem}}'>
+
+                        <h5 id = "nomeusu" class = "align-self-center">{{amigo.nome_completo}}</h5>
+
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class = "box">
+            <div class = "row">
+                <div class = "amigos">
+                    <div class = "col-md-12">
+                        {% for amg in amigos %}
+                            <div class = "card">
+
+                                <a href="/forum/{{amg.usuario.id}}/{{current_user.id}}"><img id='imagem-usu' src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{amg.usuario.imagem}}'></a>
+                                <div class="card-body">
+
+                                    <a href="/forum/{{amg.usuario.id}}/{{current_user.id}}"><p id = "nomeamigo">{{amg.usuario.nome_completo}}</p></a>
+
+                                </div>
+
+                            </div>
+                            <br>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class = "mensagens">
+
+                        {% for post in posts %}
+
+                            {% if post.usuario.id != current_user.id %}
+                            <div class = "d-flex justify-content-start">
+                                <div class="media-body teste2">
+
+
+                                    <a href="/perfil/{{post.usuario.id}}"><h5 class = "nomeusuario">{{post.usuario.nome_completo}}</a></h5>
+
+
+                                    {% if post.postagem.imagem %}
+                                        <img id="imagem-usu" src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{post.postagem.imagem}}'>
+                                    {% endif %}
+                                    <p class = "textopostagem">{{post.postagem.texto}}</p>
+                                    <div class = "d-flex justify-content-end">
+                                        <small><i class = "data">{{post.postagem.data.strftime("%d/%m/%Y, %H:%M:%S")}}</i></small>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+
+                            {% else %}
+                                <div class = "d-flex justify-content-end">
+                                    <div class="media-body teste">
+
+                                        <a href="/perfil/{{post.usuario.id}}"><h5 class = "nomeusuario">{{post.usuario.nome_completo}}</a></h5>
+
+                                        {% if post.postagem.imagem %}
+                                            <img id="imagem-usu" src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{post.postagem.imagem}}'>
+                                        {% endif %}
+                                        <p class = "textopostagem">{{post.postagem.texto}}</p>
+                                        <div class = "d-flex justify-content-end">
+                                            <small><i class = "data">{{post.postagem.data.strftime("%d/%m/%Y, %H:%M:%S")}}</i></small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+
+
+
+                            {% endif %}
+
+
+                        {% endfor %}
+
+                </div>
+            </div>
+        </div>
+
+            <div class="col-md-12">
+                <div class = "caixadosbotoes container-fluid">
+
+
+                        <div class="media-body">
+
+                            <form action = '/forum/{{idamigo}}/post' method='POST' enctype="multipart/form-data">
+                                <div class = "formatopostagem">
+                                    <textarea  name="comentario" cols="" rows="2" placeholder="Mensagem..."></textarea>
+                                    <button type="submit" class="botaoenviar btn">Publicar</button>
+
+                                    <button id = "anexos" class="file-button btn btn-light" type="button"><i class="material-icons">open_in_browser</i></button><br>
+                                    <input class="file-chooser" name = "imagemsel" type="file" accept="image/*" hidden>
+                                    <img class="previa">
+
+                                    <!-- JAVASCRIPT -->
+                                    <script src="/static/js/estante.js"></script>
+                                </div>
+                            </form>
+                        </div>
+
+                </div>
+        </div>
+
+
+
+
+</div>
+
+{% endblock %}
+

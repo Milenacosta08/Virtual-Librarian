@@ -151,6 +151,13 @@ b{
     min-width: 110px;
     margin-right: 20px;
 }
+
+#imagem-danos{
+    max-height: 250px;
+    max-width: 50%;
+    min-width: 110px;
+}
+
 .fakeimg {
     height: 100px;
     width: 100px;
@@ -199,7 +206,11 @@ button.botaoenviar {
     word-wrap: break-word;
     padding-left: 10px;
 }
+
 .caixadosbotoes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: start;
     align-content: center;
 }
 #data{
@@ -208,6 +219,28 @@ button.botaoenviar {
 @media only screen and (max-width: 775px) {
     #data{
         min-width: 0ch;
+    }
+    .textopostagem {
+        max-width: 30ch;
+        word-wrap: break-word;
+        padding-left: 10px;
+    }
+}
+@media only screen and (max-width: 442px) {
+    .textopostagem {
+        max-width: 15ch;
+        word-wrap: break-word;
+        padding-left: 10px;
+    }
+    #img-usu{
+        width: 45px;
+        margin-right: 1%;
+    }
+}
+@media only screen and (max-width: 500px) {
+    #img-usu{
+        width: 55px;
+        margin-right: 1%;
     }
 
 }
@@ -225,3 +258,11 @@ button.botaoenviar {
     display: inline;
     background: none;
 }
+
+.notificacao1{
+    width: 80px;
+}
+.notificacao2{
+    width: 80px;
+}
+

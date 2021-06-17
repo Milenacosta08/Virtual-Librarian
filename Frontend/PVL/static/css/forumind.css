@@ -1,0 +1,233 @@
+body{
+    margin: 0;
+    background-color: white;
+    padding: 0;
+    font-family: "Lucida Console", "Courier New", monospace;
+}
+div.header {
+    background-color: #4b3621;
+    padding: 15px 20px;
+}
+#TITULO {
+    width: 100%;
+    text-align: center;
+    margin: 10px 30px 0px 0px;
+    font-size: 40px;
+    color: white;
+    text-shadow: 2px 2px 2px rgba(0,0,0,0.5);
+}
+#LOGO {
+    max-width: 60px;
+    height: auto;
+    margin: 0px 0px 10px 0px;
+}
+.sub-header{
+    max-height: 20%;
+    background-color: #f5f5dc;
+    color: black;
+    font-size: 12px;
+}
+.navbar-toggler{
+    font-size: 15px;
+    background-color: #f5f5dc;
+}
+
+@media only screen and (min-width: 390px) {
+    #ulsub1 {
+        position: absolute;
+        top: 12px;
+        left: 13%;
+    }
+    #ulsub2 {
+        position: absolute;
+        top: 12px;
+        left: 28%;
+    }
+
+    #ulsub3 {
+        position: absolute;
+        top: 12px;
+        left: 43%;
+
+    }
+    #ulsub4 {
+        position: absolute;
+        top: 12px;
+        left: 58%;
+
+    }
+}
+
+
+a:link {
+    display : block;
+    text-decoration: none;
+    color: black;
+}
+ul a:hover {
+    border: 5em;
+    border-radius: 5px;
+    margin: 0.1em;
+    padding: 2px , 3px;
+    box-shadow: 1.5px 1.5px 1.5px black;
+    background-color: rgb(75, 239, 245);
+    color:black;
+}
+a:visited {
+    color: black;
+}
+a:active {
+    color: black;
+    box-shadow: 0 0 0 0 black;
+}
+.caixapesquisa {
+    border-radius: 48px;
+    width: 60%;
+    text-align: center;
+}
+#imagem-usu {
+    margin-top: 10px;
+    margin-left: 15px;
+    max-height: 100px;
+    padding-bottom: 10px;
+}
+#nomeusu {
+    color: white;
+    margin-left: 5px;
+}
+.caixadosbotoes {
+    align-content: center;
+    margin-top: 20px;
+}
+.formatopostagem p {
+    font-size: 10px;
+    opacity: 0.5;
+}
+textarea {
+    padding: 10px;
+    line-height: 1.5;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 1px 1px 1px #999;
+    width: 70%;
+    margin-left: 10%;
+    min-width: 10%;
+    max-width: 90%;
+  	max-height: 100px;
+}
+
+button.botaoenviar {
+    margin-bottom: 5%;
+    text-align: center;
+    max-width: 100px;
+    border-radius: 5px;
+}
+.file-button{
+    max-width: 100px;
+    max-height: 55px;
+    margin-bottom: 5%;
+    background-color: #d2b48c;
+}
+.file-button hover{
+    background-color: #be935a;
+}
+.btn {
+    width: 100%;
+    background-color: #d2b48c;
+    color: black;
+    padding: 16px;
+    font-size: 14px;
+    border: none;
+    outline: none;
+}
+.mensagens {
+    margin-top: 10px;
+    width: 1006px;
+    max-width: 100%;
+    min-width: 300px;
+    height: 400px;
+    max-height: 100%;
+    overflow: auto;
+
+}
+.previa{
+    max-height: 200px;
+    max-width: 50%;
+}
+.amigos {
+    max-width: 100%;
+    min-width: 100px;
+    height: 400px;
+    max-height: 100%;
+    overflow: auto;
+    background-color: #f5f5dc;
+}
+
+.usuario {
+    background-color: #4b3621;
+    width: 1366px;
+    max-width: 100%;
+    min-width: 300px;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: black;
+}
+.textopostagem {
+    margin-left: 25px;
+}
+.nomeusuario {
+    margin-top: 5px;
+    margin-left: 15px;
+}
+#nomeamigo {
+    margin-top: 15px;
+}
+.card {
+    display: flex;
+    justify-content: center;
+}
+.teste2 {
+    border: 2px solid black;
+    border-radius: 0px 20px 20px 20px;
+    max-width: 50%;
+    margin-left: 10px;
+    background-color: lightgray;
+}
+.teste {
+    border: 2px solid black;
+    border-radius: 20px 0px 20px 20px;
+    max-width: 50%;
+    margin-right: 10px;
+    background-color: #f5f5dc;
+}
+.data {
+    margin-right: 15px;
+}
+.data2 {
+    margin-left: 15px;
+}
+@media only screen and (min-width: 701px) {
+    .amigos {
+        display: inline;
+        width: 20%;
+    }
+    .mensagens {
+        display: inline;
+        width: 80%;
+    }
+}
+@media only screen and (max-width: 700px) {
+    .amigos {
+        display: block;
+        width: 100%;
+        margin-bottom: 30px;
+    }
+    .mensagens {
+        display: block;
+        width: 100%;
+    }
+    #nomeamigo {
+        margin-top: 0px;
+    }
+
+}

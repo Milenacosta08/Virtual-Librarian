@@ -14,25 +14,28 @@
 
     <!--CAIXA DO ITEM 1-->
     <div class="media border p-3">
-      <img class="img-fluid" id='imagem-livro' src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{livro.imagem}}'>
-      <div class="media-body">
-        <h4>{{livro.titulo}} <small><i>({{livro.autor}})</i></small></h4>
-        <small><i>Adicionado em 06 de Março de 2021 <br></i></small>
-        <button class="btn btn-secondary btn-sm" type="button" data-toggle="collapse" data-target="#resumo">Resumo</button>
-        <div id="resumo" class="collapse">
-            <p class="text-justify">{{livro.resumo}}</p>
-        </div>
-        <div class="botao">
-          <button type="button" class="btn btn-outline-success btn-sm">Desejo</button>
-          <button type="button" class="btn btn-outline-info btn-sm">Tenho</button>
-          {% if current_user.id == livro.usuario_id: %}
-          <form action = '/delete/{{livro.id}}'>
-                <p><button type="submit" class="delete btn btn-danger"><i class="material-icons">delete</i></button></p>
-          </form>
-          {% endif %}
+        <img class="img-fluid" id='imagem-livro' src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{livro.imagem}}'>
+        <div class="media-body">
+            <h4>{{livro.titulo}} <small><i>({{livro.autor}})</i></small></h4>
+            <small><i>Adicionado em 06 de Março de 2021 <br></i></small>
+            <button class="btn btn-secondary btn-sm" type="button" data-toggle="collapse" data-target="#resumo">Resumo</button>
+            <div id="resumo" class="collapse">
+                <p class="text-justify">{{livro.resumo}}</p>
+            </div>
+            <div class="botao">
+                <div class= "d-flex flex-row bd-highlight mb-3">
+                    <a href="/notificacao/Desejo/{{livro.id}}" class="notificacao1 btn btn-outline-success btn-sm" role="button">Desejo</a>
+                    <a href="/notificacao/Tenho/{{livro.id}}" class="notificacao2 btn btn-outline-info btn-sm" role="button">Tenho</a>
+                </div>
 
+                {% if current_user.id == livro.usuario_id: %}
+                <form action = '/delete/{{livro.id}}'>
+                    <p><button type="submit" class="delete btn btn-danger"><i class="material-icons">delete</i></button></p>
+                </form>
+                {% endif %}
+
+            </div>
         </div>
-      </div>
     </div>
 
     <!--DETALHES ITEM 1-->
@@ -44,25 +47,33 @@
           <div class="media">
             <img class= 'img-fluid' id='imagem-usu' src= https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{usuario.imagem}}>
             <div class="media-body">
-              <form action="/perfil/{{livro.usuario_id}}/{{current_user.id}}" method="POST">
+              <form action="/perfil/{{livro.usuario_id}}" method="POST">
                 <input type="hidden" name="var" value="1" />
                 <button class="tim"><h5>{{usuario.nome}} {{usuario.sobrenome}}</h5></button>
               </form>
 
               <p><small id="reput">Confiável/duvidosa</small></p>
-              <button type="button" id = "botaochat" class="mensagem btn btn-warning btn-sm"><a href="#"class="material-icons">message</a></button>
+              <button type="button" id = "botaochat" class="mensagem btn btn-warning btn-sm"><a href="/forum/{{usuario.id}}/{{current_user.id}}"class="material-icons">message</a></button>
             </div>
           </div>
         </div>
     <!--COLUNA PRINCIPAL-->
         <div class="col-md-8">
           <h2 id="detalhes">Detalhes</h2>
-          <b>Status do livro:</b> {{livro.status}}.
+          <b>Status do livro:</b> {{livro.status}}
           {% if livro.preco != 0.0 %}
             <p><b>Preço: </b>R$ {{livro.preco}}</p>
           {% endif %}
-          <p><b>Condições do livro:</b> Apresenta poucas marcas de uso, com todas as páginas sem danos ou rasgos. Além disso, o livro possui um estado de conservação bem elevado, já que obteve somente um dono.</p>
-          <div class="fakeimg"><i>Foto dos danos</i></div>
+          <p>
+              <b>Gênero: </b>
+            {% for genero in livro.generos %}
+                {{genero.nome}}
+            {% endfor %}
+          </p>
+          {% if livro.condicao %}
+            <p><b>Condições do livro:</b> {{livro.condicao}}</p>
+            <img class="img-fluid" id='imagem-danos' src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{livro.dano}}'>
+          {% endif %}
         </div>
       </div>
     </div>

@@ -28,10 +28,20 @@
                             <button class = "btn">Amigos</button>
                         </a>
                         <button class = "btn">Chat</button>
-                        <a href='/estante'>
+                        <a href='/estante/Exibição/{{current_user.id}}'>
                             <button class = "btn">Minha Estante</button>
                         </a>
-                        <button class = "btn">Estantes</button>
+                    <div class = "col-md-12">
+                    <div class="dropdown">
+                        <button class="btn" type="button"  class="btn btn-primary dropdown-toggle"  data-toggle="dropdown">Estantes</button>
+
+                        <div class="dropdown-menu" >
+                            <a class= "dropdown-item" href="/estante/Exibição/{{current_user.id}}">Estante de Exibição</a>
+                            <a class="dropdown-item" href="/estante/Troca/{{current_user.id}}">Estante de Troca</a>
+                            <a class="dropdown-item" href="/estante/Venda/{{current_user.id}}">Estante de Venda</a>
+                        </div>
+                        </div>
+                    </div>
                     </div>
                 </div>
             </div>
