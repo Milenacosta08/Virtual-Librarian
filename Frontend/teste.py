@@ -1,27 +1,12 @@
 from PVL import db, create_app
 from PVL.entidades import Amigo, Usuario, ForumIndividual, Mensagem
+from sqlalchemy import desc, or_
 
 meu = create_app()
 with meu.app_context():
     teste = "EAE PESSOAS"
 
-    novo = ForumIndividual()
-    novo.id_usuario = 123
-    novo.id_amigo = 321
-    novo.texto = "teste"
-    db.session.add(novo)
-    db.session.commit()
-
-    msg = Mensagem()
-    msg.texto = teste
-    db.session.add(msg)
-    db.session.commit()
-
-    novo.mensagens.append(msg)
-    novo.mensagens.append(ForumIndividual())
-    db.session.commit()
-
-    teste = ForumIndividual.query.filter(ForumIndividual.id_usuario == 123).first()
+    forum = ForumIndividual.query.filter(or_(ForumIndividual.id_amigo == 1, ForumIndividual.id_amigo == 4)).filter(or_(ForumIndividual.id_usuario == 4, ForumIndividual.id_usuario == 1)).all()
 
 
-    print(teste.mensagens[0].texto)
+    print(forum)

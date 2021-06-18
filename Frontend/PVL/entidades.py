@@ -37,7 +37,7 @@ class Livros(db.Model):
 
 class Postagem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    conteudo = db.Column(db.String(250), nullable=False)
+    conteudo = db.Column(db.String(400), nullable=False)
     usuario_id = db.Column(db.Integer, db.ForeignKey("usuario.id"), nullable = False)
     imagem = db.Column(db.String(100), default= '')
     curtidas = db.Column(db.Integer, default = 0)
@@ -50,6 +50,7 @@ class ForumLivro(db.Model):
     texto = db.Column(db.String(250), nullable = False)
     respostas = db.relationship("Resposta", backref='forumlivro',lazy=True)
     data = db.Column(db.DateTime, default=datetime.now(tz=timezone(-timedelta(hours=3))))
+
 
 class Genero(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -73,9 +74,8 @@ class ForumIndividual(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     id_usuario = db.Column(db.Integer, db.ForeignKey(Usuario.id), nullable = False)
     id_amigo = db.Column(db.Integer, nullable = False)
-    texto = db.Column(db.String(250), nullable = False)
-    data = db.Column(db.DateTime, default=datetime.now(tz=timezone(-timedelta(hours=3))))
-    imagem = db.Column(db.String(100), default= '')
+    last_post = db.Column(db.DateTime)
+
 
 class Notificacao(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -86,6 +86,8 @@ class Notificacao(db.Model):
 
 class Mensagem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    id_forumind = db.Column(db.Integer, nullable = False)
+    id_forumind = db.Column(db.Integer, db.ForeignKey(ForumIndividual.id), nullable = False)
     id_usuario = db.Column(db.Integer, nullable = False)
     texto = db.Column(db.String(250), nullable = False)
+    data = db.Column(db.DateTime, default=datetime.now(tz=timezone(-timedelta(hours=3))))
+    imagem = db.Column(db.String(100), default= '')

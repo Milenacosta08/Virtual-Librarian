@@ -265,4 +265,22 @@ button.botaoenviar {
 .notificacao2{
     width: 80px;
 }
-
+#resenhas {
+    width: 100%;
+    max-width: 100%;
+    min-width: 100px;
+}
+.modal-header{
+    background-color: #d2b48c;
+    text-align: center;
+}
+.modal-body{
+    background-color: #ddd9ce;
+}
+.modal-footer{
+    background-color: #ddd9ce;
+}
+#Benviar{
+    background-color: #be935a;
+    color: white;
+}

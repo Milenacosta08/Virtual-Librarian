@@ -170,7 +170,6 @@ def perfil():
         notificacoes.append({'usuario':usu, 'notificacao':n, 'livro':livro})
 
 
-
     return render_template("perfil.html", postagens = post, notificacoes = notificacoes)
 
 
@@ -194,6 +193,7 @@ def perfil_usu(id_usuario):
 @login_required
 def deletarUsuario():
     user = Usuario.query.get(current_user.id)
+    mensagens = Mensagem.query.filter(Mensagem.id_usuario == current_user.id).all()
     amigos = Amigo.query.filter(Amigo.id_usuario == current_user.id).all()
     forumindividual = ForumIndividual.query.filter(ForumIndividual.id_usuario == current_user.id).all()
     resposta = Resposta.query.filter(Resposta.id_usuario == current_user.id).all()
@@ -208,7 +208,7 @@ def deletarUsuario():
         db.session.commit()
 
     for forumlivro in forumlivro:
-        forumlivro.resposta.clear()
+        forumlivro.respostas.clear()
         db.session.commit()
 
         db.session.delete(forumlivro)
@@ -234,6 +234,9 @@ def deletarUsuario():
         db.session.delete(amigo)
         db.session.commit()
 
+    for mensagem in mensagens:
+        db.session.delete(mensagem)
+        db.session.commit()
 
     db.session.delete(user)
     db.session.commit()
@@ -271,24 +274,21 @@ def removeramigo(idamigo):
 def estante(stt, id_user):
     session['status'] = stt
 
-    livros = Livros.query.filter_by(usuario_id = id_user).all()
+    usu = Usuario.query.get(id_user)
+    livros = Livros.query.filter_by(usuario_id = id_user).filter(Livros.status==stt).all()
 
     exemplar = {}
-    livro_id = {}
 
     for livro in livros:
-        #if(livro.usuario_id==session['user_id']):
         exemplar[livro] = {'titulo': livro.titulo, 'autor': livro.autor, 'status':livro.status, 'genero': livro.generos, 'idlivro': livro.id, 'capa':livro.imagem}
-        livro_id[livro] = livro.id
 
-    usu = Usuario.query.get(id_user)
 
-    if usu.id != session['user_id']:
+    if usu.id != current_user.id:
         id_user = usu.id
 
-        return render_template("estante.html", livros = exemplar, livroid = livro_id, usuario = id_user, status = stt)
+        return render_template("estante.html", livros = exemplar, usuario = id_user, status = stt)
     else:
-        return render_template("estante.html", livros = exemplar, livroid = livro_id, status = stt)
+        return render_template("estante.html", livros = exemplar, status = stt)
 
 
 @app.route('/delete/<id>')
@@ -397,11 +397,30 @@ def paglivros(id_livro):
 
     return render_template('item1.html', livro = livro, usuario = usuario, posts = posts, respostas = respostass)
 
+@app.route('/livros/<id_livro>/resenha', methods=['POST'])
+@login_required
+def livroresenha(id_livro):
+    comentario = request.form['resenha']
+    livro = Livros.query.get(id_livro)
+    usu = Usuario.query.filter_by(email=session['user_email']).first()
+
+    postagem = Postagem()
+    postagem.conteudo = f'Resenha do livro "{livro.titulo}": {comentario}'
+    postagem.usuario_id = usu.id
+    postagem.imagem = livro.imagem
+
+    if postagem.conteudo is not None:
+        db.session.add(postagem)
+        db.session.commit()
+
+    return redirect(f'/livros/{id_livro}')
+
+
+
 @app.route('/forum/cadastro/<id_li>', methods=['POST'])
 @login_required
 def Forum(id_li):
     comentario = request.form['comentario']
-    livro = Livros.query.filter_by(usuario_id = current_user.id).first()
 
     if comentario != '':
         novo = ForumLivro()
@@ -460,10 +479,10 @@ def buscas():
     return render_template('buscas.html', busca = busca, livros = livros, usuarios = usuarios)
 
 
-@app.route('/amigos')
+@app.route('/amigos/<id_usu>')
 @login_required
-def amigos():
-    amigos = Amigo.query.filter(Amigo.id_usuario == current_user.id).all()
+def amigos(id_usu):
+    amigos = Amigo.query.filter(Amigo.id_usuario == id_usu).all()
     amigoss = []
 
     for amigo in amigos:
@@ -495,23 +514,21 @@ def atualiza():
 
         if(novo_nome!=""):
             quem.nome = novo_nome
-            db.session.add(quem)
-            db.session.commit()
+
 
         if(novo_sobrenome!=""):
             quem.sobrenome = novo_sobrenome
-            db.session.add(quem)
-            db.session.commit()
+
 
         if(novo_email!=""):
             quem.email = novo_email
-            db.session.add(quem)
-            db.session.commit()
+
 
         if(nova_senha!=""):
             quem.senha = nova_senha
-            db.session.add(quem)
-            db.session.commit()
+
+        db.session.add(quem)
+        db.session.commit()
         return redirect ('/perfil')
 
     else:
@@ -545,32 +562,70 @@ def atualizardg():
 
     return redirect ('/perfil')
 
+@app.route("/forum")
+@login_required
+def forumsolo():
+    lista = ForumIndividual.query.filter(ForumIndividual.id_usuario == current_user.id).all()
+    listamg = []
+    amigoreal = 0
+    idamigo = 0
+    posts = 0
+
+    for resultado in lista:
+        if resultado.id != "":
+            if resultado.id_usuario == current_user.id:
+                pessoa = Usuario.query.get(resultado.id_amigo)
+                listamg.append({'usuario' : pessoa})
+
+    return render_template('forumind.html', amigo = amigoreal, idamigo = idamigo, amigos = listamg, posts = posts)
+
 @app.route("/forum/<idamigo>/<idusuario>")
 @login_required
 def forumind(idamigo, idusuario):
     amigo = Usuario.query.filter(Usuario.id == idamigo).first()
     usuarioo = Usuario.query.filter(Usuario.id == idusuario).first()
 
-    if amigo is not None and usuarioo is not None and idusuario != idamigo:
+    forum = ForumIndividual.query.filter(or_(ForumIndividual.id_amigo == amigo.id, ForumIndividual.id_amigo == usuarioo.id)).filter(or_(ForumIndividual.id_usuario == usuarioo.id, ForumIndividual.id_usuario == amigo.id)).all()
+
+    if amigo is not None and usuarioo is not None and idamigo != idusuario:
+        if forum == []:
+            post = ForumIndividual()
+            post.id_usuario = current_user.id
+            post.id_amigo = amigo.id
+            db.session.add(post)
+            db.session.commit()
+
+            novo = ForumIndividual()
+            novo.id_usuario = amigo.id
+            novo.id_amigo = current_user.id
+            db.session.add(novo)
+            db.session.commit()
+
         if amigo.id == current_user.id or usuarioo.id == current_user.id:
-            lista = Amigo.query.filter(Amigo.id_usuario == idusuario).order_by(Amigo.id).all()
+            #lista = Amigo.query.filter(Amigo.id_usuario == idusuario).order_by(Amigo.id).all()
+            #lista = ForumIndividual.query.filter(ForumIndividual.id_usuario == current_user.id).all()
             amigoreal = Usuario.query.filter(Usuario.id == idamigo).first()
+            forumteste = ForumIndividual.query.filter(or_(ForumIndividual.id_usuario == current_user.id, ForumIndividual.id_usuario == amigo.id)).order_by(desc(ForumIndividual.last_post)).all()
             listamg = []
-            #postagens = ForumIndividual.query.filter(or_(ForumIndividual.id_amigo == amigo.id, ForumIndividual.id_amigo == usuarioo.id)).filter(or_(ForumIndividual.id_usuario == usuarioo.id, ForumIndividual.id_usuario == amigo.id)).order_by(ForumIndividual.data).all()
-            postagens = ForumIndividual.query.filter(ForumIndividual.id_amigo == amigo.id).filter(ForumIndividual.id_usuario == usuarioo.id).first()
             posts = []
 
-            if postagens is not None:
-                mensagens = Mensagem.query.filter(Mensagem.id_forumind.id == postagens.id).all()
 
-                for postagem in mensagens:
-                    usuario = Usuario.query.get(postagem.id_usuario)
-                    posts.append({'usuario' : usuario, 'postagem' : postagem})
+            if forum != []:
+                for foru in forum:
+                    mensagens = Mensagem.query.filter(Mensagem.id_forumind == foru.id).all()
 
-            for amigo in lista:
-                amigo = Usuario.query.get(amigo.id_amigo)
-                listamg.append({'usuario' : amigo})
+                    for postagem in mensagens:
+                        usuario = Usuario.query.get(postagem.id_usuario)
+                        posts.append({'usuario' : usuario, 'postagem' : postagem})
 
+
+
+
+            for amigos in forumteste:
+                if amigos.id != "":
+                    if amigos.id_usuario == current_user.id:
+                        pessoa = Usuario.query.get(amigos.id_amigo)
+                        listamg.append({'usuario' : pessoa})
 
 
             if amigo is not None:
@@ -590,14 +645,22 @@ def forumpost(idamigo):
     comentario = request.form['comentario']
     amigo = Usuario.query.get(idamigo)
 
-    forum = ForumIndividual.query.filter(ForumIndividual.id_usuario == current_user.id).filter(ForumIndividual.id_amigo == amigo.id).first()
+    forum = ForumIndividual.query.filter(or_(ForumIndividual.id_amigo == amigo.id, ForumIndividual.id_amigo == current_user.id)).filter(or_(ForumIndividual.id_usuario == current_user.id, ForumIndividual.id_usuario == amigo.id)).all()
 
-    if forum is None:
-        post = ForumIndividual()
-        post.id_usuario = current_user.id
-        post.id_amigo = amigo.id
-        post.texto = comentario
-        post.data = datetime.now(tz=timezone(-timedelta(hours=3)))
+    if forum != []:
+        msg = Mensagem()
+
+        for foru in forum:
+            if foru.id != msg.id_forumind:
+                msg.id_forumind = foru.id
+
+            foru.last_post = datetime.now(tz=timezone(-timedelta(hours=3)))
+            db.session.commit()
+
+
+        msg.id_usuario = current_user.id
+        msg.texto = comentario
+        msg.data = datetime.now(tz=timezone(-timedelta(hours=3)))
 
         file = request.files['imagemsel']
 
@@ -609,25 +672,19 @@ def forumpost(idamigo):
                 filename = f'{len(imgs)+1:08}.{filename.rsplit(".", 1)[1].lower()}'
 
                 file.save(app.config['UPLOAD_FOLDER']+'/'+filename)
-                post.imagem = filename
-
-        if post.texto is not None:
-            db.session.add(post)
-            db.session.commit()
-
-        msg = Mensagem()
-        msg.id_forumind = forum.id
-        msg.id_usuario = current_user.id
-        msg.texto = comentario
+                msg.imagem = filename
 
         if msg.texto is not None:
             db.session.add(msg)
             db.session.commit()
 
-        return redirect(f'/forum/{idamigo}/{current_user.id}')
+            return redirect(f'/forum/{idamigo}/{current_user.id}')
 
+        else:
+            return redirect('/feed')
     else:
-        return redirect('feed')
+        return redirect('/feed')
+
 
 
 @app.route("/notificacao/<string:noti>/<idlivro>")

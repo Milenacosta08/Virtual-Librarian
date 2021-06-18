@@ -20,12 +20,11 @@
                 {% for usuario in usuarios %}
                     <div class="col-md-10">
                         <div class = "card">
-                            <a href="/perfil/{{usuarios.id}}"><img class='perfil img-fluid' src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{usuario.imagem}}'></a>
+                            <a href="/perfil/{{usuario.id}}"><img class='perfil img-fluid' src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{usuario.imagem}}'></a>
                             <div class="card-body">
 
                                 <a href="/perfil/{{usuario.id}}">{{usuario.nome_completo}}</a>
 
-                                <p><small>reputação</small></p>
                             </div>
                         </div>
                     </div>
@@ -39,6 +38,7 @@
                                 {% for genero in livro.genero %}
                                     <small>{{genero.nome}}</small>
                                 {% endfor %}
+                                <p><span class="badge badge-info">{{livro.status}}</span></p>
                             </div>
                         </div>
                     </div>

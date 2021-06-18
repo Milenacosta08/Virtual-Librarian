@@ -33,22 +33,22 @@
                 <p>{{usuario.biografia}}</p>
                 <div class="texto">
                     <p><small>{{usuario.email}}</small></p>
-                    <p class="reput"> <small> Reputação:  (Confiável/Duvidosa) </small></p>
                 </div>
                 <div class="d-flex justify-content-start">
 
-                    {% if existe == 0 %}
-                        <a class = "amigos btn btn-info btn-sm" href="/adicionar/{{usuario.id}}">
-                            Adicionar amigo
-                        </a>
+                    {% if current_user.id != usuario.id %}
+                        {% if existe == 0 %}
+                            <a class = "amigos btn btn-info btn-sm" href="/adicionar/{{usuario.id}}">
+                                Adicionar amigo
+                            </a>
 
-                    {% else %}
+                        {% else %}
 
-                        <a class = "amigos btn btn-info btn-sm" href="/remover/{{usuario.id}}">
-                            Remover amigo
-                        </a>
+                            <a class = "amigos btn btn-info btn-sm" href="/remover/{{usuario.id}}">
+                                Remover amigo
+                            </a>
 
-
+                        {% endif %}
                     {% endif %}
 
 
@@ -64,7 +64,6 @@
                 <p>{{current_user.biografia}}</p>
                 <div class="texto">
                     <p><small>{{current_user.email}}</small></p>
-                    <p class="reput"> <small> Reputação:  (Confiável/Duvidosa) </small></p>
                 </div>
 
         <!--Botão de configuração-->
@@ -192,12 +191,6 @@
                 <!-- JAVASCRIPT -->
                         <script src="/static/js/pagando.js"></script>
 
-
-
-
-
-
-
         {% endif %}
 
             </div>
@@ -212,7 +205,7 @@
                 <ul class="nav nav-tabs">
                     {% if usuario %}
                         <li class="nav-item">
-                            <a class="nav-link" href="/amigos">Amigos</a>
+                            <a class="nav-link" href="/amigos/{{usuario.id}}">Amigos</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/estante/Exibição/{{usuario.id}}">Estante</a>
@@ -222,7 +215,7 @@
                         </li>
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="/amigos">Amigos</a>
+                            <a class="nav-link" href="/amigos/{{current_user.id}}">Amigos</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/estante/Exibição/{{current_user.id}}">Estante</a>
@@ -238,7 +231,7 @@
             <div class="row">
       <!--Coluna Listas-->
                 <div class="list col-md-2">
-                    <h4>Listas</h4>
+                    <h4>Estantes</h4>
                     <ul class="nav nav-pills flex-column">
                         {% if usuario %}
                             <li class="nav-item">
@@ -269,7 +262,7 @@
                     {% if not usuario %}
                         {% if postagens %}
                             {% for postagem in postagens %}
-                                <h4>Resenha Literária<small id="data"><i>Postou em {{postagem.data.strftime("%d/%m/%Y")}}</i></small></h4>
+                                <h5>{{current_user.nome_completo}}<small id="data"><i>Postou em {{postagem.data.strftime("%d/%m/%Y")}}</i></small></h5>
                                 {% if postagem.imagem %}
                                     <img class='img-fluid' id="capa-resenha" src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{postagem.imagem}}'>
                                 {% endif %}
@@ -282,7 +275,7 @@
                     {% else %}
                         {% if postagens %}
                             {% for postagem in postagens %}
-                                <h3>Resenha Literária<small id="data"><i>Postou em {{postagem.data.strftime("%d/%m/%Y")}}</i></small></h3>
+                                <h5>{{usuario.nome_completo}}<small id="data"><i>Postou em {{postagem.data.strftime("%d/%m/%Y")}}</i></small></h5>
                                 {% if postagem.imagem %}
                                     <img class='img-fluid' id="capa-resenha" src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{postagem.imagem}}'>
                                 {% endif %}

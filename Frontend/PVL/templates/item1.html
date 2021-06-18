@@ -33,8 +33,39 @@
                     <p><button type="submit" class="delete btn btn-danger"><i class="material-icons">delete</i></button></p>
                 </form>
                 {% endif %}
-
             </div>
+
+            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal_resenha">Escrever Resenha</button>
+            <!--MODAL DE RESENHAS-->
+            <div class="modal fade" id="modal_resenha">
+                <div class="modal-dialog modal-dialog-centered modal-lg">
+                    <div class="modal-content">
+
+                    <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title">Escrever Resenha</h4>
+                        </div>
+
+                    <!-- Modal body -->
+                        <form action="/livros/{{livro.id}}/resenha" method='POST' enctype="multipart/form-data">
+                            <div class="modal-body">
+                                <textarea  id = "resenhas" name="resenha" cols="" rows="2" placeholder="Resenha..."></textarea>
+
+
+                            </div>
+
+                    <!-- Modal footer -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cancelar</button>
+                                <button type="submit" id="Benviar" class="btn btn-light">Enviar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+
+
         </div>
     </div>
 
@@ -47,7 +78,7 @@
           <div class="media">
             <img class= 'img-fluid' id='imagem-usu' src= https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{usuario.imagem}}>
             <div class="media-body">
-              <form action="/perfil/{{livro.usuario_id}}" method="POST">
+              <form action="/perfil/{{livro.usuario_id}}">
                 <input type="hidden" name="var" value="1" />
                 <button class="tim"><h5>{{usuario.nome}} {{usuario.sobrenome}}</h5></button>
               </form>

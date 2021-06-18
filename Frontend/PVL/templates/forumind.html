@@ -15,10 +15,13 @@
 
             <div class = "usuario">
                 <div class = "d-flex justify-content-center">
+                    {% if amigo != 0 %}
                         <img id='imagem-usu' src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{amigo.imagem}}'>
-
-                        <h5 id = "nomeusu" class = "align-self-center">{{amigo.nome_completo}}</h5>
-
+                            <h5 id = "nomeusu" class = "align-self-center">{{amigo.nome_completo}}</h5>
+                        {% else %}
+                        <img id='imagem-usu' src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/forumind.png'>
+                            <h5 id = "nomeusu" class = "align-self-center">Fórum</h5>
+                        {% endif %}
                 </div>
 
 
@@ -30,22 +33,27 @@
                 <div class = "amigos">
                     <div class = "col-md-12">
                         {% for amg in amigos %}
-                            <div class = "card">
+                            {% if amg %}
+                                {% if amg.usuario.id != current_user.id %}
+                                    <div class = "card">
 
-                                <a href="/forum/{{amg.usuario.id}}/{{current_user.id}}"><img id='imagem-usu' src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{amg.usuario.imagem}}'></a>
-                                <div class="card-body">
+                                        <a href="/forum/{{amg.usuario.id}}/{{current_user.id}}"><img id='imagem-usu' src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{amg.usuario.imagem}}'></a>
+                                        <div class="card-body">
 
-                                    <a href="/forum/{{amg.usuario.id}}/{{current_user.id}}"><p id = "nomeamigo">{{amg.usuario.nome_completo}}</p></a>
+                                            <a href="/forum/{{amg.usuario.id}}/{{current_user.id}}"><p id = "nomeamigo">{{amg.usuario.nome_completo}}</p></a>
 
-                                </div>
+                                        </div>
 
-                            </div>
-                            <br>
+                                    </div>
+                                <br>
+                                {% endif %}
+                            {% endif %}
                         {% endfor %}
                     </div>
                 </div>
                 <div class = "mensagens">
 
+                    {% if posts != 0 %}
                         {% for post in posts %}
 
                             {% if post.usuario.id != current_user.id %}
@@ -90,6 +98,7 @@
 
 
                         {% endfor %}
+                    {% endif %}
 
                 </div>
             </div>
@@ -100,8 +109,12 @@
 
 
                         <div class="media-body">
-
+                        {% if idamigo != 0 %}
                             <form action = '/forum/{{idamigo}}/post' method='POST' enctype="multipart/form-data">
+                        {% else %}
+                            <form action = '/forum'>
+                        {% endif %}
+
                                 <div class = "formatopostagem">
                                     <textarea  name="comentario" cols="" rows="2" placeholder="Mensagem..."></textarea>
                                     <button type="submit" class="botaoenviar btn">Publicar</button>
@@ -114,6 +127,7 @@
                                     <script src="/static/js/estante.js"></script>
                                 </div>
                             </form>
+
                         </div>
 
                 </div>

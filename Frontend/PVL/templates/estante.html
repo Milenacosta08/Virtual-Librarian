@@ -18,9 +18,8 @@
         <h1>Estante de {{status}}</h1>
     </div>
     <div class = "card-columns" align='center'>
-        {% for livro in livros: %}
 
-            {% if livro.status == status %}
+        {% for livro in livros: %}
                 <div class="col-xs">
                     <div class = 'card'>
                         <a href='/livros/{{livros[livro].idlivro}}'}}>
@@ -32,18 +31,16 @@
                         <div class = 'card-body'>
                             <p class = 'card-text'>{{livros[livro].titulo}}</p>
                             <p class = 'card-text'>{{livros[livro].autor}}</p>
-                            {% if not usuario %}
 
+                            {% if not usuario %}
                                 <a href = "/delete/{{livros[livro].idlivro}}">
                                     <button class="delete btn btn-danger"><i class="material-icons">delete</i></button>
                                 </a>
-
                             {% endif %}
+
                         </div>
                     </div>
                 </div>
-            {% endif %}
-
         {% endfor %}
 
     </div>
