@@ -14,13 +14,12 @@ class Usuario(db.Model, UserMixin):
     nome_completo = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     senha = db.Column(db.String(20), nullable=False)
-    biografia = db.Column(db.String(200), default='Alterar biografia')
     imagem = db.Column(db.String(100), default= 'padrao.png')
     postagens = db.relationship("Postagem", backref='usuario', lazy=True)
+    biografia = db.Column(db.String(200), default='Alterar biografia')
     livros = db.relationship("Livros", backref='usuario',lazy=True)
     amigos = db.relationship("Amigo", backref='usuario', lazy=True)
     notificacoes = db.relationship("Notificacao", backref='usuario', lazy=True)
-
 
 class Livros(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -51,7 +50,6 @@ class ForumLivro(db.Model):
     respostas = db.relationship("Resposta", backref='forumlivro',lazy=True)
     data = db.Column(db.DateTime, default=datetime.now(tz=timezone(-timedelta(hours=3))))
 
-
 class Genero(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(50), nullable = False)
@@ -75,6 +73,17 @@ class ForumIndividual(db.Model):
     id_usuario = db.Column(db.Integer, db.ForeignKey(Usuario.id), nullable = False)
     id_amigo = db.Column(db.Integer, nullable = False)
     last_post = db.Column(db.DateTime)
+
+class ForumSolo(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    id_usuario = db.Column(db.Integer, nullable = False)
+
+class MensagemSolo(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    texto = db.Column(db.String(250), nullable = False)
+    data = db.Column(db.DateTime, default=datetime.now(tz=timezone(-timedelta(hours=3))))
+    imagem = db.Column(db.String(100), default= '')
+    id_usuario = db.Column(db.Integer, nullable = False)
 
 
 class Notificacao(db.Model):

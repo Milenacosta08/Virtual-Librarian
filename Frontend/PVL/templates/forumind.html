@@ -112,7 +112,7 @@
                         {% if idamigo != 0 %}
                             <form action = '/forum/{{idamigo}}/post' method='POST' enctype="multipart/form-data">
                         {% else %}
-                            <form action = '/forum'>
+                            <form action = '/forum/post' method='POST' enctype="multipart/form-data">
                         {% endif %}
 
                                 <div class = "formatopostagem">

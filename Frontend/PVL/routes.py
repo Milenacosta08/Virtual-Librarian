@@ -1,5 +1,5 @@
 from flask import current_app as app, render_template, request, redirect, url_for, session
-from PVL.entidades import Usuario, Livros, Postagem, Genero, categorizados, ForumLivro, Resposta, Amigo, ForumIndividual, Notificacao, Mensagem
+from PVL.entidades import Usuario, Livros, Postagem, Genero, categorizados, ForumLivro, Resposta, Amigo, ForumIndividual, Notificacao, Mensagem, ForumSolo, MensagemSolo
 from PVL import db, login_manager
 from flask_login import login_user, logout_user, login_required, current_user
 from sqlalchemy import desc, or_
@@ -115,6 +115,7 @@ def perfil_log():
             db.session.add(novo)
             db.session.commit()
 
+
             login_user(novo)
             session['user_id'] = novo.id
 
@@ -198,6 +199,8 @@ def deletarUsuario():
     forumindividual = ForumIndividual.query.filter(ForumIndividual.id_usuario == current_user.id).all()
     resposta = Resposta.query.filter(Resposta.id_usuario == current_user.id).all()
     forumlivro = ForumLivro.query.filter(ForumLivro.usuario_id == current_user.id).all()
+    forumsolo = ForumSolo.query.filter(ForumSolo.id_usuario == current_user.id).all()
+    mensagem = MensagemSolo.query.filter(MensagemSolo.id_usuario == current_user.id).all()
 
     for postagem in user.postagens:
         db.session.delete(postagem)
@@ -212,6 +215,14 @@ def deletarUsuario():
         db.session.commit()
 
         db.session.delete(forumlivro)
+        db.session.commit()
+
+    for forum in forumsolo:
+        db.session.delete(forum)
+        db.session.commit()
+
+    for msg in mensagem:
+        db.session.delete(msg)
         db.session.commit()
 
     for resposta in resposta:
@@ -565,11 +576,25 @@ def atualizardg():
 @app.route("/forum")
 @login_required
 def forumsolo():
+    forum = ForumSolo.query.filter(ForumSolo.id_usuario == current_user.id).all()
+
+    if forum == []:
+        novo = ForumSolo()
+        novo.id_usuario = current_user.id
+        db.session.add(novo)
+        db.session.commit()
+
+    mensagens = MensagemSolo.query.filter(MensagemSolo.id_usuario == current_user.id).all()
+    posts = []
+    for mensagem in mensagens:
+        usuario = Usuario.query.get(mensagem.id_usuario)
+        posts.append({'usuario' : usuario, 'postagem' : mensagem})
+
     lista = ForumIndividual.query.filter(ForumIndividual.id_usuario == current_user.id).all()
     listamg = []
     amigoreal = 0
     idamigo = 0
-    posts = 0
+
 
     for resultado in lista:
         if resultado.id != "":
@@ -578,6 +603,42 @@ def forumsolo():
                 listamg.append({'usuario' : pessoa})
 
     return render_template('forumind.html', amigo = amigoreal, idamigo = idamigo, amigos = listamg, posts = posts)
+
+@app.route("/forum/post", methods=['POST'])
+@login_required
+def postsolo():
+    comentario = request.form['comentario']
+    forum = ForumSolo.query.filter(ForumSolo.id_usuario == current_user.id).all()
+
+    if forum != []:
+        msg = MensagemSolo()
+        msg.id_usuario = current_user.id
+        msg.texto = comentario
+        msg.data = datetime.now(tz=timezone(-timedelta(hours=3)))
+
+        file = request.files['imagemsel']
+
+        if file is not None:
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+
+                imgs = os.listdir(app.config['UPLOAD_FOLDER'])
+                filename = f'{len(imgs)+1:08}.{filename.rsplit(".", 1)[1].lower()}'
+
+                file.save(app.config['UPLOAD_FOLDER']+'/'+filename)
+                msg.imagem = filename
+
+        if msg.texto is not None:
+            db.session.add(msg)
+            db.session.commit()
+
+            return redirect(f'/forum')
+
+        else:
+            return redirect('/feed')
+    else:
+        return redirect('/feed')
+
 
 @app.route("/forum/<idamigo>/<idusuario>")
 @login_required
