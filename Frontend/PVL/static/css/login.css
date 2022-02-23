@@ -6,14 +6,23 @@ body{
     background-position-y: -150px;
     font-family: "Lucida Console", "Courier New", monospace;
 }
+
+.login{
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    display: flex;
+    flex-direction: center;
+    justify-content: center;
+    align-items: center;
+}
+
 .form{
+    margin-top: 5%;
     background-color: white;
     width: 400px;
-    margin: 2%;
-    margin-left: 35%;
     padding: 30px;
     padding-top: 40px;
-    float: center;/* Coloquei o formulario p esquerda */
     border-radius: 10px;
     box-shadow: 1px 1px 5px #ccc;
 }

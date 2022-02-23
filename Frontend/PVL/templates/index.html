@@ -8,16 +8,85 @@
 
 {% block conteudo %}
     {{  super() }}
-        <!--IMAGEM INICIAL-->
-        <div class = "pagini">
-            <img class = "img-fluid" src="/static/img/PAGINAINICIAL1-1024w.png">
+    <!--SLIDES CARROSSEL-->
+    <div id="home" class="carousel slide" data-ride="carousel">
+
+        <ul class="carousel-indicators">
+            <li data-target="#home" data-slide-to="0" class="active"></li>
+            <li data-target="#home" data-slide-to="1"></li>
+            <li data-target="#home" data-slide-to="2"></li>
+            <li data-target="#home" data-slide-to="3"></li>
+        </ul>
+
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="/static/img/PAGINAINICIAL1-1024w.png" width="1400" height="400">
+                <div class="carousel-caption">
+            		<h3>Virtual Librarian</h3>
+            		<p>Uma rede social para todos os leitores!</p>
+          		</div>
+            </div>
+            <div class="carousel-item">
+                <img src="/static/img/books2.jpg" width="1400" height="400">
+                <div class="carousel-caption">
+            		<h3>Troque livros</h3>
+            		<p>Troque aquele livro esquecido na estante por um que deseja!</p>
+          	    </div>
+            </div>
+            <div class="carousel-item">
+                <img src="/static/img/books3.jpg" width="1400" height="400">
+                <div class="carousel-caption">
+            		<h3>Publique Resenhas</h3>
+            		<p>Compartilhe sua experiência literária com todos os usuários da nossa plataforma!</p>
+          		</div>
+            </div>
+            <div class="carousel-item">
+                <img src="/static/img/books.jpg" width="1400" height="400">
+                <div class="carousel-caption">
+                    <h3>Organize seus livros</h3>
+                    <p>Tenha sua própria estante virtual e organize seus livros do seu jeito!</p>
+                </div>
+            </div>
         </div>
-        <div class = "frase">
-            <div class = "caixa">
-                <br>
+
+        <!-- CONTROLES NEXT/PREVIOUS -->
+        <a class="carousel-control-prev" href="#home" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#home" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </a>
+    </div>
+
+    <script src="/static/js/index.js"></script>
+
+    <div class="content">
+        <section id="caixa">
+            <div id="text">
                 <p id = "para1">"Um livro é um sonho que seguramos com as mãos" <br> Neil Gaiman</p>
                 <p id = "para2">Então, junte-se ao Virtual Librarian e compartilhe seus sonhos!!!</p>
             </div>
-        </div>
-        <br>
+        </section>
+
+<!--
+        <section id="columns">
+            <div class="livros">
+                <p>grade de livros disponívies aqui</p>
+            </div>
+
+            <div class="resenhas">
+                <p>grade de resenhas</p>
+            </div>
+
+            <div class="info">
+                <p>informações adiciona</p>
+            </div>
+        </section>
+    </div>
+-->
+
+
+
+
+
 {% endblock %}

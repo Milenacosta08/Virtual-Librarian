@@ -1,3 +1,4 @@
+
 body{
     margin: 0;
     background-color: darkslategrey;
@@ -58,7 +59,6 @@ div.header {
     }
 }
 
-
 a:link {
     display : block;
     text-decoration: none;
@@ -81,6 +81,7 @@ a:active {
     box-shadow: 0 0 0 0 black;
 }
 .caixapesquisa {
+    background-color: white;
     border-radius: 48px;
     width: 60%;
     text-align: center;
@@ -100,15 +101,29 @@ a:active {
     width: 100%;
     top: 12px;
 }
-.frase {
-    background: darkslategrey;
-    text-align: center;
-    color: white;
-    top: -200px;
+
+.content {
+    width: 100vw; /* PROCURA O MENOR VALOR ENTRE OS DOIS ARGUMENTOS */
+    margin: auto;
 }
-.caixa {
-    box-sizing: border-box;
-    border: 2px solid black;
+
+.content #caixa {
+    background: linear-gradient(18deg, darkslategrey,  #013220);
+    text-align: center;
+    color: #efeeee;
+    float: left;
+    width: 100%;
+    margin-top: 2%;
+    border-style: inset;
+    opacity: 0.8;
+}
+
+.content #caixa:hover {
+ opacity: 1;
+}
+
+.content #caixa #text {
+    margin-top: 1rem;
 }
 
 .alerta{
@@ -117,4 +132,9 @@ a:active {
     width: 58%;
     border-left: 6px solid #c73a33;
     border-radius: 2px;
+}
+
+.carousel-inner .fakeImg {
+    background: no-repeat center;
+    background-size: cover;
 }

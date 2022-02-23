@@ -13,17 +13,19 @@
     <div class="main container-fluid">
         {% if current_user.is_authenticated %}
         <div class="row">
-          <div class="col-sm-3">
+        <div class="col-sm-3">
             <div class = "barradefuncao">
-                <a href="#demo" data-toggle="collapse"><div class = "titulofuncao">
-                    <h2>Funções</h2>
-                </div></a>
+                <a href="#demo" data-toggle="collapse">
+                    <div class = "titulofuncao">
+                        <h2>Funções</h2>
+                    </div>
+                </a>
                 <div id="demo" class="collapse show">
-                    <p class = "botaoperfil">
-                        <a class = "perfilzin" href="/perfil">Meu Perfil</a>
-                    </p>
                     <!--BOTOES DA TABELA DE FUNÇÃO FAKE-->
-                    <div class = "botoesfake">
+                    <div class = "botoes">
+                        <a href="/perfil">
+                            <button class="btn">Meu Perfil</button>
+                        </a>
                         <a href='/amigos/{{current_user.id}}'>
                             <button class = "btn">Amigos</button>
                         </a>
@@ -33,17 +35,17 @@
                         <a href='/estante/Exibição/{{current_user.id}}'>
                             <button class = "btn">Minha Estante</button>
                         </a>
-                    <div class = "col-md-12">
-                    <div class="dropdown">
-                        <button class="btn" type="button"  class="btn btn-primary dropdown-toggle"  data-toggle="dropdown">Estantes</button>
+                        <div class = "col-md-12">
+                            <div class="dropdown">
+                                <button class="btn" type="button"  class="btn btn-primary dropdown-toggle"  data-toggle="dropdown">Estantes</button>
 
-                        <div class="dropdown-menu" >
-                            <a class= "dropdown-item" href="/estante/Exibição/{{current_user.id}}">Estante de Exibição</a>
-                            <a class="dropdown-item" href="/estante/Troca/{{current_user.id}}">Estante de Troca</a>
-                            <a class="dropdown-item" href="/estante/Venda/{{current_user.id}}">Estante de Venda</a>
+                                <div class="dropdown-menu" >
+                                    <a class= "dropdown-item" href="/estante/Exibição/{{current_user.id}}">Estante de Exibição</a>
+                                    <a class="dropdown-item" href="/estante/Troca/{{current_user.id}}">Estante de Troca</a>
+                                    <a class="dropdown-item" href="/estante/Venda/{{current_user.id}}">Estante de Venda</a>
+                                </div>
+                            </div>
                         </div>
-                        </div>
-                    </div>
                     </div>
                 </div>
             </div>
@@ -80,41 +82,42 @@
             </div>
             <!--USUARIO TESTE-->
             {% for post in postagem: %}
-            <div class="teste media">
+                {% if post != [] %}
+                    <div class="teste media">
 
-                <img class='rounded-circle' id='img-usu' src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{postagem[post].imagem}}'>
+                        <img class='rounded-circle' id='img-usu' src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{postagem[post].imagem}}'>
 
-                <div class="media-body">
-
-
-                    <a href="/perfil/{{postagem[post].idusuario}}"><h5>{{postagem[post]['nome']}} {{postagem[post]['sobrenome']}}</a> <small><i>Postou em {{postagem[post]['data'].strftime("%d/%m/%Y")}}</i></small></h5>
+                        <div class="media-body">
 
 
-                    {% if post.imagem %}
-                        <img class="img-fluid" src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{post.imagem}}'>
-                    {% endif %}
-                    <p class = "textopostagem">{{postagem[post]['conteudo']}}</p>
-                    <div class = 'container wrap' id='teste'>
-                        <a class="btn btn-outline-info botao" id = 'curtir' href='/curtir/{{postagem[post].idpostagem}}' >Curtir</a>
-                        <a class="btn btn-outline-info botao" id = 'descurtir' href='/descurtir/{{postagem[post].idpostagem}}' >Descurtir</a>
-                    </div>
-
-                    {% if postagem[post]['curtidas'] > 0 %}
-                        <span class="badge badge-success">+{{postagem[post]['curtidas']}}</span>
-                    {% endif %}
-
-                    {% if postagem[post]['curtidas'] == 0 %}
-                        <span class="badge badge-secondary">{{postagem[post]['curtidas']}}</span>
-                    {% endif %}
+                            <a href="/perfil/{{postagem[post].idusuario}}"><h5>{{postagem[post]['nome']}} {{postagem[post]['sobrenome']}}</a> <small><i>Postou em {{postagem[post]['data'].strftime("%d/%m/%Y")}}</i></small></h5>
 
 
-                    {% if postagem[post]['curtidas'] < 0 %}
-                        <span class="badge badge-danger">{{postagem[post]['curtidas']}}</span>
-                    {% endif %}
+                            {% if post.imagem %}
+                                <img class="img-fluid" src='https://www.pythonanywhere.com/user/VirtualLibrarian/files/home/VirtualLibrarian/Virtual-Librarian/Frontend/PVL/uploads/{{post.imagem}}'>
+                            {% endif %}
+                            <p class = "textopostagem">{{postagem[post]['conteudo']}}</p>
+                            <div class = 'container wrap' id='teste'>
+                                <a class="btn btn-outline-info botao" id = 'curtir' href='/curtir/{{postagem[post].idpostagem}}' >Curtir</a>
+                                <a class="btn btn-outline-info botao" id = 'descurtir' href='/descurtir/{{postagem[post].idpostagem}}' >Descurtir</a>
+                            </div>
+
+                            {% if postagem[post]['curtidas'] > 0 %}
+                                <span class="badge badge-success">+{{postagem[post]['curtidas']}}</span>
+                            {% endif %}
+
+                            {% if postagem[post]['curtidas'] == 0 %}
+                                <span class="badge badge-secondary">{{postagem[post]['curtidas']}}</span>
+                            {% endif %}
+
+
+                            {% if postagem[post]['curtidas'] < 0 %}
+                                <span class="badge badge-danger">{{postagem[post]['curtidas']}}</span>
+                            {% endif %}
 
                 </div>
             </div>
-
+                {% endif %}
             {% endfor %}
         </div>
     </div>

@@ -47,7 +47,7 @@ def feed_post():
 
     postagem = Postagem()
     postagem.conteudo = comentario
-    postagem.usuario_id = usu.id
+    postagem.usuario_id = current_user.id
 
     file = request.files['imagemsel']
 

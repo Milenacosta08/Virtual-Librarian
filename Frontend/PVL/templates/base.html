@@ -10,6 +10,7 @@
       <meta charset="UTF-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="descriptio" content="Biblioteca virtual: um lugar para compartilhar aventuras literárias">
 
       <title>{% block titulo %}{% endblock %}</title>
   </head>
@@ -32,7 +33,7 @@
               <ul id = "ulsub1"><a href="/">Home</a></ul>
             </li>
             <li class="nav-item">
-              <ul id = "ulsub2"><a href="/feed">Feed</a></ul>
+                <ul id = "ulsub2"><a href="/feed">Feed</a></ul>
             </li>
             {% if current_user.is_authenticated %}
                 <li class="nav-item">
@@ -43,7 +44,7 @@
                 </li>
             {% else %}
                 <li class="nav-item">
-                    <ul id = "ulsub3"><a href="/cadastro">Cadastro</a></ul>
+                    <ul id="ulsub3"><a href="/cadastro">Cadastro</a></ul>
                 </li>
                 <li class="nav-item">
                   <ul id = "ulsub4"><a href="/login">Login</a></ul>
